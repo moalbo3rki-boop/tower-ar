@@ -2,53 +2,134 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Twisted Towers in AR</title>
-  <meta name="description" content="Bahrain Bay Twisted Towers: view the 3D model in augmented reality on your phone.">
+  <meta name="description" content="Bahrain Bay Twisted Towers: place the 1:200 model in your room with your phone camera. No app needed.">
+  <meta name="theme-color" content="#eef2f6">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bahrain Bay Twisted Towers in AR">
+  <meta property="og:description" content="Three 200 m towers with a 180° twist. Tap to place the 3D model in your room, no app needed.">
+  <meta property="og:url" content="https://moalbo3rki-boop.github.io/tower-ar/">
+  <meta property="og:image" content="https://moalbo3rki-boop.github.io/tower-ar/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4f8f'/%3E%3Cpath d='M9 26V8c2 1 3 4 3 9s1 8 3 9H9zm7 0V6c2 1 3 4 3 10s1 9 3 10h-6zm7 0V8c2 1 3 4 3 9s0 8 0 9h-3z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preload" as="image" href="poster.webp">
   <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
   <style>
-    :root { --bg: #eef2f6; --ink: #13233a; --muted: #5a6b80; --accent: #1f4f8f; }
+    :root { --bg: #eef2f6; --card: #ffffff; --ink: #13233a; --muted: #5a6b80; --accent: #1f4f8f; --line: #d8e0ea; }
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+    html, body { margin: 0; background: var(--bg); color: var(--ink);
                  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-    body { display: flex; flex-direction: column; }
-    header { padding: 16px 16px 4px; text-align: center; }
-    h1 { margin: 0; font-size: 1.35rem; }
+    header { padding: 16px 16px 0; text-align: center; }
+    h1 { margin: 0; font-size: 1.4rem; }
     header p { margin: 4px 0 0; color: var(--muted); font-size: 0.95rem; }
-    model-viewer { flex: 1; width: 100%; min-height: 60vh; background: var(--bg);
+    .stage { position: relative; height: min(72vh, 680px); min-height: 420px; }
+    model-viewer { width: 100%; height: 100%; background: var(--bg); --poster-color: var(--bg);
                    --progress-bar-color: var(--accent); }
-    #ar-button { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
-                 white-space: nowrap; border: 0; border-radius: 999px; padding: 14px 28px; font-size: 1.05rem; font-weight: 600;
-                 background: var(--accent); color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
-    #no-ar { position: absolute; left: 16px; right: 16px; bottom: 20px; text-align: center;
-             color: var(--muted); font-size: 0.9rem; display: none; }
-    footer { padding: 8px 16px 16px; text-align: center; color: var(--muted); font-size: 0.85rem; }
+    #ar-button { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+                 white-space: nowrap; border: 0; border-radius: 999px; padding: 14px 28px;
+                 font-size: 1.05rem; font-weight: 600; background: var(--accent); color: #fff;
+                 box-shadow: 0 4px 14px rgba(0,0,0,.25); cursor: pointer; }
+    .hint { position: absolute; left: 16px; right: 16px; bottom: 20px; text-align: center;
+            color: var(--muted); font-size: 0.9rem; display: none; }
+    .hotspot { border: 0; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+               background: rgba(255,255,255,.92); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.18);
+               white-space: nowrap; pointer-events: none; transform: translateY(-50%); }
+    .hotspot::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px;
+                       border-radius: 50%; background: var(--accent); vertical-align: middle; }
+    .hotspot[data-visible="false"] { opacity: 0; }
+    .hide-labels .hotspot { display: none; }
+    #labels-toggle { position: absolute; top: 12px; right: 12px; border: 1px solid var(--line);
+                     background: var(--card); color: var(--ink); border-radius: 999px; padding: 6px 12px;
+                     font-size: 0.85rem; cursor: pointer; }
+    .banner { display: none; margin: 12px 16px 0; padding: 12px 14px; border-radius: 12px;
+              background: #fff4d6; color: #5c4400; font-size: 0.92rem; line-height: 1.4; }
+    main { max-width: 760px; margin: 0 auto; padding: 8px 16px 32px; }
+    section { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+              padding: 16px 18px; margin-top: 14px; }
+    h2 { margin: 0 0 10px; font-size: 1.05rem; }
+    ol { margin: 0; padding-left: 20px; line-height: 1.6; }
+    dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; }
+    dt { color: var(--muted); }
+    dd { margin: 0; }
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; padding: 0 16px 24px; }
   </style>
 </head>
 <body>
   <header>
     <h1>Bahrain Bay Twisted Towers</h1>
-    <p>Three 200 m towers, 180° twist &middot; model at 1:200 scale (about 1 m tall)</p>
+    <p>1:200 model, about 1.1 m tall &middot; drag to rotate, pinch to zoom</p>
   </header>
 
-  <model-viewer id="tower"
-      src="towers_ar.glb" ios-src="towers_ar.usdz"
-      alt="3D model of three twisted towers connected by sky bridges"
-      ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto"
-      camera-controls touch-action="pan-y" auto-rotate
-      camera-orbit="35deg 75deg auto" shadow-intensity="1" environment-image="neutral" exposure="1.1">
-    <button slot="ar-button" id="ar-button">View in your room (AR)</button>
-    <div id="no-ar">Open this page on a phone to place the towers in your room.</div>
-  </model-viewer>
+  <div class="banner" id="inapp">
+    <strong>AR doesn't open inside this app.</strong> Tap the &#8942; or &#8230; menu and choose
+    <em>Open in browser</em> (Safari on iPhone, Chrome on Android), then tap the blue button.
+  </div>
 
-  <footer>Tap the button, point your camera at the floor, then move your phone slowly until the towers appear.</footer>
+  <div class="stage">
+    <model-viewer id="tower"
+        src="towers_ar.glb" ios-src="towers_ar.usdz" poster="poster.webp" loading="eager"
+        alt="3D model of three twisted towers joined by two sky bridges, on a landscaped base"
+        ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto"
+        camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="2500" interaction-prompt="auto"
+        camera-orbit="35deg 75deg auto" shadow-intensity="1" shadow-softness="0.8"
+        environment-image="neutral" exposure="1.05">
+      <button class="hotspot" slot="hotspot-crown" data-position="-0.275 1.0856 0.0">Crown &middot; 72 aluminium fins</button>
+      <button class="hotspot" slot="hotspot-garden" data-position="0.1395 1.0309 -0.0098">Sky Garden Walk &middot; 200 m</button>
+      <button class="hotspot" slot="hotspot-gallery" data-position="-0.1375 0.6327 -0.0095">Sky Gallery &middot; Level 31</button>
+      <button class="hotspot" slot="hotspot-mech" data-position="-0.275 0.415 0.0724" data-normal="0 0 1">Plant floor &middot; Level 20</button>
+      <button class="hotspot" slot="hotspot-lobby" data-position="0 0.045 0.146" data-normal="0 0 1">Lobby &amp; canopy</button>
+      <button slot="ar-button" id="ar-button">View in your room (AR)</button>
+      <div class="hint" id="no-ar">Open this page on a phone to place the towers in your room.</div>
+      <div class="hint" id="ar-failed">AR couldn't start on this phone. You can still explore the 3D model here.</div>
+    </model-viewer>
+    <button id="labels-toggle" type="button">Hide labels</button>
+  </div>
+
+  <main>
+    <section>
+      <h2>How to see it in your room</h2>
+      <ol>
+        <li>Tap <strong>View in your room (AR)</strong>.</li>
+        <li>Point your camera at the floor and move the phone slowly until the towers appear.</li>
+        <li>Walk around them. Pinch to resize, drag to move, twist with two fingers to rotate.</li>
+      </ol>
+    </section>
+    <section>
+      <h2>Project facts</h2>
+      <dl>
+        <dt>Location</dt><dd>Bahrain Bay waterfront, Manama</dd>
+        <dt>Towers</dt><dd>Three identical towers in a shallow arc, about 55 m apart</dd>
+        <dt>Height</dt><dd>200 m, 50 floors at 4 m</dd>
+        <dt>Twist</dt><dd>12-sided floor plate rotating 3.6&deg; per floor, 180&deg; in total</dd>
+        <dt>Sky bridges</dt><dd>Glazed Sky Gallery at Level 31 and open Sky Garden Walk on the roofs</dd>
+        <dt>Uses</dt><dd>Lobby &amp; public spaces (L1&ndash;5), offices (L6&ndash;19), hotel (L21&ndash;34), residences (L36&ndash;49), sky amenities (L50)</dd>
+        <dt>Model scale</dt><dd>1:200 &middot; the model is about 1.1 m tall</dd>
+      </dl>
+    </section>
+  </main>
+  <footer>Works on iPhone (Safari) and Android (Chrome) with no app to install.</footer>
 
   <script type="module">
     const viewer = document.querySelector("#tower");
-    const showHint = () => {
-      if (!viewer.canActivateAR) document.querySelector("#no-ar").style.display = "block";
-    };
+    const show = (id) => { document.getElementById(id).style.display = "block"; };
+
+    const showHint = () => { if (!viewer.canActivateAR) show("no-ar"); };
     if (viewer.loaded) showHint(); else viewer.addEventListener("load", showHint);
+    viewer.addEventListener("ar-status", (e) => { if (e.detail.status === "failed") show("ar-failed"); });
+
+    // Social and messaging apps open links in their own browser, which can't start AR.
+    if (/Instagram|FBAN|FBAV|FB_IAB|WhatsApp|Snapchat|Line\/|TikTok|musical_ly|Twitter|LinkedInApp|GSA\//i.test(navigator.userAgent)) {
+      show("inapp");
+    }
+
+    const toggle = document.querySelector("#labels-toggle");
+    toggle.addEventListener("click", () => {
+      const hidden = document.querySelector(".stage").classList.toggle("hide-labels");
+      toggle.textContent = hidden ? "Show labels" : "Hide labels";
+    });
   </script>
 </body>
 </html>
