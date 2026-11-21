@@ -1,25 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>Twisted Towers, Bahrain Bay</title>
-<meta name="description" content="Three 200 m twisted towers on Bahrain Bay, joined by sky bridges. Place them in your room with AR, take the guided 3D tour, watch them sway in wind and rise floor by floor. Senior design project, University of Bahrain.">
-<meta name="theme-color" content="#070f1c">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Twisted Towers, Bahrain Bay">
-<meta property="og:description" content="Three 200 m towers with a 180° twist. Place them in your room with AR, explore the structure, the wind sway and the construction sequence.">
-<meta property="og:url" content="https://moalbo3rki-boop.github.io/tower-ar/">
-<meta property="og:image" content="https://moalbo3rki-boop.github.io/tower-ar/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070f1c'/%3E%3Cpath d='M9 26V8c2 1 3 4 3 9s1 8 3 9H9zm7 0V6c2 1 3 4 3 10s1 9 3 10h-6zm7 0V8c2 1 3 4 3 9s0 8 0 9h-3z' fill='%23e3bd78'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="render5.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+<meta content="Three 200 m twisted towers on Bahrain Bay, joined by sky bridges. Place them in your room with AR, take the guided 3D tour, watch them sway in wind and rise floor by floor. Senior design project, University of Bahrain." name="description"/>
+<meta content="#070f1c" name="theme-color"/>
+<meta content="website" property="og:type"/>
+<meta content="Twisted Towers, Bahrain Bay" property="og:title"/>
+<meta content="Three 200 m towers with a 180° twist. Place them in your room with AR, explore the structure, the wind sway and the construction sequence." property="og:description"/>
+<meta content="https://moalbo3rki-boop.github.io/tower-ar/" property="og:url"/>
+<meta content="https://moalbo3rki-boop.github.io/tower-ar/og.jpg" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070f1c'/%3E%3Cpath d='M9 26V8c2 1 3 4 3 9s1 8 3 9H9zm7 0V6c2 1 3 4 3 10s1 9 3 10h-6zm7 0V8c2 1 3 4 3 9s0 8 0 9h-3z' fill='%23e3bd78'/%3E%3C/svg%3E" rel="icon"/>
+<link as="image" href="render5.jpg" rel="preload"/>
+<script>try { if (sessionStorage.getItem("seen")) document.documentElement.classList.add("seen"); sessionStorage.setItem("seen", "1"); } catch (e) {}</script>
+<link href="manifest.json" rel="manifest"/>
+<link href="icon-192.png" rel="apple-touch-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>self.ModelViewerElement = { dracoDecoderLocation: new URL("draco/", location.href).href };</script>
+<script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js" type="module"></script>
 <style>
 :root {
   --pearl: #eef2f6; --paper: #ffffff; --ink: #0e2238; --muted: #55677d; --line: #d5dde8;
@@ -89,8 +94,13 @@ p { margin: 0 0 14px; max-width: 68ch; }
 /* hero */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; color: var(--on-night); background: var(--night); overflow: hidden; isolation: isolate; }
 .hero .bg { position: absolute; inset: 0; z-index: -2; }
-.hero .bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; transform: scale(1.12); animation: kb 22s ease-out forwards; }
-@keyframes kb { to { transform: scale(1); } }
+.hero .bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; opacity: 0; transform: scale(1.12); transition: opacity 1.8s ease; }
+.hero .bg img.on { opacity: 1; animation: kb 9s ease-out forwards; }
+@keyframes kb { from { transform: scale(1.12); } to { transform: scale(1); } }
+.glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(420px circle at var(--gx, 70%) var(--gy, 40%), rgba(227,189,120,.16), transparent 60%); transition: background .2s; }
+.dots-hero { display: flex; gap: 8px; margin-top: 18px; }
+.dots-hero button { width: 28px; height: 4px; border: 0; padding: 0; border-radius: 2px; background: rgba(255,255,255,.25); cursor: pointer; }
+.dots-hero button.on { background: var(--gold); }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background:
   linear-gradient(180deg, rgba(7,15,28,.7) 0%, rgba(7,15,28,0) 22%, rgba(7,15,28,0) 42%, rgba(7,15,28,.85) 78%, var(--night) 100%),
   linear-gradient(90deg, rgba(7,15,28,.75) 0%, rgba(7,15,28,0) 60%); }
@@ -308,407 +318,737 @@ figure { margin: 0; }
 footer { background: var(--night); color: var(--on-night-muted); font-size: 0.85rem; padding: 26px 0 40px; border-top: 1px solid rgba(255,255,255,.06); }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
 footer button { background: none; border: 1px solid rgba(255,255,255,.2); color: var(--on-night); border-radius: 999px; padding: 8px 16px; cursor: pointer; font: 500 .88rem var(--body); }
+.hintq { display: none; color: #5d7290; } @media (min-width: 900px) and (hover: hover) { .hintq { display: inline; } }
 .toast { position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%); background: var(--on-night); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .9rem; z-index: 70; display: none; }
+
+/* intro */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--night); display: grid; place-content: center; justify-items: center; gap: 14px; transition: opacity .7s ease, visibility .7s; }
+.loader.done { opacity: 0; visibility: hidden; }
+.loader svg { width: 110px; height: 110px; }
+.loader path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw 1.1s var(--ease) forwards; }
+.loader .l2 { animation-delay: .12s; } .loader .l3 { animation-delay: .24s; } .loader .l4 { animation-delay: .7s; stroke: #f0b429; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.loader b { font: 800 1.6rem var(--display); color: var(--on-night); letter-spacing: .02em; opacity: 0; animation: fade .6s .6s forwards; }
+html.seen .loader { display: none; }
+
+/* bar extras */
+.langbtn, .qrbtn { flex: none; border: 1px solid rgba(255,255,255,.18); background: transparent; color: var(--on-night); border-radius: 999px; height: 38px; padding: 0 13px; cursor: pointer; font: 600 .88rem var(--body); }
+.qrbtn { width: 38px; padding: 0; display: grid; place-items: center; }
+.qrbtn svg { width: 18px; height: 18px; }
+.langbtn:hover, .qrbtn:hover { background: rgba(255,255,255,.08); }
+@media (max-width: 899px) { .qrbtn { display: none; } .langbtn { margin-left: auto; } .bar .ar-top { margin-left: 0; } }
+@media (min-width: 900px) { .bar nav { margin-left: auto; } }
+
+/* QR overlay for presenting */
+.qrlay { position: fixed; inset: 0; z-index: 90; background: rgba(4,9,17,.96); display: none; place-items: center; padding: 30px; cursor: pointer; }
+.qrlay.open { display: grid; animation: fade .3s; }
+.qrlay-in { display: flex; align-items: center; gap: 6vw; flex-wrap: wrap; justify-content: center; }
+.qrlay img { width: min(62vh, 80vw); height: auto; background: #fff; padding: 22px; border-radius: 30px; box-shadow: 0 0 0 3px var(--gold), 0 40px 100px rgba(0,0,0,.6); }
+.qrlay small { display: block; font: 500 1rem var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.qrlay b { display: block; font: 800 clamp(2.6rem, 6vw, 5rem)/.95 var(--display); color: var(--on-night); max-width: 9ch; margin: 12px 0; }
+.qrlay span { display: block; color: var(--on-night-muted); font-size: 1.2rem; }
+.qrlay em { display: block; font-style: normal; color: #5d7290; font-size: .85rem; margin-top: 30px; }
+
+/* twist comparison */
+.versus { display: grid; gap: 12px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); }
+.versus div { display: grid; grid-template-columns: 76px 1fr; align-items: center; column-gap: 12px; }
+.versus b { font: 800 1.9rem/1 var(--display); color: var(--on-night); grid-row: span 2; }
+.versus div:first-child b { color: var(--gold); }
+.versus span { font-size: .85rem; color: var(--on-night-muted); }
+.versus i { display: block; height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); position: relative; overflow: hidden; }
+.versus i::after { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); background: linear-gradient(90deg, var(--gold), var(--amber)); border-radius: 3px; }
+.versus div + div i::after { background: var(--on-night-muted); }
+.versus p { margin: 0; }
+
+/* ride up the tower */
+.ride { display: grid; gap: 22px; margin-top: 30px; align-items: center; grid-template-columns: 90px 1fr; }
+@media (min-width: 900px) { .ride { grid-template-columns: 120px minmax(0, 1.1fr) minmax(280px, .9fr); gap: 36px; } }
+#ride-elev { width: 100%; height: auto; aspect-ratio: 220/760; cursor: ns-resize; touch-action: none; max-height: 70vh; }
+#ride-plan { width: 100%; height: auto; aspect-ratio: 1; max-width: 560px; justify-self: center; }
+.ride-info { grid-column: 1 / -1; }
+@media (min-width: 900px) { .ride-info { grid-column: auto; } }
+.lvl small { display: block; font: 500 .78rem var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.lvl b { font: 900 clamp(4.5rem, 10vw, 7rem)/.85 var(--display); font-variant-numeric: tabular-nums; }
+.ride-info dl { display: grid; grid-template-columns: max-content 1fr; gap: 0 18px; margin: 18px 0 0; }
+.ride-info dt, .ride-info dd { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.08); margin: 0; }
+.ride-info dt { color: var(--on-night-muted); }
+.ride-info dd { font-weight: 600; }
+.ride-note { min-height: 3em; margin: 14px 0; color: var(--gold-2); font-size: .95rem; }
+.ride-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.ride-btns button { border: 1px solid rgba(255,255,255,.18); background: transparent; color: var(--on-night); border-radius: 999px; padding: 7px 13px; cursor: pointer; font: 600 .85rem var(--body); }
+.ride-btns button:hover { background: rgba(255,255,255,.08); }
+
+/* skyline */
+.sky { display: flex; align-items: flex-end; gap: clamp(8px, 2vw, 22px); height: 380px; margin-top: 34px; padding-bottom: 64px; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.18); position: relative; }
+.sk { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; position: relative; }
+.sk i { display: block; width: min(56px, 70%); height: 0; background: linear-gradient(180deg, #34507a, #1a2c48); border-radius: 4px 4px 0 0; transition: height 1.6s var(--ease); }
+.sky.in .sk i { height: calc(var(--h) / 280 * 100%); }
+.sk.us { flex-direction: row; align-items: flex-end; justify-content: center; gap: 4px; }
+.sk.us i { width: min(18px, 22%); background: linear-gradient(180deg, var(--gold-2), #b8873d); box-shadow: 0 0 30px rgba(227,189,120,.35); }
+.sk.tw i { background: linear-gradient(180deg, #4b6c9a, #23395a); }
+.sk b { position: absolute; bottom: calc(var(--h) / 280 * 100% + 8px); font: 800 1.3rem var(--display); opacity: 0; transition: opacity .6s 1.2s; white-space: nowrap; }
+.sky.in .sk b { opacity: 1; }
+.sk.us b { color: var(--gold); }
+.sk span { position: absolute; top: 100%; margin-top: 10px; font-size: .78rem; color: var(--on-night-muted); text-align: center; line-height: 1.25; width: 110%; }
+.sk.us span { color: var(--gold-2); font-weight: 600; }
+.mapwrap { position: relative; margin-top: 48px; border-radius: 20px; overflow: hidden; border: 1px solid #1d3458; height: min(60vh, 460px); }
+.mapwrap iframe { width: 100%; height: 100%; border: 0; filter: invert(.92) hue-rotate(180deg) saturate(.6) brightness(.9); }
+.maplabel { position: absolute; left: 16px; bottom: 16px; max-width: calc(100% - 32px); padding: 12px 16px; border-radius: 14px; background: rgba(7,15,28,.88); backdrop-filter: blur(6px); }
+.maplabel b { display: block; font: 800 1.3rem var(--display); }
+.maplabel span { font-size: .85rem; color: var(--on-night-muted); }
+
+/* Arabic */
+html[lang="ar"] { --display: "IBM Plex Sans Arabic", "Big Shoulders Display", sans-serif; --body: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif; }
+html[lang="ar"] h1, html[lang="ar"] h2 { line-height: 1.2; font-weight: 700; letter-spacing: 0; }
+html[lang="ar"] .hero h1 { line-height: 1.15; font-size: clamp(2.8rem, 9vw, 5.6rem); }
+html[lang="ar"] .eyebrow, html[lang="ar"] .by, html[lang="ar"] .lvl small, html[lang="ar"] .journey em, html[lang="ar"] .tourcard small { letter-spacing: 0; font-family: var(--body); }
+html[lang="ar"] .eyebrow::before { order: 2; }
+html[lang="ar"] .stats b, html[lang="ar"] .dial b, html[lang="ar"] .checks b, html[lang="ar"] .specs b, html[lang="ar"] .lvl b, html[lang="ar"] .sim .read, html[lang="ar"] .sk b { font-family: "Big Shoulders Display", sans-serif; direction: ltr; unicode-bidi: isolate; }
+html[lang="ar"] .checks .track::before { inset: 0 0 0 auto; background: linear-gradient(270deg, var(--sea), var(--sea-2)); }
+html[lang="ar"] .checks .track::after { right: auto; left: 0; }
+html[lang="ar"] .journey li { padding: 0 34px 26px 0; }
+html[lang="ar"] .journey li::before { left: auto; right: 0; }
+html[lang="ar"] .journey li::after { left: auto; right: 11.5px; }
+@media (min-width: 900px) {
+  html[lang="ar"] .journey li { padding: 38px 0 0 14px; }
+  html[lang="ar"] .journey li::after { right: 24px; left: 0; background: linear-gradient(270deg, var(--gold), rgba(227,189,120,.15)); }
+}
+html[lang="ar"] .hero::before { background: linear-gradient(180deg, rgba(7,15,28,.7) 0%, rgba(7,15,28,0) 22%, rgba(7,15,28,0) 42%, rgba(7,15,28,.85) 78%, var(--night) 100%), linear-gradient(270deg, rgba(7,15,28,.75) 0%, rgba(7,15,28,0) 60%); }
+html[lang="ar"] th, html[lang="ar"] td { text-align: right; padding: 10px 0 10px 10px; }
+html[lang="ar"] .fab { right: auto; left: 16px; }
+html[lang="ar"] .stats b, html[lang="ar"] .lvl b, html[lang="ar"] .dial b, html[lang="ar"] .specs b { text-align: right; }
+html[lang="ar"] .ride-info dd { direction: ltr; text-align: right; }
+html[lang="ar"] .sim .read { left: auto; right: 18px; text-align: right; }
+html[lang="ar"] .sim .read small { direction: rtl; }
+html[lang="ar"] .gauge { right: auto; left: 18px; }
+html[lang="ar"] .tourcard { left: auto; right: 16px; }
+html[lang="ar"] .fs { right: auto; left: 14px; }
+html[lang="ar"] .maplabel { left: auto; right: 16px; }
+@media (max-width: 899px) { html[lang="ar"] .logo { font-size: 1.15rem; } .logo span { white-space: nowrap; } }
+html[lang="ar"] .hotspot::before { margin: 0 0 0 6px; }
+
+/* load path */
+.seg.light { box-shadow: inset 0 0 0 1.5px var(--line); }
+.seg.light button { color: var(--ink); }
+.seg.light button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.lp { display: grid; gap: 30px; margin-top: 22px; align-items: start; }
+@media (min-width: 900px) { .lp { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
+#lp-svg { width: 100%; height: auto; max-height: 78vh; background: linear-gradient(#f6f9fc, #eaf0f6 61%); border-radius: 20px; border: 1px solid var(--line); }
+.lp-t { font: 600 15px var(--body); fill: #3c4b5e; }
+.lp-part { transition: opacity .5s; }
+.lp.dim .lp-part { opacity: .35; } .lp.dim .lp-part.on { opacity: 1; }
+#lp-path { animation: flow 1s linear infinite; filter: drop-shadow(0 0 6px rgba(227,189,120,.8)); }
+@keyframes flow { to { stroke-dashoffset: -18; } }
+.lp-steps { list-style: none; padding: 0; margin: 0 0 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+.lp-steps button { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 7px 13px; font: 600 .85rem var(--body); cursor: pointer; color: var(--ink); }
+.lp-steps button.on { background: var(--gold); border-color: var(--gold); color: #1d1405; }
+.lp-card { background: var(--night); color: var(--on-night); border-radius: 20px; padding: 24px; min-height: 260px; }
+.lp-card small { font: 500 .75rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.lp-card b { display: block; font: 800 2rem/1.05 var(--display); margin: 6px 0 10px; }
+.lp-card p { color: var(--on-night-muted); margin: 0 0 14px; }
+.lp-big { font: 800 clamp(2rem, 5vw, 3rem)/1 var(--display); color: var(--gold-2); }
+.lp-big small { display: block; font: 500 .85rem var(--body); letter-spacing: 0; text-transform: none; color: var(--on-night-muted); margin-top: 6px; }
+.lp-nav { display: flex; gap: 10px; margin-top: 14px; }
+.lp-nav .btn:not(.gold) { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+
+/* quiz */
+.quiz { margin-top: 22px; padding: 18px 20px; border-radius: 18px; background: rgba(227,189,120,.08); border: 1px solid rgba(227,189,120,.3); }
+.quiz span { color: var(--on-night-muted); }
+.quiz-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 12px; }
+.quiz-row input { flex: 1; min-width: 180px; }
+.quiz output { font: 800 1.6rem var(--display); min-width: 4.5em; color: var(--gold); }
+.quiz-a { margin: 12px 0 0; color: var(--gold-2); min-height: 1.4em; }
+.quiz-a b { color: #fff; }
+.arlink { margin: 14px 0 0; }
+.arlink a { color: var(--gold); font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(227,189,120,.5); }
+.arlink.dark a { color: var(--sea); border-color: rgba(31,79,143,.4); }
+
+/* night mode for the 3D model */
+.nightbtn { margin-left: 6px; }
+.tabs .nightbtn[aria-pressed="true"] { background: #0b1b2e; border-color: #0b1b2e; color: var(--gold-2); }
+body.night3d #stage-ext { background: radial-gradient(90% 70% at 50% 75%, #1b3a66 0%, #050b16 100%); border-color: #1d3458; }
+body.night3d #stage-ext .hint { color: #9db0c8; }
+
+/* shape and sun */
+.shape, .sun { display: grid; gap: 28px; align-items: center; margin-top: 30px; padding: 26px; border-radius: 22px; background: var(--paper); border: 1px solid var(--line); }
+@media (min-width: 900px) { .shape { grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); } .sun { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } }
+.shape canvas { width: 100%; max-width: 420px; height: auto; aspect-ratio: 1; justify-self: center; }
+.shape .dial b { color: var(--sea); } .shape .dial span { color: var(--muted); }
+.shape input[type=range], .sun input[type=range] { accent-color: var(--sea); }
+.shape .range-labels, .sun .range-labels { color: var(--muted); }
+dl.facts.small { margin-top: 14px; }
+.sun canvas { width: 100%; height: auto; aspect-ratio: 1; border-radius: 16px; }
+.sl { display: grid; grid-template-columns: 60px 1fr 64px; align-items: center; gap: 10px; margin: 10px 0; font-size: .9rem; color: var(--muted); }
+.sl output { font-weight: 600; color: var(--ink); text-align: right; }
+.sun-read { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0; }
+.sun-read b { display: block; font: 800 1.8rem/1 var(--display); color: var(--ink); }
+.sun-read span { font-size: .8rem; color: var(--muted); }
+
+/* presenting */
+.presentbtn { background: none; border: 1px solid rgba(255,255,255,.2); color: var(--on-night); border-radius: 999px; padding: 8px 16px; cursor: pointer; font: 500 .88rem var(--body); }
+.pbar { position: fixed; z-index: 80; left: 50%; bottom: 16px; transform: translateX(-50%); display: none; gap: 16px; align-items: center; padding: 8px 18px; border-radius: 999px; background: rgba(7,15,28,.85); color: var(--on-night-muted); font: 500 .85rem var(--body); backdrop-filter: blur(8px); white-space: nowrap; }
+.pbar #pcount { color: var(--gold); font-weight: 600; }
+.plive:empty { display: none; }
+.plive { color: #8fe3a8; }
+html.presenting .pbar { display: flex; }
+html.presenting .bar, html.presenting .fab, html.presenting .progress { display: none; }
+html.presenting body > section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+html.presenting { scroll-snap-type: y mandatory; }
+html.presenting body > section { scroll-snap-align: start; }
+.counter { margin: 18px auto 0; color: var(--on-night-muted); }
+.counter b { color: var(--gold); font: 800 1.6rem var(--display); }
+html[lang="ar"] .quiz output, html[lang="ar"] .sun-read b, html[lang="ar"] dl.facts dd, html[lang="ar"] .sl output, html[lang="ar"] .lp-big, html[lang="ar"] .shape .dial b { unicode-bidi: plaintext; }
+html[lang="ar"] .range-labels { font-family: var(--body); }
+html[lang="ar"] .counter b, html[lang="ar"] .quiz output, html[lang="ar"] .sun-read b, html[lang="ar"] .lp-big { font-family: "Big Shoulders Display", sans-serif; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .loader { display: none; }
   .hero .bg img, .hero h1 .w > span, .hero p.lead, .hero .btns, .hero .by, .qrcard { animation: none; opacity: 1; transform: none; }
   .btn.gold::after { animation: none; }
 }
 </style>
+<script>window.AR = {"0": "الأبراج الملتوية", "1": "امسح الرمز بكاميرا هاتفك", "2": "ضع الأبراج في غرفتك", "3": "آيفون وأندرويد · بدون تطبيق", "4": "اضغط Esc أو Q للإغلاق", "5": "الأبراج الملتوية", "6": "الالتواء", "7": "المشروع", "8": "الطوابق", "9": "النموذج ثلاثي الأبعاد", "10": "الرياح", "11": "البناء", "12": "بالحجم الحقيقي", "13": "النتائج", "14": "المنهجية", "15": "الأفق", "16": "الفريق", "17": "الواقع المعزز", "18": "مشروع التخرج · جامعة البحرين", "19": "يرتفع كل برج 200 م ويلتف نصف دورة كاملة من الأرض حتى السطح. ضع الأبراج الثلاثة أمامك على الأرض، ثم اكتشف ما الذي يحملها.", "20": "شاهدها في غرفتك", "21": "استكشف بالأبعاد الثلاثة", "22": "<b>امسح الرمز بهاتفك</b><br/>لتضع الأبراج في غرفتك", "23": "ارتفاع كل برج", "24": "التواء من الأرض إلى السطح", "25": "طابقًا، 4 م لكل طابق", "26": "جسور سماوية فولاذية", "27": "إزاحة السطح، والحد 500", "28": "الفكرة", "29": "الطوابق تدور، والهيكل ثابت.", "30": "حرّك المؤشر لتلوي الأبراج. كل طابق بأضلاعه الاثني عشر يدور 3.6° عن الطابق الذي تحته، بينما تبقى النواة والأعمدة العشرون مستقيمة وعمودية، فتنزل كل الأحمال مباشرة إلى الأسفل.", "31": "0° مستقيم", "32": "180° كما صُمّم", "33": "بلاطة الطابق الأرضي", "34": "بلاطة السطح بعد الدوران", "35": "20 عمودًا لا تتحرك", "36": "لأن الشكل ذا الأضلاع الاثني عشر ينطبق على نفسه كل 30°، تبقى الأعمدة العمودية دائمًا داخل حافة البلاطة.", "37": "لكل طابق هنا", "38": "لكل طابق، برج كيان، دبي", "39": "يلتف برج كيان 90° على ارتفاع 306 م. أما هذه الأبراج فتلتف 180° على ارتفاع 200 م: ضعف الالتواء، وبمعدل أسرع بثلاث مرات لكل طابق.", "40": "المشروع باختصار", "41": "ثلاثة أبراج على واجهة بحرية واحدة", "42": "ثلاثة أبراج متطابقة متعددة الاستخدامات تقف في قوس خفيف على واجهة خليج البحرين في المنامة، وتربطها جسور سماوية فولاذية عند الطابق 31 وعند السطح.", "43": "تمتد نواة خرسانية مستقيمة و20 عمودًا رأسيًا على كامل الارتفاع، وتدور كل بلاطة ذات اثني عشر ضلعًا 3.6° فوق التي تحتها. ويجعل الحزام الفولاذي عند الطابق 20 الأعمدة المحيطية تعمل معًا لمقاومة الرياح.", "44": "الارتفاع", "45": "200 م، 50 طابقًا بارتفاع 4 م", "46": "الالتواء", "47": "3.6° لكل طابق، 180° إجمالًا", "48": "البلاطة", "49": "12 ضلعًا، بقطر 40 م", "50": "المساحة", "51": "نحو 192,900 م² في الأبراج الثلاثة", "52": "الجسور السماوية", "53": "أربعة، طول كل منها 15 م وعرضه 5 م", "54": "الهيكل", "55": "نواة وأعمدة خرسانية، وحزام تدعيم فولاذي، وبلاطات لاحقة الشد", "56": "الأساسات", "57": "لبشة بسماكة 2 م على 121 خازوقًا محفورًا لكل برج", "58": "ماذا يوجد في كل طابق", "59": "<b>الطابق 50</b> <span>المطعم السماوي وجسور ممشى الحديقة السماوية، 200 م</span>", "60": "<b>الطوابق 36 إلى 49</b> <span>شقق سكنية، أربع شقق في كل طابق</span>", "61": "<b>الطابق 35</b> <span>طابق المعدات والملجأ</span>", "62": "<b>الطوابق 21 إلى 34</b> <span>فندق، مع جسور المعرض السماوي في الطابق 31</span>", "63": "<b>الطابق 20</b> <span>المعدات والملجأ والحزام الفولاذي</span>", "64": "<b>الطوابق 6 إلى 19</b> <span>مكاتب، ست وحدات في كل طابق</span>", "65": "<b>الطوابق 1 إلى 5</b> <span>الردهة والمقهى والمعرض والمكتبة والنادي الرياضي والمطعم</span>", "66": "طابقًا بعد طابق", "67": "اصعد البرج", "68": "اسحب المصعد إلى أي طابق. تدور البلاطة معك، بينما تبقى النواة والأعمدة في مكانها تمامًا.", "69": "الطابق", "70": "الارتفاع", "71": "الدوران", "72": "الاستخدام", "73": "فندق", "74": "الأعمدة", "75": "الردهة", "76": "الحزام الفولاذي", "77": "المعرض السماوي", "78": "السطح", "79": "مسار الأحمال", "80": "تتبّع الحمل حتى الصخر", "81": "كل كيلونيوتن يجب أن يجد طريقه إلى الأسفل. تتبّع خطوة بخطوة كيف تنتقل أحمال الجاذبية والرياح من الطابق حتى الصخر على عمق 25 م تحت اللبشة.", "82": "الجاذبية", "83": "الرياح", "84": "النموذج ثلاثي الأبعاد", "85": "دوّره، افتحه، وضعه في غرفتك", "86": "اسحب للتدوير وقرّب بإصبعين. خذ الجولة الإرشادية، أو انتقل إلى الهيكل لتزيل الزجاج وترى ما يحمل الأبراج.", "87": "<strong>لا يعمل الواقع المعزز داخل هذا التطبيق.</strong> افتح القائمة واختر <em>الفتح في المتصفح</em> (Safari على آيفون، Chrome على أندرويد)، ثم حاول مجددًا.", "88": "الخارج", "89": "الهيكل", "90": "ليلًا", "91": "جولة إرشادية", "92": "الزجاج", "93": "الطوابق", "94": "النواة", "95": "الأعمدة", "96": "التدعيم", "97": "الجسور السماوية", "98": "اللبشة والخوازيق", "99": "التاج، 72 زعنفة ألمنيوم", "100": "ممشى الحديقة السماوية، 200 م", "101": "المعرض السماوي، الطابق 31", "102": "طابق المعدات، الطابق 20", "103": "الردهة والمظلة", "104": "شاهدها في غرفتك (واقع معزز)", "105": "امسح رمز QR في الأعلى بهاتفك لتضع الأبراج في غرفتك.", "106": "تعذّر تشغيل الواقع المعزز على هذا الهاتف. يمكنك استكشاف النموذج هنا.", "107": "المحطة 1 من 6", "108": "ثلاثة أبراج", "109": "التالي", "110": "إنهاء", "111": "الحزام الفولاذي، الطابق 20", "112": "النواة الخرسانية، 17.6 × 18.4 م", "113": "20 عمودًا لكل برج", "114": "جسر سماوي، مفصل وبكرة", "115": "لبشة على 121 خازوقًا", "116": "الهيكل في غرفتك (واقع معزز)", "117": "النموذج بمقياس 1:200، أي بارتفاع 1.1 م تقريبًا في غرفتك. نموذج الهيكل مبني من أبعاد التقرير، ومواقع الخوازيق فيه تخطيطية.", "118": "الرياح والديناميكا", "119": "كم تتحرك الأبراج مع الرياح", "120": "تدفع رياح التصميم السطح 494 مم جانبًا، والحد المسموح 500 مم، أي الارتفاع مقسومًا على 400. ويساعد الحزام الفولاذي عند الطابق 20 على إبقائها ضمن الحد.", "121": "<b>خمّن أولًا.</b> <span>تحت رياح التصميم، كم يتحرك سطح برج ارتفاعه 200 م جانبيًا؟</span>", "122": "اكشف الإجابة", "123": "تحتاج هذه الحركة إلى WebGL، وهو متوقف في هذا المتصفح.", "124": "رياح باتجاه الجسور", "125": "رياح عرضية", "126": "نمط الالتواء", "127": "إيقاف", "128": "الطرف المفصلي: الجسر مثبت بهذا البرج", "129": "طرف البكرة: الجسر ينزلق، فيتمايل كل برج وحده", "130": "شاهد الأبراج تتمايل على طاولتك بالواقع المعزز ←", "131": "سرعة الرياح الأساسية، ASCE 7-16", "132": "<b>فئة التعرض D</b><span>مياه مفتوحة من الشمال</span>", "133": "النمط 1، تمايل باتجاه X", "134": "النمط 2، تمايل باتجاه Y", "135": "النمط 3، التواء", "136": "شكل التمايل هو إزاحة الرياح من ETABS عند كل طابق (494.42 مم باتجاه الجسور، و439.65 مم عرضيًا)، ويتحرك بزمن النمطين الأولين 9.08 ث و8.55 ث. ويُرسم نمط الالتواء دورانًا يزداد مع الارتفاع بزمن 2.84 ث. والأبراج الثلاثة مرسومة بتوقيت مختلف قليلًا، كما تفعل الهبّات، لإظهار عمل البكرة.", "137": "البناء", "138": "كيف يُبنى", "139": "الخوازيق واللبشة أولًا. ثم ترتفع النواة في المقدمة، ويتبعها كل طابق مدارًا 3.6° عن الذي تحته، ثم الزجاج. وتُرفع الجسور إلى مكانها في النهاية.", "140": "تحتاج هذه الحركة إلى WebGL، وهو متوقف في هذا المتصفح.", "141": "ابنِ الأبراج", "142": "شاهدها ترتفع في غرفتك بالواقع المعزز ←", "143": "هذا توضيح للتسلسل وليس جدولًا زمنيًا للتنفيذ. ويذكر التقرير تحليل البناء طابقًا بطابق كعمل مستقبلي.", "144": "بالحجم الحقيقي", "145": "قف بجانب العمود C2", "146": "هذه قاعدة عمود محيطي بحجمها الحقيقي: 1.2 م لكل ضلع، صُمّم لحمل نحو 40,000 كيلونيوتن، أي ما يعادل وزن 4,000 طن تقريبًا.", "147": "يُظهر الجزء السفلي الخرسانة النهائية، وفوقه أُزيلت الخرسانة لترى 32 قضيبًا بقطر 50 مم والكانات التي تربطها.", "148": "المقطع", "149": "1200 × 1200 مم، الطوابق 1 إلى 12", "150": "التسليح الرئيسي", "151": "32 قضيبًا بقطر 50 مم، تسعة على كل وجه", "152": "الكانات", "153": "16 مم كل 150 مم، خمسة أفرع في كل اتجاه", "154": "نسبة الحديد", "155": "4.36%، ضمن الحد من 1% إلى 8%", "156": "الحمل المحوري", "157": "40,116 كيلونيوتن، 0.946 من السعة", "158": "في الأعلى", "159": "1000 ثم 850 ثم 750 ثم 600 مم في القمة", "160": "شاهده بحجمه الحقيقي (واقع معزز)", "161": "يظهر العمود في الواقع المعزز بعرض 1.2 م وارتفاع 2.4 م. الوصلات والأشاير غير مرسومة.", "162": "حيث يلتقي التدعيم بالعمود", "163": "كل دعامة أنبوب فولاذي بقطر 356 مم يحمل الضغط والشد فقط. تمر صفيحة سكينية بسماكة 30 مم عبر الأنبوب وتُربط بصفيحة وصل. وتخترق عشرة براغي M36 العمود بعرضه الكامل 1 م إلى صفيحة في الجهة الأخرى، فلا يعتمد الشد أبدًا على اقتلاع الخرسانة. وأكثر الأجزاء تحميلًا يعمل عند 87.5% من مقاومته.", "164": "لماذا تنزلق الجسور", "165": "كل جسر بطول 15 م مكوّن من ثلاثة جملونات فولاذية تحت بلاطة خرسانية. أحد طرفيه مثبت بمفصل في برج، والآخر على بكرات، فلا يدفع برج الآخر أو يشده عند التمايل. نجحت جميع العناصر الـ193، وأكثرها تحميلًا يعمل عند 0.83 من مقاومته.", "166": "قف تحت جسر بحجمه الحقيقي بالواقع المعزز ←", "167": "النتائج", "168": "كل فحص مقابل حدّه", "169": "الشريط الأزرق هو النتيجة، والعلامة الحمراء في نهايته هي الحد. وكل شريط يتوقف قبله.", "170": "نجحت 9 فحوصات من 9", "171": "إزاحة السطح، رياح باتجاه الجسور <i>الحد 500 مم، الارتفاع / 400</i>", "172": "إزاحة السطح، رياح عرضية <i>الحد 500 مم</i>", "173": "الحمل المحوري للعمود C2 <i>الحد 1.00</i>", "174": "وصلة التدعيم، براغي الصفيحة السكينية <i>الحد 100%</i>", "175": "الجسر السماوي، العنصر الأكثر تحميلًا <i>الحد 1.00</i>", "176": "هبوط الجسر السماوي تحت حمل الناس <i>الحد 41.7 مم، البحر / 360</i>", "177": "هبوط البلاطة بعد تركيب القواطع <i>الحد 20.5 مم، البحر / 480</i>", "178": "هبوط اللبشة <i>الحد 50 مم</i>", "179": "الخوازيق المطلوبة من 121 مُنفّذة <i>المطلوب 119، ومعامل الأمان 3.28</i>", "180": "119 من 121", "181": "تحقق يدوي", "182": "أُعيد تصميم العناصر الرئيسية يدويًا وقورنت بنتائج البرامج.", "183": "العنصر", "184": "الفرق", "185": "حمل قاعدة العمود C2 مقابل ETABS", "186": "قيم تصميم العمود C2", "187": "نحو 1%", "188": "جدار النواة P3 مقابل ETABS", "189": "ضمن 5%", "190": "شريحة كابلات البلاطة مقابل RAM Concept", "191": "نفس الجدائل الأربع", "192": "سعة الخازوق مقابل PLAXIS 3D", "193": "انحناء اللبشة مقابل SAFE", "194": "ضمن 5%", "195": "الخطوات القادمة", "196": "يذكر التقرير ما يحتاجه التصميم النهائي من أعمال.", "197": "اختبار نفق رياح للأبراج الثلاثة معًا", "198": "فحص اهتزاز الجسور من خطوات المشاة لراحة المستخدمين", "199": "قِصَر الأعمدة والنواة على امتداد الارتفاع", "200": "تحليل مراحل البناء مع الطوابق الدوّارة", "201": "تقدير التكلفة، وتنسيق الخدمات، ونموذج رباعي الأبعاد", "202": "الكودات: ASCE 7-16 وACI 318-19 وAISC 360-16.", "203": "كيف أنجزناه", "204": "من رسم أولي إلى تصميم مُتحقَّق منه", "205": "سبع مراحل، وخمسة برامج تحليل، وتحقق يدوي من كل عنصر رئيسي.", "206": "الفكرة", "207": "الشكل وتوزيع الاستخدامات والجسور والمخططات في موقع خليج البحرين", "208": "تحليل الأبراج", "209": "الرياح وفق ASCE 7-16، والتحليل الديناميكي، والأعمدة وجدران النواة والدعامات", "210": "الطوابق", "211": "البلاطات لاحقة الشد والكابلات والهبوط طويل الأمد", "212": "الوصلة", "213": "وصلة الدعامة بالعمود بالصفيحة السكينية، صفيحة بصفيحة", "214": "الأساسات", "215": "لبشة على خوازيق في الصخر، والهبوط وانحناء اللبشة", "216": "التحقق اليدوي", "217": "إعادة تصميم العناصر الرئيسية يدويًا، بفرق أقل من 5% عن البرامج", "218": "الواقع المعزز والموقع", "219": "النماذج التي يمكنك وضعها في غرفتك من هذه الصفحة", "220": "الاستدامة", "221": "مصمّم لشمس البحرين وبحرها", "222": "يتبع التصميم اشتراطات المباني الخضراء في البحرين، ويدعم الرؤية الاقتصادية 2030 والهدف الوطني بالوصول إلى 20% من الطاقة المتجددة بحلول 2035.", "223": "لماذا اثنا عشر ضلعًا؟", "224": "لكل شكل هنا مساحة طابق البرج نفسها، 1,286 م². وكلما قلّت الأضلاع زاد طول الجدار حول المساحة نفسها.", "225": "دائرة", "226": "المحيط", "227": "الواجهة لكل برج", "228": "مقارنة بالمربع", "229": "شكل يظلّل نفسه", "230": "يغيّر الالتواء اتجاه كل طابق نحو الشمس، ويحتاج الشكل ذو الاثني عشر ضلعًا واجهةً أقل بنحو 10% من مربع بالمساحة نفسها.", "231": "زجاج يمنع الحرارة", "232": "زجاج مزدوج للتحكم الشمسي، مع تظليل خارجي على الجهات الأكثر تعرضًا.", "233": "طاقة من المبنى نفسه", "234": "ألواح شمسية في أحزمة الواجهة، وفوق موقف السيارات ذي 624 موقفًا، وفي السقف الزجاجي لممشى الحديقة السماوية.", "235": "مياه أقل وخرسانة أقل", "236": "إعادة استخدام المياه الرمادية، واستخدام مياه تكثيف التكييف للري، وبلاطات لاحقة الشد تستهلك خرسانة أقل.", "237": "خدمات عالية الكفاءة", "238": "ربط بشبكة التبريد المركزي، مع غرف المعدات في الطابقين 20 و35 قرب الطوابق التي تخدمها.", "239": "مفتوح للجميع", "240": "يعرض المعرض السماوي في الطابق 31 تراث البحرين في الغوص على اللؤلؤ وأعمال الفنانين المحليين، وممشى السطح مفتوح للزوار.", "241": "الشمس والظل في الموقع", "242": "مسار الشمس الحقيقي فوق المنامة (26.2° شمالًا). اختر يومًا وساعة لترى أين تُلقي الأبراج الثلاثة ظلالها.", "243": "الشهر", "244": "الوقت", "245": "ارتفاع الشمس", "246": "من الشمال", "247": "طول الظل", "248": "شغّل اليوم كاملًا", "249": "يُفترض أن البحر في الشمال كما في مخطط الموقع. الأوقات بتوقيت البحرين.", "250": "على خليج البحرين", "251": "خط جديد في أفق المنامة", "252": "بارتفاع 200 م ستكون الأبراج الثلاثة بين أعلى مباني المنامة، بجوار برج يونايتد الملتوي على الخليج نفسه.", "253": "فندق فورسيزونز، خليج البحرين", "254": "مرفأ البحرين المالي", "255": "مركز البحرين التجاري العالمي", "256": "الأبراج الملتوية، هذا المشروع", "257": "برج يونايتد، ملتوٍ، 2016", "258": "ارتفاعات المباني القائمة من مركز ناطحات السحاب التابع لـ CTBUH.", "259": "<b>خليج البحرين، المنامة</b><span>موقع على الواجهة البحرية يطل على الخليج العربي شمالًا، فئة التعرض D للرياح</span>", "260": "المعرض", "261": "كيف سيبدو", "262": "فيلم المشروع", "263": "يوم في الأبراج", "264": "من الغروب إلى الليل", "265": "من الجو، على واجهة خليج البحرين", "266": "من الواجهة البحرية عصرًا", "267": "مستوى السطح عند الغسق", "268": "من المدخل", "269": "نظرة إلى الأعلى نحو جسر سماوي", "270": "من البحر عند الغروب", "271": "هذه الصور مُنتَجة بمساعدة الذكاء الاصطناعي من نموذج SketchUp الخاص بالفريق. وهي توضيحية، ونموذج SketchUp هو المرجع التصميمي.", "272": "الواقع المعزز", "273": "ضع خليج البحرين على طاولتك", "274": "يعمل على آيفون وأندرويد دون تثبيت أي تطبيق. اختر الأبراج، أو الهيكل الإنشائي، أو العمود C2 بحجمه الحقيقي.", "275": "شاهدها في غرفتك", "276": "كل نماذج الواقع المعزز", "277": "زيارة لصفحة الواقع المعزز حتى الآن", "278": "الفريق", "279": "من صنعه", "280": "الهندسة المدنية", "281": "الهندسة المدنية", "282": "الهندسة المدنية", "283": "بإشراف د. محمد أجمل", "284": "مشروع التخرج CENG495<br/>بكالوريوس الهندسة المدنية<br/>كلية الهندسة، جامعة البحرين", "285": "حمّل التقرير كاملًا", "286": "المفهوم الإنشائي والنمذجة والتحليل والتصميم والتفاصيل من عمل الفريق. أما النماذج ثلاثية الأبعاد ونماذج الواقع المعزز وهذا الموقع فطُوّرت بمساعدة الذكاء الاصطناعي، كما هو مُصرّح في التقرير.", "287": "الأبراج الملتوية، خليج البحرين · يعمل على آيفون (Safari) وأندرويد (Chrome) دون تثبيت أي تطبيق.", "288": "وضع العرض", "289": "تعرض المشروع؟ اضغط <b>Q</b> لرمز QR، و<b>P</b> لوضع العرض.", "290": "شارك المشروع", "291": "الواقع المعزز", "292": "تم نسخ الرابط", "293": "← → للتنقل · Q لرمز QR · Esc للخروج"};</script>
 </head>
 <body>
+<div aria-hidden="true" class="loader" id="loader"><svg viewbox="0 0 120 120"><g fill="none" stroke="#e3bd78" stroke-linecap="round" stroke-width="2.4"><path class="l1" d="M30 100 C 30 70, 42 50, 38 20"></path><path class="l2" d="M60 104 C 60 72, 72 48, 66 14"></path><path class="l3" d="M90 100 C 90 70, 102 50, 98 20"></path><path class="l4" d="M38 62 H 62 M 66 62 H 92 M 38 24 H 64 M 68 24 H 96" stroke-width="3"></path></g></svg><b data-i18n="0">Twisted Towers</b></div>
+<div aria-label="QR code" aria-modal="true" class="qrlay" id="qrlay" role="dialog">
+<div class="qrlay-in"><img alt="QR code that opens the AR view" src="qr-ar.png"/><div><small data-i18n="1">Scan with your phone camera</small><b data-i18n="2">Place the towers in your room</b><span data-i18n="3">iPhone and Android · no app needed</span><em data-i18n="4">Press Esc or Q to close</em></div></div>
+</div>
 <div class="progress" id="progress"></div>
 <header class="bar" id="bar">
-  <div class="wrap">
-    <a class="logo" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M9 26V8c2 1 3 4 3 9s1 8 3 9H9zm7 0V6c2 1 3 4 3 10s1 9 3 10h-6zm7 0V8c2 1 3 4 3 9s0 8 0 9h-3z" fill="#e3bd78"/></svg>Twisted Towers</a>
-    <nav aria-label="Sections">
-      <a href="#twist">Twist</a><a href="#project">Project</a><a href="#model">3D model</a><a href="#wind">Wind</a><a href="#build">Construction</a>
-      <a href="#column">Real size</a><a href="#results">Results</a><a href="#journey">Process</a><a href="#gallery">Gallery</a><a href="#team">Team</a>
-    </nav>
-    <a class="btn gold small ar-top ar-link" href="ar.html" rel="ar"><img src="poster.webp" alt="">View in AR</a>
-  </div>
-</header>
-
-<section class="hero" id="top">
-  <div class="bg"><img src="render5.jpg" alt="" fetchpriority="high"></div>
-  <div class="wrap">
-    <div>
-      <div class="by">Senior design project · University of Bahrain</div>
-      <h1 id="h1"><span class="w"><span>Three</span></span> <span class="w"><span><em>twisted</em></span></span> <span class="w"><span>towers</span></span> <span class="w"><span>on</span></span> <span class="w"><span>Bahrain</span></span> <span class="w"><span>Bay</span></span></h1>
-      <p class="lead">Each tower is 200 m tall and turns half a circle between the ground and the roof. Place all three on the floor in front of you, then see what holds them up.</p>
-      <div class="btns">
-        <a class="btn gold ar-link" href="ar.html" rel="ar"><img src="poster.webp" alt=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>View in your room</a>
-        <a class="btn ghost" href="#model">Explore in 3D</a>
-      </div>
-    </div>
-    <div class="qrcard"><img src="qr-ar.png" alt="QR code to open the AR view on a phone"><span><b>Scan with your phone</b><br>to place the towers in your room</span></div>
-    <div class="stats" style="grid-column:1/-1">
-      <div><b data-count="200">0<small>m</small></b><span>tall, each tower</span></div>
-      <div><b data-count="180">0<small>°</small></b><span>twist, roof to ground</span></div>
-      <div><b data-count="50">0</b><span>floors, 4 m each</span></div>
-      <div><b data-count="4">0</b><span>steel sky bridges</span></div>
-      <div><b data-count="494">0<small>mm</small></b><span>roof sway, limit 500</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="band night" id="twist">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>The idea</div>
-    <h2 data-reveal>The floors turn. The structure does not.</h2>
-    <p class="lead" data-reveal>Drag the slider to twist the towers. Each 12-sided floor turns 3.6° on the one below, but the core and the 20 columns stay straight and vertical, so every load goes straight down.</p>
-    <div class="twist">
-      <canvas id="twist-canvas" aria-label="Drawing of the three towers twisting as the slider moves"></canvas>
-      <div class="panel" data-reveal>
-        <div class="dial"><b id="twist-deg">180°</b><span>roof turned against the ground floor<br><span id="twist-per">3.6° per floor × 50 floors</span></span></div>
-        <div>
-          <input type="range" id="twist-range" min="0" max="180" value="180" aria-label="Total twist in degrees">
-          <div class="range-labels"><span>0° straight</span><span>90°</span><span>180° built</span></div>
-        </div>
-        <div class="plan">
-          <canvas id="plan-canvas" width="260" height="260" aria-label="Plan view of the ground floor and the roof"></canvas>
-          <ul>
-            <li style="--c:#78aad7">Ground floor plate</li>
-            <li style="--c:#e3bd78">Roof plate, turned</li>
-            <li style="--c:#ffffff">20 columns, never move</li>
-          </ul>
-        </div>
-        <p class="note" style="margin:0">Because a 12-sided plate turned by 30° lands on itself, the vertical columns always sit inside the floor edge.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="project">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow" data-reveal>The project in short</div>
-      <h2 data-reveal>Three towers, one waterfront</h2>
-      <p class="lead" data-reveal>Three identical mixed-use towers stand in a shallow arc on the Bahrain Bay waterfront in Manama. Steel sky bridges join them at Level 31 and at the roof.</p>
-      <p data-reveal>A straight concrete core and 20 vertical columns run the full height, and each 12-sided floor plate turns 3.6° on top of the one below. Steel belt bracing at Story 20 makes the perimeter columns work together under wind.</p>
-      <dl class="facts" data-reveal>
-        <dt>Height</dt><dd>200 m, 50 floors at 4 m</dd>
-        <dt>Twist</dt><dd>3.6° per floor, 180° in total</dd>
-        <dt>Floor plate</dt><dd>12 sides, 40 m across</dd>
-        <dt>Floor area</dt><dd>About 192,900 m² in three towers</dd>
-        <dt>Sky bridges</dt><dd>Four, each 15 m long and 5 m wide</dd>
-        <dt>Structure</dt><dd>Concrete core and columns, steel belt bracing, post-tensioned floors</dd>
-        <dt>Foundation</dt><dd>2 m raft on 121 bored piles per tower</dd>
-      </dl>
-    </div>
-    <div data-reveal>
-      <h3>What is on each level</h3>
-      <ol class="zones" aria-label="Uses by level, from the roof down">
-        <li class="bridge" style="--f:1;--c:#12294a"><div><b>Level 50</b> <span>Sky restaurant and Sky Garden Walk bridges, 200 m</span></div></li>
-        <li style="--f:14;--c:#1f4f8f"><div><b>Levels 36 to 49</b> <span>Residences, four apartments per floor</span></div></li>
-        <li style="--f:1;--c:#e24a33"><div><b>Level 35</b> <span>Plant and refuge floor</span></div></li>
-        <li class="bridge" style="--f:14;--c:#4b7fc0"><div><b>Levels 21 to 34</b> <span>Hotel, with the Sky Gallery bridges at Level 31</span></div></li>
-        <li style="--f:1;--c:#e24a33"><div><b>Level 20</b> <span>Plant, refuge and the steel belt bracing</span></div></li>
-        <li style="--f:14;--c:#78aad7"><div><b>Levels 6 to 19</b> <span>Offices, six units per floor</span></div></li>
-        <li style="--f:5;--c:#b9d0e8"><div><b>Levels 1 to 5</b> <span>Lobby, café, exhibition, library, gym, restaurant</span></div></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section class="band" id="model" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>3D model</div>
-    <h2 data-reveal>Turn it, open it, place it in your room</h2>
-    <p class="lead" data-reveal>Drag to rotate and pinch to zoom. Take the guided tour, or switch to the structure to take the glass off and see what holds the towers up.</p>
-    <div class="banner" id="inapp"><strong>AR does not open inside this app.</strong> Tap the menu and choose <em>Open in browser</em> (Safari on iPhone, Chrome on Android), then try again.</div>
-    <div class="tabs" role="tablist">
-      <button type="button" role="tab" id="tab-ext" aria-selected="true">Exterior</button>
-      <button type="button" role="tab" id="tab-xray" aria-selected="false">Structure</button>
-      <span class="spacer"></span>
-      <button type="button" class="tour" id="tour-start"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>Guided tour</button>
-    </div>
-    <div class="chips" id="layers" aria-label="Structure layers">
-      <button type="button" data-layer="glass" aria-pressed="true" style="--dot:#78aad7">Glass</button>
-      <button type="button" data-layer="floors" aria-pressed="true" style="--dot:#b9c0cb">Floors</button>
-      <button type="button" data-layer="core" aria-pressed="true" style="--dot:#c4a070">Core</button>
-      <button type="button" data-layer="columns" aria-pressed="true" style="--dot:#1f4f8f">Columns</button>
-      <button type="button" data-layer="bracing" aria-pressed="true" style="--dot:#e24a33">Bracing</button>
-      <button type="button" data-layer="bridges" aria-pressed="true" style="--dot:#f0b429">Sky bridges</button>
-      <button type="button" data-layer="foundation" aria-pressed="true" style="--dot:#96785a">Raft and piles</button>
-    </div>
-    <div class="stage only-ext" id="stage-ext">
-      <model-viewer id="tower" src="towers_ar.glb" ios-src="towers_ar.usdz" poster="poster.webp" loading="lazy"
-          alt="3D model of three twisted towers joined by two sky bridges, on a landscaped base"
-          ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto"
-          camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="2500" interaction-prompt="auto"
-          camera-orbit="35deg 75deg auto" shadow-intensity="1" shadow-softness="0.8" environment-image="neutral" exposure="1.05"
-          interpolation-decay="120">
-        <button class="hotspot" slot="hotspot-crown" data-position="-0.275 1.0856 0.0">Crown, 72 aluminium fins</button>
-        <button class="hotspot" slot="hotspot-garden" data-position="0.1395 1.0309 -0.0098">Sky Garden Walk, 200 m</button>
-        <button class="hotspot" slot="hotspot-gallery" data-position="-0.1375 0.6327 -0.0095">Sky Gallery, Level 31</button>
-        <button class="hotspot" slot="hotspot-mech" data-position="-0.275 0.415 0.0724" data-normal="0 0 1">Plant floor, Level 20</button>
-        <button class="hotspot" slot="hotspot-lobby" data-position="0 0.045 0.146" data-normal="0 0 1">Lobby and canopy</button>
-        <button slot="ar-button" class="ar-btn">View in your room (AR)</button>
-        <div class="hint" id="no-ar">Scan the QR code at the top with your phone to place the towers in your room.</div>
-        <div class="hint" id="ar-failed">AR could not start on this phone. You can still explore the 3D model here.</div>
-      </model-viewer>
-      <div class="tourcard" id="tourcard" aria-live="polite">
-        <small id="tour-n">Stop 1 of 6</small>
-        <h3 id="tour-h">Three towers</h3>
-        <p id="tour-p"></p>
-        <div class="row"><div class="dots" id="tour-dots"></div><button type="button" id="tour-next">Next</button><button type="button" class="x" id="tour-end">End</button></div>
-      </div>
-      <button type="button" class="fs" id="fs" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-    </div>
-    <div class="stage only-xray">
-      <model-viewer id="structure" ios-src="structure.usdz" loading="eager"
-          alt="Structural model of the three towers: floors, core, columns, belt bracing, sky bridges, raft and piles"
-          ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto"
-          camera-controls touch-action="pan-y" interaction-prompt="none" camera-orbit="25deg 80deg auto"
-          shadow-intensity="0" environment-image="neutral" exposure="1.05">
-        <button class="hotspot" slot="hotspot-bracing" data-layer="bracing" data-position="0 0.39 0.095" data-normal="0 0 1">Belt bracing, Story 20</button>
-        <button class="hotspot" slot="hotspot-core" data-layer="core" data-position="-0.275 1.0 -0.05">Concrete core, 17.6 × 18.4 m</button>
-        <button class="hotspot" slot="hotspot-columns" data-layer="columns" data-position="0.275 0.2 0.045" data-normal="0 0 1">20 columns per tower</button>
-        <button class="hotspot" slot="hotspot-bridge" data-layer="bridges" data-position="-0.1375 0.6 -0.025" data-normal="0 0 1">Sky bridge, pin and roller</button>
-        <button class="hotspot" slot="hotspot-piles" data-layer="foundation" data-position="0 -0.07 0.1" data-normal="0 0 1">Piled raft, 121 piles</button>
-        <button slot="ar-button" class="ar-btn">Structure in your room (AR)</button>
-      </model-viewer>
-    </div>
-    <p class="note" style="margin-top:10px">The model is at 1:200, about 1.1 m tall in your room. The structure model is built from the report dimensions, and its pile positions are schematic.</p>
-  </div>
-</section>
-
-<section class="band night" id="wind">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Wind and dynamics</div>
-    <h2 data-reveal>How far the towers move in wind</h2>
-    <p class="lead" data-reveal>Design wind pushes the roof 494 mm sideways. The limit is 500 mm, the height divided by 400. The steel belt at Story 20 helps keep it inside the limit.</p>
-    <div class="sim">
-      <canvas id="wind-canvas" aria-label="Animation of the three towers swaying in wind"></canvas>
-      <div class="fail">This animation needs WebGL, which this browser has turned off.</div>
-      <div class="read" aria-live="off"><span id="wind-now">0</span> <span id="wind-unit">mm</span><small id="wind-sub">roof movement now, of <span id="wind-max">494</span> mm</small></div>
-      <div class="gauge" aria-hidden="true"><i id="wind-gauge"></i></div>
-    </div>
-    <div class="ctrl">
-      <div class="seg" role="group" aria-label="Wind direction or mode">
-        <button type="button" id="wind-x" aria-pressed="true">Wind along the bridges</button>
-        <button type="button" id="wind-y" aria-pressed="false">Wind across</button>
-        <button type="button" id="wind-t" aria-pressed="false">Twisting mode</button>
-      </div>
-      <label>Enlarged <input type="range" id="wind-ex" min="1" max="80" value="40" aria-label="How much the movement is enlarged"> <span id="wind-exv">40 times</span></label>
-      <button type="button" class="btn ghost small" id="wind-play">Pause</button>
-    </div>
-    <ul class="key">
-      <li style="--c:#e24a33">Pinned end: the bridge is held to this tower</li>
-      <li style="--c:#ffffff">Roller end: the bridge slides, so each tower sways on its own</li>
-    </ul>
-    <div class="specs" data-reveal>
-      <div><b>46 m/s</b><span>basic wind speed, ASCE 7-16</span></div>
-      <div><b>Exposure D</b><span>open water to the north</span></div>
-      <div><b>9.08 s</b><span>mode 1, sway along X</span></div>
-      <div><b>8.55 s</b><span>mode 2, sway along Y</span></div>
-      <div><b>2.84 s</b><span>mode 3, twisting</span></div>
-    </div>
-    <p class="note" style="margin-top:14px">The shape of the sway is the ETABS wind displacement at every story (494.42 mm along the bridges, 439.65 mm across). It moves at the towers’ first-mode periods, 9.08 s and 8.55 s. The twisting mode is drawn as a smooth turn that grows with height, at its 2.84 s period. The three towers are drawn slightly out of step, as gusts would make them, to show the roller working.</p>
-  </div>
-</section>
-
-<section class="band night" id="build" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Construction</div>
-    <h2 data-reveal>How it goes up</h2>
-    <p class="lead" data-reveal>Piles and raft first. The core climbs ahead, each floor follows turned 3.6° from the one below, and the glass comes after. The bridges are lifted into place last.</p>
-    <div class="sim">
-      <canvas id="build-canvas" aria-label="Animation of the towers being built floor by floor"></canvas>
-      <div class="fail">This animation needs WebGL, which this browser has turned off.</div>
-      <div class="read"><span id="build-story">Story 50 of 50</span><small id="build-stage">Complete, top floor turned 180°</small></div>
-    </div>
-    <div class="ctrl">
-      <button type="button" class="btn gold" id="build-play">Build the towers</button>
-      <label>Progress <input type="range" id="build-scrub" min="0" max="1000" value="1000" aria-label="Construction progress"></label>
-    </div>
-    <p class="note" style="margin-top:14px">This is an illustration of the sequence, not a construction schedule. A story-by-story construction analysis is listed in the report as future work.</p>
-  </div>
-</section>
-
-<section class="band" id="column">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow" data-reveal>Real size</div>
-      <h2 data-reveal>Stand next to Column C2</h2>
-      <p class="lead" data-reveal>This is the base of a perimeter column at its real size: 1.2 m on each side, designed for about 40,000 kN, roughly the weight of 4,000 tonnes.</p>
-      <p data-reveal>The lower part shows the finished concrete. Above it the concrete is left off, so you can see the 32 bars of 50 mm diameter and the ties that hold them.</p>
-      <dl class="facts" data-reveal>
-        <dt>Section</dt><dd>1200 × 1200 mm, Stories 1 to 12</dd>
-        <dt>Main bars</dt><dd>32 bars of 50 mm, nine on each face</dd>
-        <dt>Ties</dt><dd>16 mm at 150 mm, five legs each way</dd>
-        <dt>Steel ratio</dt><dd>4.36%, inside the 1% to 8% limit</dd>
-        <dt>Axial load</dt><dd>40,116 kN, 0.946 of capacity</dd>
-        <dt>Higher up</dt><dd>1000, 850, 750, then 600 mm at the top</dd>
-      </dl>
-    </div>
-    <div data-reveal>
-      <div class="stage" style="margin-top:0;height:min(66vh,580px)">
-        <model-viewer id="col" src="column_c2.glb" ios-src="column_c2.usdz" loading="lazy"
-            alt="Column C2 at real size: concrete base with the reinforcement cage exposed above"
-            ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="fixed"
-            camera-controls touch-action="pan-y" interaction-prompt="none" camera-orbit="35deg 72deg auto" auto-rotate
-            shadow-intensity="1" shadow-softness="0.9" environment-image="neutral">
-          <button slot="ar-button" class="ar-btn">See it at real size (AR)</button>
-        </model-viewer>
-      </div>
-      <p class="note" style="margin-top:10px">In AR the column appears 1.2 m wide and 2.4 m tall. Bar couplers and dowels are not drawn.</p>
-    </div>
-  </div>
-  <div class="wrap" style="margin-top:56px">
-    <ul class="green">
-      <li style="--c:var(--brace)" data-reveal><h3>Where the brace meets the column</h3><p>Each brace is a 356 mm steel pipe that carries only push and pull. A 30 mm knife plate passes through the pipe and bolts to a gusset. Ten M36 bolts run through the full 1 m column to a plate on the far side, so tension never relies on pulling concrete out. The busiest part works at 87.5% of its strength.</p></li>
-      <li style="--c:var(--amber)" data-reveal><h3>Why the bridges slide</h3><p>Each 15 m bridge is three steel trusses under a concrete deck. One end is pinned to a tower and the other sits on rollers, so the towers do not push and pull each other when they sway. All 193 members pass, and the most loaded one works at 0.83 of its strength.</p></li>
-    </ul>
-  </div>
-</section>
-
-<section class="band" id="results" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Results</div>
-    <h2 data-reveal>Every check against its limit</h2>
-    <p class="lead" data-reveal>The blue bar is the result. The red mark at the end is the limit. Every bar stops short of it.</p>
-    <div class="passall" data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-7"/></svg>9 of 9 checks pass</div>
-    <ul class="checks" id="checks">
-      <li style="--v:98.9"><span>Roof movement, wind along the bridges <i>limit 500 mm, height / 400</i></span><b data-num="494.42" data-unit=" mm">494.42 mm</b><div class="track"></div></li>
-      <li style="--v:87.9"><span>Roof movement, wind across <i>limit 500 mm</i></span><b data-num="439.65" data-unit=" mm">439.65 mm</b><div class="track"></div></li>
-      <li style="--v:94.6"><span>Column C2 axial load <i>limit 1.00</i></span><b data-num="0.946">0.946</b><div class="track"></div></li>
-      <li style="--v:87.5"><span>Brace connection, knife plate bolts <i>limit 100%</i></span><b data-num="87.5" data-unit="%">87.5%</b><div class="track"></div></li>
-      <li style="--v:83"><span>Sky bridge, most loaded member <i>limit 1.00</i></span><b data-num="0.83">0.83</b><div class="track"></div></li>
-      <li style="--v:38.1"><span>Sky bridge deflection under people <i>limit 41.7 mm, span / 360</i></span><b data-num="15.9" data-unit=" mm">15.9 mm</b><div class="track"></div></li>
-      <li style="--v:86.3"><span>Floor slab deflection after partitions <i>limit 20.5 mm, span / 480</i></span><b data-num="17.69" data-unit=" mm">17.69 mm</b><div class="track"></div></li>
-      <li style="--v:34.5"><span>Raft settlement <i>limit 50 mm</i></span><b data-num="17.23" data-unit=" mm">17.23 mm</b><div class="track"></div></li>
-      <li style="--v:98.3"><span>Piles needed, of 121 provided <i>119 needed, factor of safety 3.28</i></span><b>119 of 121</b><div class="track"></div></li>
-    </ul>
-    <div class="split" style="margin-top:56px">
-      <div data-reveal>
-        <h3>Checked by hand</h3>
-        <p>The main members were designed again by hand and compared with the software.</p>
-        <table>
-          <tr><th>Member</th><th>Difference</th></tr>
-          <tr><td>Column C2 base load, against ETABS</td><td>0.52%</td></tr>
-          <tr><td>Column C2 design values</td><td>About 1%</td></tr>
-          <tr><td>Core wall pier P3, against ETABS</td><td>Within 5%</td></tr>
-          <tr><td>Floor tendon strip, against RAM Concept</td><td>Same 4 strands</td></tr>
-          <tr><td>Pile capacity, against PLAXIS 3D</td><td>4.34%</td></tr>
-          <tr><td>Raft bending, against SAFE</td><td>Within 5%</td></tr>
-        </table>
-      </div>
-      <div data-reveal>
-        <h3>What comes next</h3>
-        <p>The report lists the work a final design would still need.</p>
-        <table>
-          <tr><td>Wind-tunnel test of the three towers together</td></tr>
-          <tr><td>Footfall check of the sky bridges for comfort</td></tr>
-          <tr><td>Column and core shortening over the height</td></tr>
-          <tr><td>Construction analysis following the rotating floors</td></tr>
-          <tr><td>Cost estimate, services coordination and a 4D model</td></tr>
-        </table>
-        <p class="note" style="margin-top:12px">Codes: ASCE 7-16, ACI 318-19 and AISC 360-16.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="band night" id="journey">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>How we did it</div>
-    <h2 data-reveal>From a sketch to a checked design</h2>
-    <p class="lead" data-reveal>Seven steps, five analysis programs, and a hand check of every main member.</p>
-    <ol class="journey" data-reveal>
-      <li><b>Concept</b><em>SketchUp · AutoCAD</em><span>Form, zoning, sky bridges and drawings on the Bahrain Bay site</span></li>
-      <li><b>Tower analysis</b><em>ETABS</em><span>Wind to ASCE 7-16, modal analysis, columns, core walls and braces</span></li>
-      <li><b>Floors</b><em>RAM Concept</em><span>Post-tensioned slabs, tendons and long-term deflection</span></li>
-      <li><b>Connection</b><em>IDEA StatiCa</em><span>Brace to column knife-plate joint, plate by plate</span></li>
-      <li><b>Foundation</b><em>PLAXIS 3D · SAFE</em><span>Piled raft on rock, settlement and raft bending</span></li>
-      <li><b>Hand checks</b><em>ACI 318 · AISC 360</em><span>Main members redesigned by hand, within 5% of the software</span></li>
-      <li><b>AR and web</b><em>Blender · model-viewer</em><span>The models you can place in your room from this page</span></li>
-    </ol>
-  </div>
-</section>
-
-<section class="band" id="design">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Sustainability</div>
-    <h2 data-reveal>Built for Bahrain’s sun and sea</h2>
-    <p class="lead" data-reveal>The design follows Bahrain’s green building rules and supports Economic Vision 2030 and the national target of 20% renewable power by 2035.</p>
-    <ul class="green three">
-      <li style="--c:var(--glass)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></div><h3>A shape that shades itself</h3><p>The twist changes which way each floor faces the sun, and the 12-sided plate needs about 10% less façade than a square of the same area.</p></li>
-      <li style="--c:var(--sea)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg></div><h3>Glass that keeps heat out</h3><p>Double-glazed solar-control glass, with outside shading on the most exposed sides.</p></li>
-      <li style="--c:var(--amber)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><h3>Power from the building</h3><p>Solar panels in the façade bands, over the 624-space car park, and in the glass roof of the Sky Garden Walk.</p></li>
-      <li style="--c:var(--pile)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg></div><h3>Less water, less concrete</h3><p>Graywater reuse, air-conditioning condensate for irrigation, and post-tensioned floors that use less concrete.</p></li>
-      <li style="--c:var(--brace)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/></svg></div><h3>Efficient services</h3><p>Connection to district cooling, with plant on Levels 20 and 35, close to the floors it serves.</p></li>
-      <li style="--c:var(--sand)" data-reveal><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5"/></svg></div><h3>Open to the public</h3><p>The Sky Gallery at Level 31 shows Bahrain’s pearling heritage and local artists, and the roof walk is open to visitors.</p></li>
-    </ul>
-  </div>
-</section>
-
-<section class="band" id="gallery" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Gallery</div>
-    <h2 data-reveal>How it will look</h2>
-    <div class="films" id="films">
-      <div class="film"><video data-src="trailer.mp4" controls playsinline preload="metadata" poster="render2.jpg"></video><h3>The project film</h3></div>
-      <div class="film"><video data-src="life.mp4" controls playsinline preload="metadata"></video><h3>A day in the towers</h3></div>
-      <div class="film"><video data-src="daynight.mp4" controls playsinline preload="metadata"></video><h3>From sunset to night</h3></div>
-    </div>
-    <div class="gallery" id="gal">
-      <figure data-reveal><img src="render2.jpg" alt="Aerial view of the three towers on the waterfront" loading="lazy" width="1400" height="788"><figcaption>From the air, on the Bahrain Bay waterfront</figcaption></figure>
-      <figure data-reveal><img src="render1.jpg" alt="The towers seen from the waterfront in late afternoon" loading="lazy" width="1400" height="788"><figcaption>From the waterfront in the late afternoon</figcaption></figure>
-      <figure data-reveal><img src="render6.jpg" alt="The roof level and crowns at dusk" loading="lazy" width="1400" height="788"><figcaption>The roof level at dusk</figcaption></figure>
-      <figure data-reveal><img src="render3.jpg" alt="The towers seen from the entrance" loading="lazy" width="1400" height="788"><figcaption>From the entrance</figcaption></figure>
-      <figure data-reveal><img src="render4.jpg" alt="Looking up at a sky bridge between two towers" loading="lazy" width="1400" height="788"><figcaption>Looking up at a sky bridge</figcaption></figure>
-      <figure data-reveal><img src="render5.jpg" alt="The towers seen from the sea at sunset" loading="lazy" width="1400" height="788"><figcaption>From the sea at sunset</figcaption></figure>
-    </div>
-    <p class="note" style="margin-top:14px">These images are AI-assisted renders of the team’s SketchUp model. They are illustrative, and the SketchUp model is the design reference.</p>
-  </div>
-</section>
-<div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <img id="lb-img" alt=""><p id="lb-cap"></p>
-  <button class="close" id="lb-close" aria-label="Close">×</button><button class="prev" id="lb-prev" aria-label="Previous">‹</button><button class="next" id="lb-next" aria-label="Next">›</button>
+<div class="wrap">
+<a class="logo" href="#top"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M9 26V8c2 1 3 4 3 9s1 8 3 9H9zm7 0V6c2 1 3 4 3 10s1 9 3 10h-6zm7 0V8c2 1 3 4 3 9s0 8 0 9h-3z" fill="#e3bd78"></path></svg><span data-i18n="5">Twisted Towers</span></a>
+<nav aria-label="Sections">
+<a data-i18n="6" href="#twist">Twist</a><a data-i18n="7" href="#project">Project</a><a data-i18n="8" href="#ride">Floors</a><a data-i18n="9" href="#model">3D model</a><a data-i18n="10" href="#wind">Wind</a><a data-i18n="11" href="#build">Construction</a>
+<a data-i18n="12" href="#column">Real size</a><a data-i18n="13" href="#results">Results</a><a data-i18n="14" href="#journey">Process</a><a data-i18n="15" href="#skyline">Skyline</a><a data-i18n="16" href="#team">Team</a>
+</nav>
+<button aria-label="Switch language" class="langbtn" id="langbtn" type="button">عربي</button>
+<button aria-label="Show the QR code" class="qrbtn" id="qrbtn" type="button"><svg fill="currentColor" viewbox="0 0 24 24"><path d="M3 3h8v8H3zm2 2v4h4V5zm8-2h8v8h-8zm2 2v4h4V5zM3 13h8v8H3zm2 2v4h4v-4zm8-2h2v2h-2zm2 2h2v2h-2zm-2 2h2v2h-2zm4 0h2v4h-4v-2h2zm0-4h2v2h-2z"></path></svg></button>
+<a class="btn gold small ar-top ar-link" href="ar.html" rel="ar"><img alt="" src="poster.webp"/><span data-i18n="17">View in AR</span></a>
 </div>
-
+</header>
+<section class="hero" id="top">
+<div class="bg" id="slides"><img alt="" class="on" fetchpriority="high" src="render5.jpg"/><img alt="" data-src="render1.jpg"/><img alt="" data-src="render6.jpg"/><img alt="" data-src="render2.jpg"/></div>
+<div aria-hidden="true" class="glow" id="glow"></div>
+<div class="wrap">
+<div>
+<div class="by" data-i18n="18">Senior design project · University of Bahrain</div>
+<h1 id="h1"><span class="w"><span>Three</span></span> <span class="w"><span><em>twisted</em></span></span> <span class="w"><span>towers</span></span> <span class="w"><span>on</span></span> <span class="w"><span>Bahrain</span></span> <span class="w"><span>Bay</span></span></h1>
+<p class="lead" data-i18n="19">Each tower is 200 m tall and turns half a circle between the ground and the roof. Place all three on the floor in front of you, then see what holds them up.</p>
+<div class="btns">
+<a class="btn gold ar-link" href="ar.html" rel="ar"><img alt="" src="poster.webp"/><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"></path><path d="M3 7l9 5 9-5M12 12v10"></path></svg><span data-i18n="20">View in your room</span></a>
+<a class="btn ghost" data-i18n="21" href="#model">Explore in 3D</a>
+</div>
+<div aria-label="Background pictures" class="dots-hero" id="slide-dots"></div>
+</div>
+<div class="qrcard"><img alt="QR code to open the AR view on a phone" src="qr-ar.png"/><span data-i18n="22"><b>Scan with your phone</b><br/>to place the towers in your room</span></div>
+<div class="stats" style="grid-column:1/-1">
+<div><b data-count="200">0<small>m</small></b><span data-i18n="23">tall, each tower</span></div>
+<div><b data-count="180">0<small>°</small></b><span data-i18n="24">twist, roof to ground</span></div>
+<div><b data-count="50">0</b><span data-i18n="25">floors, 4 m each</span></div>
+<div><b data-count="4">0</b><span data-i18n="26">steel sky bridges</span></div>
+<div><b data-count="494">0<small>mm</small></b><span data-i18n="27">roof sway, limit 500</span></div>
+</div>
+</div>
+</section>
+<section class="band night" id="twist">
+<div class="wrap">
+<div class="eyebrow" data-i18n="28" data-reveal="">The idea</div>
+<h2 data-i18n="29" data-reveal="">The floors turn. The structure does not.</h2>
+<p class="lead" data-i18n="30" data-reveal="">Drag the slider to twist the towers. Each 12-sided floor turns 3.6° on the one below, but the core and the 20 columns stay straight and vertical, so every load goes straight down.</p>
+<div class="twist">
+<canvas aria-label="Drawing of the three towers twisting as the slider moves" id="twist-canvas"></canvas>
+<div class="panel" data-reveal="">
+<div class="dial"><b id="twist-deg">180°</b><span>roof turned against the ground floor<br/><span id="twist-per">3.6° per floor × 50 floors</span></span></div>
+<div>
+<input aria-label="Total twist in degrees" id="twist-range" max="180" min="0" type="range" value="180"/>
+<div class="range-labels"><span data-i18n="31">0° straight</span><span>90°</span><span data-i18n="32">180° built</span></div>
+</div>
+<div class="plan">
+<canvas aria-label="Plan view of the ground floor and the roof" height="260" id="plan-canvas" width="260"></canvas>
+<ul>
+<li data-i18n="33" style="--c:#78aad7">Ground floor plate</li>
+<li data-i18n="34" style="--c:#e3bd78">Roof plate, turned</li>
+<li data-i18n="35" style="--c:#ffffff">20 columns, never move</li>
+</ul>
+</div>
+<p class="note" data-i18n="36" style="margin:0">Because a 12-sided plate turned by 30° lands on itself, the vertical columns always sit inside the floor edge.</p>
+<div class="versus">
+<div><b>3.6°</b><span data-i18n="37">per floor here</span><i style="--w:100%"></i></div>
+<div><b>1.2°</b><span data-i18n="38">per floor, Cayan Tower, Dubai</span><i style="--w:33%"></i></div>
+<p class="note" data-i18n="39">Cayan Tower turns 90° over 306 m. These towers turn 180° over 200 m: twice the twist, three times faster per floor.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="band" id="project">
+<div class="wrap split">
+<div>
+<div class="eyebrow" data-i18n="40" data-reveal="">The project in short</div>
+<h2 data-i18n="41" data-reveal="">Three towers, one waterfront</h2>
+<p class="lead" data-i18n="42" data-reveal="">Three identical mixed-use towers stand in a shallow arc on the Bahrain Bay waterfront in Manama. Steel sky bridges join them at Level 31 and at the roof.</p>
+<p data-i18n="43" data-reveal="">A straight concrete core and 20 vertical columns run the full height, and each 12-sided floor plate turns 3.6° on top of the one below. Steel belt bracing at Story 20 makes the perimeter columns work together under wind.</p>
+<dl class="facts" data-reveal="">
+<dt data-i18n="44">Height</dt><dd data-i18n="45">200 m, 50 floors at 4 m</dd>
+<dt data-i18n="46">Twist</dt><dd data-i18n="47">3.6° per floor, 180° in total</dd>
+<dt data-i18n="48">Floor plate</dt><dd data-i18n="49">12 sides, 40 m across</dd>
+<dt data-i18n="50">Floor area</dt><dd data-i18n="51">About 192,900 m² in three towers</dd>
+<dt data-i18n="52">Sky bridges</dt><dd data-i18n="53">Four, each 15 m long and 5 m wide</dd>
+<dt data-i18n="54">Structure</dt><dd data-i18n="55">Concrete core and columns, steel belt bracing, post-tensioned floors</dd>
+<dt data-i18n="56">Foundation</dt><dd data-i18n="57">2 m raft on 121 bored piles per tower</dd>
+</dl>
+</div>
+<div data-reveal="">
+<h3 data-i18n="58">What is on each level</h3>
+<ol aria-label="Uses by level, from the roof down" class="zones">
+<li class="bridge" style="--f:1;--c:#12294a"><div data-i18n="59"><b>Level 50</b> <span>Sky restaurant and Sky Garden Walk bridges, 200 m</span></div></li>
+<li style="--f:14;--c:#1f4f8f"><div data-i18n="60"><b>Levels 36 to 49</b> <span>Residences, four apartments per floor</span></div></li>
+<li style="--f:1;--c:#e24a33"><div data-i18n="61"><b>Level 35</b> <span>Plant and refuge floor</span></div></li>
+<li class="bridge" style="--f:14;--c:#4b7fc0"><div data-i18n="62"><b>Levels 21 to 34</b> <span>Hotel, with the Sky Gallery bridges at Level 31</span></div></li>
+<li style="--f:1;--c:#e24a33"><div data-i18n="63"><b>Level 20</b> <span>Plant, refuge and the steel belt bracing</span></div></li>
+<li style="--f:14;--c:#78aad7"><div data-i18n="64"><b>Levels 6 to 19</b> <span>Offices, six units per floor</span></div></li>
+<li style="--f:5;--c:#b9d0e8"><div data-i18n="65"><b>Levels 1 to 5</b> <span>Lobby, café, exhibition, library, gym, restaurant</span></div></li>
+</ol>
+</div>
+</div>
+</section>
+<section class="band night" id="ride">
+<div class="wrap">
+<div class="eyebrow" data-i18n="66" data-reveal="">Floor by floor</div>
+<h2 data-i18n="67" data-reveal="">Ride up the tower</h2>
+<p class="lead" data-i18n="68" data-reveal="">Drag the lift to any floor. The floor plate turns with you, while the core and columns stay exactly where they are.</p>
+<div class="ride" data-reveal="">
+<canvas aria-label="Side view of one tower; drag to choose a floor" height="760" id="ride-elev" width="220"></canvas>
+<canvas aria-label="Plan of the chosen floor" height="720" id="ride-plan" width="720"></canvas>
+<div class="ride-info">
+<div class="lvl"><small data-i18n="69">Level</small><b id="ride-n">31</b></div>
+<dl>
+<dt data-i18n="70">Height</dt><dd id="ride-h">124 m</dd>
+<dt data-i18n="71">Turned</dt><dd id="ride-a">111.6°</dd>
+<dt data-i18n="72">Use</dt><dd data-i18n="73" id="ride-u">Hotel</dd>
+<dt data-i18n="74">Columns</dt><dd id="ride-c">850 × 850 mm</dd>
+</dl>
+<p class="ride-note" id="ride-x"></p>
+<input aria-label="Floor" id="ride-range" max="50" min="1" type="range" value="31"/>
+<div class="ride-btns"><button data-go="1" data-i18n="75" type="button">Lobby</button><button data-go="20" data-i18n="76" type="button">Belt bracing</button><button data-go="31" data-i18n="77" type="button">Sky Gallery</button><button data-go="50" data-i18n="78" type="button">Roof</button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="band" id="load">
+<div class="wrap">
+<div class="eyebrow" data-i18n="79" data-reveal="">Load path</div>
+<h2 data-i18n="80" data-reveal="">Follow the load to the rock</h2>
+<p class="lead" data-i18n="81" data-reveal="">Every kilonewton has to find its way down. Step through how gravity and wind travel from a floor to the rock 25 m below the raft.</p>
+<div aria-label="Load type" class="seg light" role="group" style="margin-top:18px">
+<button aria-pressed="true" data-i18n="82" id="lp-g" type="button">Gravity</button><button aria-pressed="false" data-i18n="83" id="lp-w" type="button">Wind</button>
+</div>
+<div class="lp" data-reveal="">
+<svg aria-label="Section through one tower showing the load path" id="lp-svg" role="img" viewbox="0 0 600 760">
+<defs>
+<pattern height="10" id="sand" patternunits="userSpaceOnUse" width="10"><rect fill="#e8d8b8" height="10" width="10"></rect><circle cx="3" cy="3" fill="#cdb88f" r="1"></circle><circle cx="8" cy="7" fill="#cdb88f" r="1"></circle></pattern>
+<pattern height="16" id="rock" patternunits="userSpaceOnUse" width="24"><rect fill="#b8bcc4" height="16" width="24"></rect><path d="M0 8h24M12 0v8M0 16v-8M24 8v8" stroke="#9aa0aa" stroke-width="1.2"></path></pattern>
+</defs>
+<rect fill="url(#sand)" height="110" width="600" x="0" y="470"></rect>
+<rect fill="url(#rock)" height="180" width="600" x="0" y="580"></rect>
+<text class="lp-t" data-lp="sand" text-anchor="end" x="590" y="492">Dense sand</text>
+<text class="lp-t" data-lp="rock" text-anchor="end" x="590" y="602">Weak rock</text>
+<g id="lp-floors"></g>
+<g class="lp-part" data-s="g2 w2 w4"><rect fill="#c4a070" height="380" opacity=".85" rx="3" width="100" x="250" y="60"></rect><text class="lp-t" data-lp="core" fill="#4a3518" text-anchor="middle" x="300" y="255">Core</text></g>
+<g class="lp-part" data-s="g2 w3 w4"><rect fill="#1f4f8f" height="380" width="14" x="92" y="60"></rect><rect fill="#1f4f8f" height="380" width="14" x="494" y="60"></rect></g>
+<g class="lp-part" data-s="w3"><path d="M99 286 L250 304 M99 304 L250 286 M350 286 L501 304 M350 304 L501 286" stroke="#e24a33" stroke-width="4"></path></g>
+<g class="lp-part" data-s="g3 w5"><rect fill="#8b93a0" height="30" rx="2" width="460" x="70" y="440"></rect><text class="lp-t" data-lp="raft" fill="#fff" text-anchor="middle" x="300" y="460">2 m raft</text></g>
+<g class="lp-part" data-s="g4 g5 w5" id="lp-piles"></g>
+<path fill="none" id="lp-path" stroke="#e3bd78" stroke-dasharray="2 16" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"></path>
+<g id="lp-wind" opacity="0"><path d="M10 120h50M10 200h50M10 280h50M10 360h50" stroke="#2c6cc0" stroke-width="5"></path><path d="M60 110l16 10-16 10zM60 190l16 10-16 10zM60 270l16 10-16 10zM60 350l16 10-16 10z" fill="#2c6cc0"></path></g>
+<circle fill="#e3bd78" id="lp-dot" r="11" stroke="#fff" stroke-width="3"></circle>
+</svg>
+<div class="lp-panel">
+<ol class="lp-steps" id="lp-steps"></ol>
+<div class="lp-card"><small id="lp-k">Step 1 of 5</small><b id="lp-h"></b><p id="lp-p"></p><div class="lp-big" id="lp-n"></div></div>
+<div class="lp-nav"><button class="btn small" id="lp-prev" type="button">Back</button><button class="btn small gold" id="lp-next" type="button">Next step</button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="band" id="model">
+<div class="wrap">
+<div class="eyebrow" data-i18n="84" data-reveal="">3D model</div>
+<h2 data-i18n="85" data-reveal="">Turn it, open it, place it in your room</h2>
+<p class="lead" data-i18n="86" data-reveal="">Drag to rotate and pinch to zoom. Take the guided tour, or switch to the structure to take the glass off and see what holds the towers up.</p>
+<div class="banner" data-i18n="87" id="inapp"><strong>AR does not open inside this app.</strong> Tap the menu and choose <em>Open in browser</em> (Safari on iPhone, Chrome on Android), then try again.</div>
+<div class="tabs" role="tablist">
+<button aria-selected="true" data-i18n="88" id="tab-ext" role="tab" type="button">Exterior</button>
+<button aria-selected="false" data-i18n="89" id="tab-xray" role="tab" type="button">Structure</button>
+<button aria-pressed="false" class="nightbtn" data-i18n="90" id="night" type="button">Night</button><span class="spacer"></span>
+<button class="tour" id="tour-start" type="button"><svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24"><path d="M7 4v16l13-8z"></path></svg><span data-i18n="91">Guided tour</span></button>
+</div>
+<div aria-label="Structure layers" class="chips" id="layers">
+<button aria-pressed="true" data-i18n="92" data-layer="glass" style="--dot:#78aad7" type="button">Glass</button>
+<button aria-pressed="true" data-i18n="93" data-layer="floors" style="--dot:#b9c0cb" type="button">Floors</button>
+<button aria-pressed="true" data-i18n="94" data-layer="core" style="--dot:#c4a070" type="button">Core</button>
+<button aria-pressed="true" data-i18n="95" data-layer="columns" style="--dot:#1f4f8f" type="button">Columns</button>
+<button aria-pressed="true" data-i18n="96" data-layer="bracing" style="--dot:#e24a33" type="button">Bracing</button>
+<button aria-pressed="true" data-i18n="97" data-layer="bridges" style="--dot:#f0b429" type="button">Sky bridges</button>
+<button aria-pressed="true" data-i18n="98" data-layer="foundation" style="--dot:#96785a" type="button">Raft and piles</button>
+</div>
+<div class="stage only-ext" id="stage-ext">
+<model-viewer alt="3D model of three twisted towers joined by two sky bridges, on a landscaped base" ar="" ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto" auto-rotate="" auto-rotate-delay="2500" camera-controls="" camera-orbit="35deg 75deg auto" environment-image="neutral" exposure="1.05" id="tower" interaction-prompt="auto" interpolation-decay="120" ios-src="towers_ar.usdz" loading="lazy" poster="poster.webp" shadow-intensity="1" shadow-softness="0.8" src="towers_ar.glb" touch-action="pan-y">
+<button class="hotspot" data-i18n="99" data-position="-0.275 1.0856 0.0" slot="hotspot-crown">Crown, 72 aluminium fins</button>
+<button class="hotspot" data-i18n="100" data-position="0.1395 1.0309 -0.0098" slot="hotspot-garden">Sky Garden Walk, 200 m</button>
+<button class="hotspot" data-i18n="101" data-position="-0.1375 0.6327 -0.0095" slot="hotspot-gallery">Sky Gallery, Level 31</button>
+<button class="hotspot" data-i18n="102" data-normal="0 0 1" data-position="-0.275 0.415 0.0724" slot="hotspot-mech">Plant floor, Level 20</button>
+<button class="hotspot" data-i18n="103" data-normal="0 0 1" data-position="0 0.045 0.146" slot="hotspot-lobby">Lobby and canopy</button>
+<button class="ar-btn" data-i18n="104" slot="ar-button">View in your room (AR)</button>
+<div class="hint" data-i18n="105" id="no-ar">Scan the QR code at the top with your phone to place the towers in your room.</div>
+<div class="hint" data-i18n="106" id="ar-failed">AR could not start on this phone. You can still explore the 3D model here.</div>
+</model-viewer>
+<div aria-live="polite" class="tourcard" id="tourcard">
+<small data-i18n="107" id="tour-n">Stop 1 of 6</small>
+<h3 data-i18n="108" id="tour-h">Three towers</h3>
+<p id="tour-p"></p>
+<div class="row"><div class="dots" id="tour-dots"></div><button data-i18n="109" id="tour-next" type="button">Next</button><button class="x" data-i18n="110" id="tour-end" type="button">End</button></div>
+</div>
+<button aria-label="Full screen" class="fs" id="fs" type="button"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg></button>
+</div>
+<div class="stage only-xray">
+<model-viewer alt="Structural model of the three towers: floors, core, columns, belt bracing, sky bridges, raft and piles" ar="" ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="auto" camera-controls="" camera-orbit="25deg 80deg auto" environment-image="neutral" exposure="1.05" id="structure" interaction-prompt="none" ios-src="structure.usdz" loading="eager" shadow-intensity="0" touch-action="pan-y">
+<button class="hotspot" data-i18n="111" data-layer="bracing" data-normal="0 0 1" data-position="0 0.39 0.095" slot="hotspot-bracing">Belt bracing, Story 20</button>
+<button class="hotspot" data-i18n="112" data-layer="core" data-position="-0.275 1.0 -0.05" slot="hotspot-core">Concrete core, 17.6 × 18.4 m</button>
+<button class="hotspot" data-i18n="113" data-layer="columns" data-normal="0 0 1" data-position="0.275 0.2 0.045" slot="hotspot-columns">20 columns per tower</button>
+<button class="hotspot" data-i18n="114" data-layer="bridges" data-normal="0 0 1" data-position="-0.1375 0.6 -0.025" slot="hotspot-bridge">Sky bridge, pin and roller</button>
+<button class="hotspot" data-i18n="115" data-layer="foundation" data-normal="0 0 1" data-position="0 -0.07 0.1" slot="hotspot-piles">Piled raft, 121 piles</button>
+<button class="ar-btn" data-i18n="116" slot="ar-button">Structure in your room (AR)</button>
+</model-viewer>
+</div>
+<p class="note" data-i18n="117" style="margin-top:10px">The model is at 1:200, about 1.1 m tall in your room. The structure model is built from the report dimensions, and its pile positions are schematic.</p>
+</div>
+</section>
+<section class="band night" id="wind">
+<div class="wrap">
+<div class="eyebrow" data-i18n="118" data-reveal="">Wind and dynamics</div>
+<h2 data-i18n="119" data-reveal="">How far the towers move in wind</h2>
+<p class="lead" data-i18n="120" data-reveal="">Design wind pushes the roof 494 mm sideways. The limit is 500 mm, the height divided by 400. The steel belt at Story 20 helps keep it inside the limit.</p>
+<div class="quiz" data-reveal="" id="quiz">
+<div data-i18n="121"><b>Your guess first.</b> <span>In design wind, how far does the roof of a 200 m tower move sideways?</span></div>
+<div class="quiz-row"><input aria-label="Your guess in millimetres" id="quiz-r" max="3000" min="0" step="10" type="range" value="1500"/><output id="quiz-o">1500 mm</output><button class="btn small gold" data-i18n="122" id="quiz-go" type="button">Reveal</button></div>
+<p aria-live="polite" class="quiz-a" id="quiz-a"></p>
+</div>
+<div class="sim">
+<canvas aria-label="Animation of the three towers swaying in wind" id="wind-canvas"></canvas>
+<div class="fail" data-i18n="123">This animation needs WebGL, which this browser has turned off.</div>
+<div aria-live="off" class="read"><span id="wind-now">0</span> <span id="wind-unit">mm</span><small id="wind-sub">roof movement now, of <span id="wind-max">494</span> mm</small></div>
+<div aria-hidden="true" class="gauge"><i id="wind-gauge"></i></div>
+</div>
+<div class="ctrl">
+<div aria-label="Wind direction or mode" class="seg" role="group">
+<button aria-pressed="true" data-i18n="124" id="wind-x" type="button">Wind along the bridges</button>
+<button aria-pressed="false" data-i18n="125" id="wind-y" type="button">Wind across</button>
+<button aria-pressed="false" data-i18n="126" id="wind-t" type="button">Twisting mode</button>
+</div>
+<label>Enlarged <input aria-label="How much the movement is enlarged" id="wind-ex" max="80" min="1" type="range" value="40"/> <span id="wind-exv">40 times</span></label>
+<button class="btn ghost small" data-i18n="127" id="wind-play" type="button">Pause</button>
+</div>
+<ul class="key">
+<li data-i18n="128" style="--c:#e24a33">Pinned end: the bridge is held to this tower</li>
+<li data-i18n="129" style="--c:#ffffff">Roller end: the bridge slides, so each tower sways on its own</li>
+</ul>
+<p class="arlink"><a data-i18n="130" href="ar.html?m=sway">See the towers sway on your table, in AR →</a></p>
+<div class="specs" data-reveal="">
+<div><b>46 m/s</b><span data-i18n="131">basic wind speed, ASCE 7-16</span></div>
+<div data-i18n="132"><b>Exposure D</b><span>open water to the north</span></div>
+<div><b>9.08 s</b><span data-i18n="133">mode 1, sway along X</span></div>
+<div><b>8.55 s</b><span data-i18n="134">mode 2, sway along Y</span></div>
+<div><b>2.84 s</b><span data-i18n="135">mode 3, twisting</span></div>
+</div>
+<p class="note" data-i18n="136" style="margin-top:14px">The shape of the sway is the ETABS wind displacement at every story (494.42 mm along the bridges, 439.65 mm across). It moves at the towers’ first-mode periods, 9.08 s and 8.55 s. The twisting mode is drawn as a smooth turn that grows with height, at its 2.84 s period. The three towers are drawn slightly out of step, as gusts would make them, to show the roller working.</p>
+</div>
+</section>
+<section class="band night" id="build" style="padding-top:0">
+<div class="wrap">
+<div class="eyebrow" data-i18n="137" data-reveal="">Construction</div>
+<h2 data-i18n="138" data-reveal="">How it goes up</h2>
+<p class="lead" data-i18n="139" data-reveal="">Piles and raft first. The core climbs ahead, each floor follows turned 3.6° from the one below, and the glass comes after. The bridges are lifted into place last.</p>
+<div class="sim">
+<canvas aria-label="Animation of the towers being built floor by floor" id="build-canvas"></canvas>
+<div class="fail" data-i18n="140">This animation needs WebGL, which this browser has turned off.</div>
+<div class="read"><span id="build-story">Story 50 of 50</span><small id="build-stage">Complete, top floor turned 180°</small></div>
+</div>
+<div class="ctrl">
+<button class="btn gold" data-i18n="141" id="build-play" type="button">Build the towers</button>
+<label>Progress <input aria-label="Construction progress" id="build-scrub" max="1000" min="0" type="range" value="1000"/></label>
+</div>
+<p class="arlink"><a data-i18n="142" href="ar.html?m=build">Watch them rise in your room, in AR →</a></p>
+<p class="note" data-i18n="143" style="margin-top:14px">This is an illustration of the sequence, not a construction schedule. A story-by-story construction analysis is listed in the report as future work.</p>
+</div>
+</section>
+<section class="band" id="column">
+<div class="wrap split">
+<div>
+<div class="eyebrow" data-i18n="144" data-reveal="">Real size</div>
+<h2 data-i18n="145" data-reveal="">Stand next to Column C2</h2>
+<p class="lead" data-i18n="146" data-reveal="">This is the base of a perimeter column at its real size: 1.2 m on each side, designed for about 40,000 kN, roughly the weight of 4,000 tonnes.</p>
+<p data-i18n="147" data-reveal="">The lower part shows the finished concrete. Above it the concrete is left off, so you can see the 32 bars of 50 mm diameter and the ties that hold them.</p>
+<dl class="facts" data-reveal="">
+<dt data-i18n="148">Section</dt><dd data-i18n="149">1200 × 1200 mm, Stories 1 to 12</dd>
+<dt data-i18n="150">Main bars</dt><dd data-i18n="151">32 bars of 50 mm, nine on each face</dd>
+<dt data-i18n="152">Ties</dt><dd data-i18n="153">16 mm at 150 mm, five legs each way</dd>
+<dt data-i18n="154">Steel ratio</dt><dd data-i18n="155">4.36%, inside the 1% to 8% limit</dd>
+<dt data-i18n="156">Axial load</dt><dd data-i18n="157">40,116 kN, 0.946 of capacity</dd>
+<dt data-i18n="158">Higher up</dt><dd data-i18n="159">1000, 850, 750, then 600 mm at the top</dd>
+</dl>
+</div>
+<div data-reveal="">
+<div class="stage" style="margin-top:0;height:min(66vh,580px)">
+<model-viewer alt="Column C2 at real size: concrete base with the reinforcement cage exposed above" ar="" ar-modes="scene-viewer webxr quick-look" ar-placement="floor" ar-scale="fixed" auto-rotate="" camera-controls="" camera-orbit="35deg 72deg auto" environment-image="neutral" id="col" interaction-prompt="none" ios-src="column_c2.usdz" loading="lazy" shadow-intensity="1" shadow-softness="0.9" src="column_c2.glb" touch-action="pan-y">
+<button class="ar-btn" data-i18n="160" slot="ar-button">See it at real size (AR)</button>
+</model-viewer>
+</div>
+<p class="note" data-i18n="161" style="margin-top:10px">In AR the column appears 1.2 m wide and 2.4 m tall. Bar couplers and dowels are not drawn.</p>
+</div>
+</div>
+<div class="wrap" style="margin-top:56px">
+<ul class="green">
+<li data-reveal="" style="--c:var(--brace)"><h3 data-i18n="162">Where the brace meets the column</h3><p data-i18n="163">Each brace is a 356 mm steel pipe that carries only push and pull. A 30 mm knife plate passes through the pipe and bolts to a gusset. Ten M36 bolts run through the full 1 m column to a plate on the far side, so tension never relies on pulling concrete out. The busiest part works at 87.5% of its strength.</p></li>
+<li data-reveal="" style="--c:var(--amber)"><h3 data-i18n="164">Why the bridges slide</h3><p data-i18n="165">Each 15 m bridge is three steel trusses under a concrete deck. One end is pinned to a tower and the other sits on rollers, so the towers do not push and pull each other when they sway. All 193 members pass, and the most loaded one works at 0.83 of its strength.</p><p class="arlink dark"><a data-i18n="166" href="ar.html?m=bridge">Stand under one at real size, in AR →</a></p></li>
+</ul>
+</div>
+</section>
+<section class="band" id="results" style="padding-top:0">
+<div class="wrap">
+<div class="eyebrow" data-i18n="167" data-reveal="">Results</div>
+<h2 data-i18n="168" data-reveal="">Every check against its limit</h2>
+<p class="lead" data-i18n="169" data-reveal="">The blue bar is the result. The red mark at the end is the limit. Every bar stops short of it.</p>
+<div class="passall" data-reveal=""><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="m7.5 12.5 3 3 6-7"></path></svg><span data-i18n="170">9 of 9 checks pass</span></div>
+<ul class="checks" id="checks">
+<li style="--v:98.9"><span data-i18n="171">Roof movement, wind along the bridges <i>limit 500 mm, height / 400</i></span><b data-num="494.42" data-unit=" mm">494.42 mm</b><div class="track"></div></li>
+<li style="--v:87.9"><span data-i18n="172">Roof movement, wind across <i>limit 500 mm</i></span><b data-num="439.65" data-unit=" mm">439.65 mm</b><div class="track"></div></li>
+<li style="--v:94.6"><span data-i18n="173">Column C2 axial load <i>limit 1.00</i></span><b data-num="0.946">0.946</b><div class="track"></div></li>
+<li style="--v:87.5"><span data-i18n="174">Brace connection, knife plate bolts <i>limit 100%</i></span><b data-num="87.5" data-unit="%">87.5%</b><div class="track"></div></li>
+<li style="--v:83"><span data-i18n="175">Sky bridge, most loaded member <i>limit 1.00</i></span><b data-num="0.83">0.83</b><div class="track"></div></li>
+<li style="--v:38.1"><span data-i18n="176">Sky bridge deflection under people <i>limit 41.7 mm, span / 360</i></span><b data-num="15.9" data-unit=" mm">15.9 mm</b><div class="track"></div></li>
+<li style="--v:86.3"><span data-i18n="177">Floor slab deflection after partitions <i>limit 20.5 mm, span / 480</i></span><b data-num="17.69" data-unit=" mm">17.69 mm</b><div class="track"></div></li>
+<li style="--v:34.5"><span data-i18n="178">Raft settlement <i>limit 50 mm</i></span><b data-num="17.23" data-unit=" mm">17.23 mm</b><div class="track"></div></li>
+<li style="--v:98.3"><span data-i18n="179">Piles needed, of 121 provided <i>119 needed, factor of safety 3.28</i></span><b data-i18n="180">119 of 121</b><div class="track"></div></li>
+</ul>
+<div class="split" style="margin-top:56px">
+<div data-reveal="">
+<h3 data-i18n="181">Checked by hand</h3>
+<p data-i18n="182">The main members were designed again by hand and compared with the software.</p>
+<table>
+<tr><th data-i18n="183">Member</th><th data-i18n="184">Difference</th></tr>
+<tr><td data-i18n="185">Column C2 base load, against ETABS</td><td>0.52%</td></tr>
+<tr><td data-i18n="186">Column C2 design values</td><td data-i18n="187">About 1%</td></tr>
+<tr><td data-i18n="188">Core wall pier P3, against ETABS</td><td data-i18n="189">Within 5%</td></tr>
+<tr><td data-i18n="190">Floor tendon strip, against RAM Concept</td><td data-i18n="191">Same 4 strands</td></tr>
+<tr><td data-i18n="192">Pile capacity, against PLAXIS 3D</td><td>4.34%</td></tr>
+<tr><td data-i18n="193">Raft bending, against SAFE</td><td data-i18n="194">Within 5%</td></tr>
+</table>
+</div>
+<div data-reveal="">
+<h3 data-i18n="195">What comes next</h3>
+<p data-i18n="196">The report lists the work a final design would still need.</p>
+<table>
+<tr><td data-i18n="197">Wind-tunnel test of the three towers together</td></tr>
+<tr><td data-i18n="198">Footfall check of the sky bridges for comfort</td></tr>
+<tr><td data-i18n="199">Column and core shortening over the height</td></tr>
+<tr><td data-i18n="200">Construction analysis following the rotating floors</td></tr>
+<tr><td data-i18n="201">Cost estimate, services coordination and a 4D model</td></tr>
+</table>
+<p class="note" data-i18n="202" style="margin-top:12px">Codes: ASCE 7-16, ACI 318-19 and AISC 360-16.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="band night" id="journey">
+<div class="wrap">
+<div class="eyebrow" data-i18n="203" data-reveal="">How we did it</div>
+<h2 data-i18n="204" data-reveal="">From a sketch to a checked design</h2>
+<p class="lead" data-i18n="205" data-reveal="">Seven steps, five analysis programs, and a hand check of every main member.</p>
+<ol class="journey" data-reveal="">
+<li><b data-i18n="206">Concept</b><em>SketchUp · AutoCAD</em><span data-i18n="207">Form, zoning, sky bridges and drawings on the Bahrain Bay site</span></li>
+<li><b data-i18n="208">Tower analysis</b><em>ETABS</em><span data-i18n="209">Wind to ASCE 7-16, modal analysis, columns, core walls and braces</span></li>
+<li><b data-i18n="210">Floors</b><em>RAM Concept</em><span data-i18n="211">Post-tensioned slabs, tendons and long-term deflection</span></li>
+<li><b data-i18n="212">Connection</b><em>IDEA StatiCa</em><span data-i18n="213">Brace to column knife-plate joint, plate by plate</span></li>
+<li><b data-i18n="214">Foundation</b><em>PLAXIS 3D · SAFE</em><span data-i18n="215">Piled raft on rock, settlement and raft bending</span></li>
+<li><b data-i18n="216">Hand checks</b><em>ACI 318 · AISC 360</em><span data-i18n="217">Main members redesigned by hand, within 5% of the software</span></li>
+<li><b data-i18n="218">AR and web</b><em>Blender · model-viewer</em><span data-i18n="219">The models you can place in your room from this page</span></li>
+</ol>
+</div>
+</section>
+<section class="band" id="design">
+<div class="wrap">
+<div class="eyebrow" data-i18n="220" data-reveal="">Sustainability</div>
+<h2 data-i18n="221" data-reveal="">Built for Bahrain’s sun and sea</h2>
+<p class="lead" data-i18n="222" data-reveal="">The design follows Bahrain’s green building rules and supports Economic Vision 2030 and the national target of 20% renewable power by 2035.</p>
+<div class="shape" data-reveal="">
+<canvas aria-label="Floor plan with the chosen number of sides, same floor area" height="520" id="shape-c" width="520"></canvas>
+<div>
+<h3 data-i18n="223">Why twelve sides?</h3>
+<p class="note" data-i18n="224">Every shape below has the same floor area as one tower floor, 1,286 m². Fewer sides means more wall around the same space.</p>
+<div class="dial"><b id="shape-n">12</b><span id="shape-name">sides, as designed</span></div>
+<input aria-label="Number of sides" id="shape-r" max="25" min="3" type="range" value="12"/>
+<div class="range-labels"><span>3</span><span>12</span><span data-i18n="225">circle</span></div>
+<dl class="facts small">
+<dt data-i18n="226">Perimeter</dt><dd id="shape-p">128.6 m</dd>
+<dt data-i18n="227">Façade per tower</dt><dd id="shape-f">25,720 m²</dd>
+<dt data-i18n="228">Against a square</dt><dd id="shape-s">10.3% less façade</dd>
+</dl>
+</div>
+</div>
+<ul class="green three">
+<li data-reveal="" style="--c:var(--glass)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></div><h3 data-i18n="229">A shape that shades itself</h3><p data-i18n="230">The twist changes which way each floor faces the sun, and the 12-sided plate needs about 10% less façade than a square of the same area.</p></li>
+<li data-reveal="" style="--c:var(--sea)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24"><rect height="18" rx="1" width="16" x="4" y="3"></rect><path d="M12 3v18M4 12h16"></path></svg></div><h3 data-i18n="231">Glass that keeps heat out</h3><p data-i18n="232">Double-glazed solar-control glass, with outside shading on the most exposed sides.</p></li>
+<li data-reveal="" style="--c:var(--amber)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg></div><h3 data-i18n="233">Power from the building</h3><p data-i18n="234">Solar panels in the façade bands, over the 624-space car park, and in the glass roof of the Sky Garden Walk.</p></li>
+<li data-reveal="" style="--c:var(--pile)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"></path></svg></div><h3 data-i18n="235">Less water, less concrete</h3><p data-i18n="236">Graywater reuse, air-conditioning condensate for irrigation, and post-tensioned floors that use less concrete.</p></li>
+<li data-reveal="" style="--c:var(--brace)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"></path></svg></div><h3 data-i18n="237">Efficient services</h3><p data-i18n="238">Connection to district cooling, with plant on Levels 20 and 35, close to the floors it serves.</p></li>
+<li data-reveal="" style="--c:var(--sand)"><div class="ic"><svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5"></path></svg></div><h3 data-i18n="239">Open to the public</h3><p data-i18n="240">The Sky Gallery at Level 31 shows Bahrain’s pearling heritage and local artists, and the roof walk is open to visitors.</p></li>
+</ul>
+<div class="sun" data-reveal="" id="sun">
+<div>
+<h3 data-i18n="241">Sun and shadow on the site</h3>
+<p class="note" data-i18n="242">The real sun path over Manama (26.2° N). Pick a day and an hour to see where the three towers cast their shadows.</p>
+<label class="sl"><span data-i18n="243">Month</span><input id="sun-m" max="11" min="0" type="range" value="5"/><output id="sun-mo">June</output></label>
+<label class="sl"><span data-i18n="244">Time</span><input id="sun-h" max="19.5" min="5" step="0.25" type="range" value="15"/><output id="sun-ho">15:00</output></label>
+<div class="sun-read"><div><b id="sun-alt">0°</b><span data-i18n="245">sun height</span></div><div><b id="sun-az">0°</b><span data-i18n="246">from north</span></div><div><b id="sun-len">0 m</b><span data-i18n="247">shadow length</span></div></div>
+<button class="btn small" data-i18n="248" id="sun-play" type="button">Play the day</button>
+<p class="note" data-i18n="249" style="margin-top:12px">Plan orientation is assumed with the sea to the north, as on the site plan. Times are Bahrain time.</p>
+</div>
+<canvas aria-label="Site plan with the towers' shadows" height="760" id="sun-c" width="760"></canvas>
+</div>
+</div>
+</section>
+<section class="band night" id="skyline">
+<div class="wrap">
+<div class="eyebrow" data-i18n="250" data-reveal="">On Bahrain Bay</div>
+<h2 data-i18n="251" data-reveal="">A new line on the Manama skyline</h2>
+<p class="lead" data-i18n="252" data-reveal="">At 200 m the three towers would sit among the tallest buildings in Manama, beside the twisted United Tower on the same bay.</p>
+<div class="sky" data-reveal="" id="sky">
+<div class="sk" style="--h:270"><i></i><b>270 m</b><span data-i18n="253">Four Seasons Hotel, Bahrain Bay</span></div>
+<div class="sk" style="--h:260"><i></i><b>260 m</b><span data-i18n="254">Bahrain Financial Harbour</span></div>
+<div class="sk" style="--h:240"><i></i><b>240 m</b><span data-i18n="255">Bahrain World Trade Center</span></div>
+<div class="sk us" style="--h:200"><i></i><i></i><i></i><b>200 m</b><span data-i18n="256">Twisted Towers, this project</span></div>
+<div class="sk tw" style="--h:189"><i></i><b>189 m</b><span data-i18n="257">United Tower, twisted, 2016</span></div>
+</div>
+<p class="note" data-i18n="258" style="margin-top:12px">Heights of existing buildings from the CTBUH Skyscraper Center.</p>
+<div class="mapwrap" data-reveal="">
+<iframe loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=50.556%2C26.232%2C50.606%2C26.262&amp;layer=mapnik" title="Map of Bahrain Bay, Manama"></iframe>
+<div class="maplabel" data-i18n="259"><b>Bahrain Bay, Manama</b><span>Waterfront site facing the Arabian Gulf to the north, Exposure D for wind</span></div>
+</div>
+</div>
+</section>
+<section class="band" id="gallery">
+<div class="wrap">
+<div class="eyebrow" data-i18n="260" data-reveal="">Gallery</div>
+<h2 data-i18n="261" data-reveal="">How it will look</h2>
+<div class="films" id="films">
+<div class="film"><video controls="" data-src="trailer.mp4" playsinline="" poster="render2.jpg" preload="metadata"></video><h3 data-i18n="262">The project film</h3></div>
+<div class="film"><video controls="" data-src="life.mp4" playsinline="" preload="metadata"></video><h3 data-i18n="263">A day in the towers</h3></div>
+<div class="film"><video controls="" data-src="daynight.mp4" playsinline="" preload="metadata"></video><h3 data-i18n="264">From sunset to night</h3></div>
+</div>
+<div class="gallery" id="gal">
+<figure data-reveal=""><img alt="Aerial view of the three towers on the waterfront" height="788" loading="lazy" src="render2.jpg" width="1400"/><figcaption data-i18n="265">From the air, on the Bahrain Bay waterfront</figcaption></figure>
+<figure data-reveal=""><img alt="The towers seen from the waterfront in late afternoon" height="788" loading="lazy" src="render1.jpg" width="1400"/><figcaption data-i18n="266">From the waterfront in the late afternoon</figcaption></figure>
+<figure data-reveal=""><img alt="The roof level and crowns at dusk" height="788" loading="lazy" src="render6.jpg" width="1400"/><figcaption data-i18n="267">The roof level at dusk</figcaption></figure>
+<figure data-reveal=""><img alt="The towers seen from the entrance" height="788" loading="lazy" src="render3.jpg" width="1400"/><figcaption data-i18n="268">From the entrance</figcaption></figure>
+<figure data-reveal=""><img alt="Looking up at a sky bridge between two towers" height="788" loading="lazy" src="render4.jpg" width="1400"/><figcaption data-i18n="269">Looking up at a sky bridge</figcaption></figure>
+<figure data-reveal=""><img alt="The towers seen from the sea at sunset" height="788" loading="lazy" src="render5.jpg" width="1400"/><figcaption data-i18n="270">From the sea at sunset</figcaption></figure>
+</div>
+<p class="note" data-i18n="271" style="margin-top:14px">These images are AI-assisted renders of the team’s SketchUp model. They are illustrative, and the SketchUp model is the design reference.</p>
+</div>
+</section>
+<div aria-label="Image viewer" aria-modal="true" class="lightbox" id="lb" role="dialog">
+<img alt="" id="lb-img"/><p id="lb-cap"></p>
+<button aria-label="Close" class="close" id="lb-close">×</button><button aria-label="Previous" class="prev" id="lb-prev">‹</button><button aria-label="Next" class="next" id="lb-next">›</button>
+</div>
 <section class="band night cta" id="ar">
-  <div class="bg"><img src="render6.jpg" alt="" loading="lazy"></div>
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>Augmented reality</div>
-    <h2 data-reveal>Put Bahrain Bay on your table</h2>
-    <p class="lead" data-reveal>Works on iPhone and Android with no app to install. Choose the towers, the bare structure, or Column C2 at its real size.</p>
-    <div class="btns" data-reveal>
-      <a class="btn gold ar-link" href="ar.html" rel="ar"><img src="poster.webp" alt=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>View in your room</a>
-      <a class="btn ghost" href="ar.html">All AR models</a>
-    </div>
-    <img class="qrbig" src="qr-ar.png" alt="QR code to open the AR view on a phone" loading="lazy" data-reveal>
-  </div>
+<div class="bg"><img alt="" loading="lazy" src="render6.jpg"/></div>
+<div class="wrap">
+<div class="eyebrow" data-i18n="272" data-reveal="">Augmented reality</div>
+<h2 data-i18n="273" data-reveal="">Put Bahrain Bay on your table</h2>
+<p class="lead" data-i18n="274" data-reveal="">Works on iPhone and Android with no app to install. Choose the towers, the bare structure, or Column C2 at its real size.</p>
+<div class="btns" data-reveal="">
+<a class="btn gold ar-link" href="ar.html" rel="ar"><img alt="" src="poster.webp"/><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"></path><path d="M3 7l9 5 9-5M12 12v10"></path></svg><span data-i18n="275">View in your room</span></a>
+<a class="btn ghost" data-i18n="276" href="ar.html">All AR models</a>
+</div>
+<img alt="QR code to open the AR view on a phone" class="qrbig" data-reveal="" loading="lazy" src="qr-ar.png"/>
+<p class="counter" hidden="" id="counter"><b id="counter-n"></b> <span data-i18n="277">visits to the AR page so far</span></p>
+</div>
 </section>
-
 <section class="band night" id="team" style="padding-top:0">
-  <div class="wrap">
-    <div class="eyebrow" data-reveal>The team</div>
-    <h2 data-reveal>Who built it</h2>
-    <div class="team">
-      <div class="person" data-reveal><div class="av">MA</div><b>Mohammed Albuarki</b><span>Civil Engineering</span></div>
-      <div class="person" data-reveal><div class="av">AM</div><b>Abdulla Mohammed</b><span>Civil Engineering</span></div>
-      <div class="person" data-reveal><div class="av">AS</div><b>Ali Sanad</b><span>Civil Engineering</span></div>
-    </div>
-    <div class="sup">
-      <div data-reveal>
-        <p class="lead" style="color:var(--on-night)">Supervised by Dr. Muhammad Ajmal</p>
-        <p style="color:var(--on-night-muted)">Senior Design Project, CENG495<br>B.Sc. in Civil Engineering<br>College of Engineering, University of Bahrain</p>
-        <p><a class="btn light" id="report-link" href="report.pdf" style="display:none">Download the full report</a></p>
-      </div>
-      <div data-reveal>
-        <p class="note">The structural concept, modelling, analysis, design and detailing are the team’s own work. The 3D and AR models and this website were developed with AI assistance, as declared in the report.</p>
-      </div>
-    </div>
-  </div>
+<div class="wrap">
+<div class="eyebrow" data-i18n="278" data-reveal="">The team</div>
+<h2 data-i18n="279" data-reveal="">Who built it</h2>
+<div class="team">
+<div class="person" data-reveal=""><div class="av">MA</div><b>Mohammed Albuarki</b><span data-i18n="280">Civil Engineering</span></div>
+<div class="person" data-reveal=""><div class="av">AM</div><b>Abdulla Mohammed</b><span data-i18n="281">Civil Engineering</span></div>
+<div class="person" data-reveal=""><div class="av">AS</div><b>Ali Sanad</b><span data-i18n="282">Civil Engineering</span></div>
+</div>
+<div class="sup">
+<div data-reveal="">
+<p class="lead" data-i18n="283" style="color:var(--on-night)">Supervised by Dr. Muhammad Ajmal</p>
+<p data-i18n="284" style="color:var(--on-night-muted)">Senior Design Project, CENG495<br/>B.Sc. in Civil Engineering<br/>College of Engineering, University of Bahrain</p>
+<p><a class="btn light" data-i18n="285" href="report.pdf" id="report-link" style="display:none">Download the full report</a></p>
+</div>
+<div data-reveal="">
+<p class="note" data-i18n="286">The structural concept, modelling, analysis, design and detailing are the team’s own work. The 3D and AR models and this website were developed with AI assistance, as declared in the report.</p>
+</div>
+</div>
+</div>
 </section>
-<footer><div class="wrap"><span>Twisted Towers, Bahrain Bay · Works on iPhone (Safari) and Android (Chrome) with no app to install.</span><button type="button" id="share">Share this project</button></div></footer>
-
-<div class="fab" id="fab"><a class="btn gold ar-link" href="ar.html" rel="ar"><img src="poster.webp" alt=""><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>View in AR</a></div>
-<div class="toast" id="toast">Link copied</div>
-
+<footer><div class="wrap"><span data-i18n="287">Twisted Towers, Bahrain Bay · Works on iPhone (Safari) and Android (Chrome) with no app to install.</span><button class="presentbtn" data-i18n="288" id="present" type="button">Present</button><span class="hintq" data-i18n="289">Presenting? Press <b>Q</b> for the QR code, <b>P</b> for slide mode.</span><button data-i18n="290" id="share" type="button">Share this project</button></div></footer>
+<div class="fab" id="fab"><a class="btn gold ar-link" href="ar.html" rel="ar"><img alt="" src="poster.webp"/><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 2 3 7v10l9 5 9-5V7z"></path><path d="M3 7l9 5 9-5M12 12v10"></path></svg><span data-i18n="291">View in AR</span></a></div>
+<div class="toast" data-i18n="292" id="toast">Link copied</div>
+<div class="pbar" id="pbar"><span id="pcount">1 / 1</span><span class="plive" id="plive"></span><span class="phint" data-i18n="293">← → to move · Q for the QR · Esc to exit</span></div>
+<script>
+// ---------- English / Arabic ----------
+(() => {
+  const DYN = {
+    "° per floor × 50 floors": "° لكل طابق × 50 طابقًا", "Stop": "المحطة", "of": "من", "Next": "التالي", "Start again": "من البداية",
+    "Pause": "إيقاف", "Play": "تشغيل", "times": "مرة", "real size": "الحجم الحقيقي",
+    "roof movement now, of": "إزاحة السطح الآن، من أصل", "period of mode 3, the towers twist about their cores": "زمن النمط 3، تلتوي الأبراج حول نواتها",
+    "Story": "الطابق", "Foundation": "الأساسات", "Build again": "ابنِ من جديد", "Continue": "متابعة", "Build the towers": "ابنِ الأبراج",
+    "Complete, top floor turned 180°": "اكتمل البناء، والطابق الأخير مُدار 180°", "Lifting the roof bridges into place": "رفع جسور السطح إلى مكانها",
+    "Lifting the Level 31 bridges into place": "رفع جسور الطابق 31 إلى مكانها", "Top floor turned": "الطابق الأعلى مُدار",
+    "Boring 121 piles under each tower": "حفر 121 خازوقًا تحت كل برج", "Casting the 2 m raft, core starting": "صب اللبشة بسماكة 2 م وبدء النواة",
+    "Lobby, café, exhibition, library, gym, restaurant": "الردهة والمقهى والمعرض والمكتبة والنادي الرياضي والمطعم",
+    "Offices, six units per floor": "مكاتب، ست وحدات في كل طابق", "Plant and refuge floor": "طابق المعدات والملجأ", "Hotel": "فندق",
+    "Residences, four apartments per floor": "شقق سكنية، أربع شقق في كل طابق", "Sky restaurant and Sky Garden Walk": "المطعم السماوي وممشى الحديقة السماوية",
+    "Ground floor. The dashed outline is this floor; every floor above is turned from it.": "الطابق الأرضي. الخط المتقطع هو هذا الطابق، وكل طابق فوقه مُدار عنه.",
+    "The steel belt bracing wraps the 12 perimeter columns here, so they share the wind load.": "يلتف الحزام الفولاذي هنا حول الأعمدة المحيطية الاثني عشر، فتتقاسم حمل الرياح.",
+    "Sky Gallery bridges to the next tower, pinned at one end and on rollers at the other.": "جسور المعرض السماوي إلى البرج المجاور، مثبتة بمفصل في طرف وعلى بكرات في الطرف الآخر.",
+    "Second plant floor, close to the floors it serves.": "طابق المعدات الثاني، قريب من الطوابق التي يخدمها.",
+    "Top floor, turned a full 180°. The roof bridges form the Sky Garden Walk.": "الطابق الأخير، مُدار 180° كاملة. وتشكّل جسور السطح ممشى الحديقة السماوية.",
+    "Columns are at their largest here, 1.2 m square.": "الأعمدة هنا في أكبر مقاس لها، 1.2 م مربع.",
+    "Dense sand": "رمل كثيف", "Weak rock": "صخر ضعيف", "Core": "النواة", "2 m raft": "لبشة 2 م",
+  };
+  const H1 = { en: ["Three", "<em>twisted</em>", "towers", "on", "Bahrain", "Bay"], ar: ["ثلاثة", "أبراج", "<em>ملتوية</em>", "على", "خليج", "البحرين"] };
+  const I18N = window.I18N = { lang: "en", t: (x) => (I18N.lang === "ar" && DYN[x]) || x };
+  const orig = new Map();
+  I18N.set = (l) => {
+    I18N.lang = l;
+    const html = document.documentElement; html.lang = l; html.dir = l === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      if (!orig.has(el)) orig.set(el, el.innerHTML);
+      el.innerHTML = l === "ar" ? (window.AR[el.dataset.i18n] ?? orig.get(el)) : orig.get(el);
+    });
+    const h1 = document.getElementById("h1");
+    if (h1) h1.innerHTML = H1[l].map((w, i) => '<span class="w"><span style="animation-delay:' + (0.1 + i * 0.07) + 's">' + w + "</span></span>").join(" ");
+    document.querySelectorAll("[data-lp]").forEach((el) => { if (!el.dataset.en) el.dataset.en = el.textContent; el.textContent = l === "ar" ? (DYN[el.dataset.en] || el.dataset.en) : el.dataset.en; });
+    const lb = document.getElementById("langbtn"); if (lb) lb.textContent = l === "ar" ? "English" : "عربي";
+    document.title = l === "ar" ? "الأبراج الملتوية، خليج البحرين" : "Twisted Towers, Bahrain Bay";
+    try { localStorage.setItem("lang", l); } catch (e) {}
+    dispatchEvent(new Event("langchange"));
+  };
+  let start = "en";
+  try { const q = new URLSearchParams(location.search).get("lang"); start = q || localStorage.getItem("lang") || ((navigator.language || "").startsWith("ar") ? "ar" : "en"); } catch (e) {}
+  addEventListener("DOMContentLoaded", () => {
+    document.getElementById("langbtn").addEventListener("click", () => I18N.set(I18N.lang === "ar" ? "en" : "ar"));
+    if (start === "ar") I18N.set("ar");
+  });
+})();
+</script>
 <script>
 // ---------- one-tap AR: every gold AR button opens AR straight away on phones ----------
 (() => {
@@ -728,7 +1068,6 @@ footer button { background: none; border: 1px solid rgba(255,255,255,.2); color:
   if (location.hash === "#ar-now") location.replace("ar.html");
 })();
 </script>
-
 <script type="module">
 // ---------- 3D model viewers, AR, layers, guided tour ----------
 const $ = (s) => document.querySelector(s);
@@ -778,12 +1117,12 @@ if (location.hash === "#structure") { setTab(true); $("#model").scrollIntoView()
 
 // guided tour
 const STOPS = [
-  { h: "Three towers", p: "Three 200 m towers in a shallow arc on the waterfront, each turning 180° from ground to roof.", t: "auto auto auto", o: "35deg 75deg auto" },
-  { h: "Lobby and canopy", p: "Levels 1 to 5: lobby, café, exhibition, library, gym and restaurant, open to the public.", hs: "lobby", t: "0m 0.08m 0.1m", o: "20deg 82deg 0.55m" },
-  { h: "Plant floor, Level 20", p: "Plant and refuge floor. Steel belt bracing here ties the 12 perimeter columns together against wind.", hs: "mech", t: "-0.275m 0.42m 0m", o: "-25deg 80deg 0.6m" },
-  { h: "Sky Gallery, Level 31", p: "The first pair of sky bridges, 15 m long. Pinned at one tower and sliding on rollers at the other.", hs: "gallery", t: "-0.1375m 0.63m 0m", o: "10deg 78deg 0.55m" },
-  { h: "Sky Garden Walk, 200 m", p: "The roof bridges form a public garden walk with a glass roof and solar panels, 200 m above the bay.", hs: "garden", t: "0.14m 1.03m 0m", o: "40deg 62deg 0.6m" },
-  { h: "The crowns", p: "Each roof ends in a crown of 72 aluminium fins, lit at night, around the sky restaurant.", hs: "crown", t: "-0.275m 1.06m 0m", o: "-40deg 60deg 0.5m" },
+  { h: "Three towers", ha: "ثلاثة أبراج", pa: "ثلاثة أبراج بارتفاع 200 م في قوس خفيف على الواجهة البحرية، يلتف كل منها 180° من الأرض إلى السطح.", p: "Three 200 m towers in a shallow arc on the waterfront, each turning 180° from ground to roof.", t: "auto auto auto", o: "35deg 75deg auto" },
+  { h: "Lobby and canopy", ha: "الردهة والمظلة", pa: "الطوابق 1 إلى 5: الردهة والمقهى والمعرض والمكتبة والنادي الرياضي والمطعم، مفتوحة للجميع.", p: "Levels 1 to 5: lobby, café, exhibition, library, gym and restaurant, open to the public.", hs: "lobby", t: "0m 0.08m 0.1m", o: "20deg 82deg 0.55m" },
+  { h: "Plant floor, Level 20", ha: "طابق المعدات، الطابق 20", pa: "طابق المعدات والملجأ. ويربط الحزام الفولاذي هنا الأعمدة المحيطية الاثني عشر لمقاومة الرياح.", p: "Plant and refuge floor. Steel belt bracing here ties the 12 perimeter columns together against wind.", hs: "mech", t: "-0.275m 0.42m 0m", o: "-25deg 80deg 0.6m" },
+  { h: "Sky Gallery, Level 31", ha: "المعرض السماوي، الطابق 31", pa: "أول زوج من الجسور السماوية بطول 15 م، مثبت بمفصل في برج ومنزلق على بكرات في الآخر.", p: "The first pair of sky bridges, 15 m long. Pinned at one tower and sliding on rollers at the other.", hs: "gallery", t: "-0.1375m 0.63m 0m", o: "10deg 78deg 0.55m" },
+  { h: "Sky Garden Walk, 200 m", ha: "ممشى الحديقة السماوية، 200 م", pa: "تشكّل جسور السطح ممشى حديقة عامًا بسقف زجاجي وألواح شمسية، على ارتفاع 200 م فوق الخليج.", p: "The roof bridges form a public garden walk with a glass roof and solar panels, 200 m above the bay.", hs: "garden", t: "0.14m 1.03m 0m", o: "40deg 62deg 0.6m" },
+  { h: "The crowns", ha: "التيجان", pa: "ينتهي كل سطح بتاج من 72 زعنفة ألمنيوم مضاءة ليلًا حول المطعم السماوي.", p: "Each roof ends in a crown of 72 aluminium fins, lit at night, around the sky restaurant.", hs: "crown", t: "-0.275m 1.06m 0m", o: "-40deg 60deg 0.5m" },
 ];
 let stop = -1;
 const dots = $("#tour-dots"); dots.innerHTML = STOPS.map(() => "<i></i>").join("");
@@ -792,9 +1131,10 @@ function go(i) {
   document.body.classList.add("touring");
   viewer.autoRotate = false;
   viewer.cameraTarget = s.t; viewer.cameraOrbit = s.o;
-  $("#tour-n").textContent = "Stop " + (i + 1) + " of " + STOPS.length;
-  $("#tour-h").textContent = s.h; $("#tour-p").textContent = s.p;
-  $("#tour-next").textContent = i === STOPS.length - 1 ? "Start again" : "Next";
+  const t = window.I18N ? I18N.t : (x) => x, ar = window.I18N && I18N.lang === "ar";
+  $("#tour-n").textContent = t("Stop") + " " + (i + 1) + " " + t("of") + " " + STOPS.length;
+  $("#tour-h").textContent = ar ? s.ha : s.h; $("#tour-p").textContent = ar ? s.pa : s.p;
+  $("#tour-next").textContent = t(i === STOPS.length - 1 ? "Start again" : "Next");
   dots.querySelectorAll("i").forEach((d, k) => d.classList.toggle("on", k === i));
   viewer.querySelectorAll(".hotspot").forEach((h) => h.classList.toggle("now", h.slot === "hotspot-" + s.hs));
 }
@@ -806,6 +1146,7 @@ function endTour() {
 $("#tour-start").addEventListener("click", () => { $("#stage-ext").scrollIntoView({ behavior: "smooth", block: "center" }); go(0); });
 $("#tour-next").addEventListener("click", () => go((stop + 1) % STOPS.length));
 $("#tour-end").addEventListener("click", endTour);
+addEventListener("langchange", () => { if (stop >= 0) go(stop); });
 
 // full screen
 $("#fs").addEventListener("click", () => {
@@ -827,7 +1168,6 @@ document.querySelectorAll("video[data-src]").forEach((v) => {
 fetch("report.pdf", { method: "HEAD" }).then((r) => { if (r.ok) $("#report-link").style.display = "inline-block"; }).catch(() => {});
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
-
 <script>
 // ---------- page feel: bar, progress, reveal, counters, gallery, share ----------
 (() => {
@@ -896,7 +1236,6 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
   });
 })();
 </script>
-
 <script>
 // ---------- twist explorer: drag to twist the towers, plan view shows the fixed columns ----------
 (() => {
@@ -970,13 +1309,14 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
     px.fillStyle = "#fff"; [...OUTER, ...INNER].forEach(([x, z]) => { px.beginPath(); px.arc(m + x * k, m + z * k, 4.5, 0, 7); px.fill(); });
   }
   function set(v) {
-    total = v; deg.textContent = Math.round(v) + "°"; per.textContent = (v / 50).toFixed(1) + "° per floor × 50 floors"; range.value = v; draw(); plan();
+    total = v; deg.textContent = Math.round(v) + "°"; per.textContent = (v / 50).toFixed(1) + (window.I18N ? I18N.t("° per floor × 50 floors") : "° per floor × 50 floors"); range.value = v; draw(); plan();
   }
   function size() {
     const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
     W = r.width; H = r.height; c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); draw();
   }
   addEventListener("resize", size); size(); set(180);
+  addEventListener("langchange", () => set(total));
   range.addEventListener("input", () => { anim = false; set(+range.value); });
   // play once when it comes into view, then drift slowly
   let anim = false, played = false, visible = false, last = 0;
@@ -995,7 +1335,352 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
   if (!reduce) set(0);
 })();
 </script>
+<script>
+// ---------- intro, hero slideshow, glow, QR overlay, skyline ----------
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const loader = document.getElementById("loader");
+  const hide = () => loader.classList.add("done");
+  if (document.documentElement.classList.contains("seen") || reduce) hide(); else setTimeout(hide, 1500);
 
+  // slideshow
+  const imgs = [...document.querySelectorAll("#slides img")], dotsEl = document.getElementById("slide-dots");
+  let cur = 0, timer = null;
+  imgs.forEach((im, i) => { const b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Picture " + (i + 1)); b.onclick = () => { show(i); restart(); }; dotsEl.appendChild(b); });
+  const dots = [...dotsEl.children];
+  function show(i) {
+    const im = imgs[i]; if (im.dataset.src) { im.src = im.dataset.src; im.removeAttribute("data-src"); }
+    imgs[cur].classList.remove("on"); cur = i;
+    void im.offsetWidth; im.classList.add("on");
+    dots.forEach((d, k) => d.classList.toggle("on", k === i));
+  }
+  function restart() { clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % imgs.length), 7000); }
+  dots[0].classList.add("on");
+  addEventListener("load", () => imgs.forEach((im) => { if (im.dataset.src) { const pre = new Image(); pre.src = im.dataset.src; } }));
+  restart();
+
+  // soft light that follows the pointer in the hero
+  const hero = document.getElementById("top"), glow = document.getElementById("glow");
+  if (!reduce && matchMedia("(hover: hover)").matches) hero.addEventListener("pointermove", (e) => {
+    const r = hero.getBoundingClientRect(); glow.style.setProperty("--gx", (e.clientX - r.left) + "px"); glow.style.setProperty("--gy", (e.clientY - r.top) + "px");
+  });
+
+  // QR overlay: button, or press Q while presenting
+  const lay = document.getElementById("qrlay");
+  const toggleQR = (on) => lay.classList.toggle("open", on);
+  document.getElementById("qrbtn").addEventListener("click", () => toggleQR(true));
+  lay.addEventListener("click", () => toggleQR(false));
+  addEventListener("keydown", (e) => {
+    if (e.target.matches("input, textarea")) return;
+    if (e.key === "q" || e.key === "Q") toggleQR(!lay.classList.contains("open"));
+    if (e.key === "Escape") toggleQR(false);
+  });
+
+  // skyline grows into view
+  const sky = document.getElementById("sky");
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { sky.classList.add("in"); o.disconnect(); } }, { threshold: 0.3 }).observe(sky);
+})();
+</script>
+<script>
+// ---------- ride up the tower: pick a floor, see its plan ----------
+(() => {
+  const elev = document.getElementById("ride-elev"), ex = elev.getContext("2d");
+  const plan = document.getElementById("ride-plan"), px = plan.getContext("2d");
+  const range = document.getElementById("ride-range");
+  const D2R = Math.PI / 180, R = 20.706;
+  const OUTER = [...Array(12)].map((_, i) => [19 * Math.cos(i * 30 * D2R), 19 * Math.sin(i * 30 * D2R)]);
+  const INNER = [[3.25, 12.129], [3.25, -12.129], [-3.25, 12.129], [-3.25, -12.129], [12.129, 3.25], [12.129, -3.25], [-12.129, 3.25], [-12.129, -3.25]];
+  const ZONES = [
+    { a: 1, b: 5, c: "#b9d0e8", u: "public", units: 0 },
+    { a: 6, b: 19, c: "#78aad7", u: "office", units: 6 },
+    { a: 20, b: 20, c: "#e24a33", u: "plant20", units: 0 },
+    { a: 21, b: 34, c: "#4b7fc0", u: "hotel", units: 12 },
+    { a: 35, b: 35, c: "#e24a33", u: "plant35", units: 0 },
+    { a: 36, b: 49, c: "#1f4f8f", u: "home", units: 4 },
+    { a: 50, b: 50, c: "#e3bd78", u: "roof", units: 0 },
+  ];
+  const zoneOf = (k) => ZONES.find((z) => k >= z.a && k <= z.b);
+  const colSize = (k) => k <= 12 ? 1200 : k <= 20 ? 1000 : k <= 31 ? 850 : k <= 39 ? 750 : 600;
+  let k = 31;
+  const T = () => window.I18N ? window.I18N.t : (x) => x;
+
+  function drawElev() {
+    const W = elev.width, H = elev.height, top = 30, bot = H - 30, fh = (bot - top) / 50, x0 = 70, w = 90;
+    ex.clearRect(0, 0, W, H);
+    for (let f = 1; f <= 50; f++) {
+      const y = bot - f * fh, z = zoneOf(f);
+      ex.fillStyle = z.c; ex.globalAlpha = f === k ? 1 : 0.38;
+      const shift = Math.sin(f * 3.6 * D2R) * 8;
+      ex.fillRect(x0 + shift, y + 1, w, fh - 2);
+    }
+    ex.globalAlpha = 1;
+    // bridges
+    ex.fillStyle = "#f0b429"; [31, 50].forEach((f) => { const y = bot - f * fh; ex.fillRect(x0 + w + 8, y + 2, 40, fh - 4); ex.fillRect(x0 - 48, y + 2, 40, fh - 4); });
+    // lift car
+    const y = bot - k * fh;
+    ex.strokeStyle = "#fff"; ex.lineWidth = 3; ex.strokeRect(x0 - 6, y - 4, w + 12, fh + 8);
+    ex.fillStyle = "#e3bd78"; ex.beginPath(); ex.moveTo(x0 - 20, y + fh / 2 - 9); ex.lineTo(x0 - 8, y + fh / 2); ex.lineTo(x0 - 20, y + fh / 2 + 9); ex.fill();
+    ex.fillStyle = "rgba(255,255,255,.5)"; ex.fillRect(10, bot, W - 20, 2);
+  }
+  function drawPlan() {
+    const S = plan.width, m = S / 2, sc = S / 52;
+    px.clearRect(0, 0, S, S);
+    const z = zoneOf(k), rot = (15 + 3.6 * k) * D2R;
+    const P = (j, r = R) => [m + r * sc * Math.cos(rot + j * Math.PI / 6), m + r * sc * Math.sin(rot + j * Math.PI / 6)];
+    // ground floor ghost
+    px.setLineDash([6, 8]); px.strokeStyle = "rgba(120,170,215,.45)"; px.lineWidth = 2; px.beginPath();
+    for (let j = 0; j < 12; j++) { const a = 15 * D2R + j * Math.PI / 6, x = m + R * sc * Math.cos(a), y = m + R * sc * Math.sin(a); j ? px.lineTo(x, y) : px.moveTo(x, y); }
+    px.closePath(); px.stroke(); px.setLineDash([]);
+    // slab
+    px.beginPath(); for (let j = 0; j < 12; j++) { const [x, y] = P(j); j ? px.lineTo(x, y) : px.moveTo(x, y); } px.closePath();
+    px.fillStyle = "rgba(20,44,78,.9)"; px.fill(); px.strokeStyle = z.c; px.lineWidth = 4; px.stroke();
+    // units: lines from the core to the edge
+    if (z.units) { px.strokeStyle = "rgba(233,238,246,.35)"; px.lineWidth = 1.5; for (let u = 0; u < z.units; u++) { const a = rot + u * 2 * Math.PI / z.units + Math.PI / 12; px.beginPath(); px.moveTo(m + 10.5 * sc * Math.cos(a), m + 10.5 * sc * Math.sin(a)); px.lineTo(m + 19.8 * sc * Math.cos(a), m + 19.8 * sc * Math.sin(a)); px.stroke(); } }
+    // core
+    px.fillStyle = "rgba(196,160,112,.85)"; px.fillRect(m - 8.8 * sc, m - 9.2 * sc, 17.6 * sc, 18.4 * sc);
+    px.fillStyle = "rgba(7,15,28,.6)"; [[-6, -6], [1.5, -6], [-6, 1.5], [1.5, 1.5]].forEach(([x, y]) => px.fillRect(m + x * sc, m + y * sc, 4.5 * sc, 4.5 * sc));
+    // bracing ring on Level 20
+    if (k === 20) { px.strokeStyle = "#ff5a3d"; px.lineWidth = 5; px.beginPath(); OUTER.forEach(([x, y], i) => { i ? px.lineTo(m + x * sc, m + y * sc) : px.moveTo(m + x * sc, m + y * sc); }); px.closePath(); px.stroke(); }
+    // columns, fixed
+    const cs = colSize(k) / 1000 * sc;
+    px.fillStyle = "#ffffff"; [...OUTER, ...INNER].forEach(([x, y]) => px.fillRect(m + x * sc - cs / 2, m + y * sc - cs / 2, cs, cs));
+    // bridges
+    if (k === 31 || k === 50) { px.fillStyle = "#f0b429"; px.fillRect(0, m - 2.5 * sc, m - 20.4 * sc, 5 * sc); px.fillRect(m + 20.4 * sc, m - 2.5 * sc, S, 5 * sc); }
+    // turned corner marker
+    const [cx, cy] = P(0); px.fillStyle = "#e3bd78"; px.beginPath(); px.arc(cx, cy, 9, 0, 7); px.fill();
+  }
+  function info() {
+    const t = T(), z = zoneOf(k);
+    document.getElementById("ride-n").textContent = k;
+    document.getElementById("ride-h").textContent = (4 * k) + " m";
+    document.getElementById("ride-a").textContent = (3.6 * k).toFixed(1) + "°";
+    document.getElementById("ride-c").textContent = colSize(k) + " × " + colSize(k) + " mm";
+    const U = { public: t("Lobby, café, exhibition, library, gym, restaurant"), office: t("Offices, six units per floor"), plant20: t("Plant and refuge floor"), hotel: t("Hotel"), plant35: t("Plant and refuge floor"), home: t("Residences, four apartments per floor"), roof: t("Sky restaurant and Sky Garden Walk") };
+    document.getElementById("ride-u").textContent = U[z.u];
+    const X = { 1: t("Ground floor. The dashed outline is this floor; every floor above is turned from it."), 20: t("The steel belt bracing wraps the 12 perimeter columns here, so they share the wind load."), 31: t("Sky Gallery bridges to the next tower, pinned at one end and on rollers at the other."), 35: t("Second plant floor, close to the floors it serves."), 50: t("Top floor, turned a full 180°. The roof bridges form the Sky Garden Walk.") };
+    document.getElementById("ride-x").textContent = X[k] || (k <= 12 ? t("Columns are at their largest here, 1.2 m square.") : "");
+  }
+  function set(n) { k = Math.max(1, Math.min(50, n)); range.value = k; drawElev(); drawPlan(); info(); }
+  range.addEventListener("input", () => set(+range.value));
+  document.querySelectorAll(".ride-btns button").forEach((b) => b.addEventListener("click", () => set(+b.dataset.go)));
+  const pick = (e) => { const r = elev.getBoundingClientRect(), y = (e.clientY - r.top) / r.height * elev.height; set(Math.round((elev.height - 30 - y) / ((elev.height - 60) / 50) + 0.5)); };
+  let dragging = false;
+  elev.addEventListener("pointerdown", (e) => { dragging = true; elev.setPointerCapture(e.pointerId); pick(e); });
+  elev.addEventListener("pointermove", (e) => { if (dragging) pick(e); });
+  elev.addEventListener("pointerup", () => { dragging = false; });
+  elev.addEventListener("keydown", (e) => { if (e.key === "ArrowUp") set(k + 1); if (e.key === "ArrowDown") set(k - 1); });
+  addEventListener("langchange", info);
+  set(31);
+})();
+</script>
+<script>
+// ---------- load path ----------
+(() => {
+  const t = (x) => window.I18N ? I18N.t(x) : x, ar = () => window.I18N && I18N.lang === "ar";
+  const floors = document.getElementById("lp-floors"), piles = document.getElementById("lp-piles");
+  let fh = ""; for (let i = 0; i <= 19; i++) { const y = 60 + i * 20; fh += '<rect class="lp-part" data-s="g1 w2" x="70" y="' + y + '" width="460" height="5" rx="1.5" fill="#9fb0c6"/>'; }
+  floors.innerHTML = fh;
+  let ph = ""; for (let i = 0; i < 9; i++) { const x = 92 + i * 52; ph += '<rect x="' + (x - 9) + '" y="470" width="18" height="250" rx="3" fill="#a7865f"/>'; }
+  piles.innerHTML = ph;
+  const P = {
+    g: [
+      { h: "The floor", hA: "البلاطة", p: "A 240 mm post-tensioned slab carries its own weight, finishes, partitions and people: 2.0 kN/m² in hotel rooms and homes, 2.4 in offices, 4.8 in the lobby and sky amenities, 7.2 in the library.", pA: "بلاطة لاحقة الشد بسماكة 240 مم تحمل وزنها والتشطيبات والقواطع والناس: 2.0 كيلونيوتن/م² في الغرف والشقق، و2.4 في المكاتب، و4.8 في الردهة والمرافق السماوية، و7.2 في المكتبة.", n: "240 mm", s: "post-tensioned slab", sA: "بلاطة لاحقة الشد", path: "M300 128 L106 128" },
+      { h: "Columns and core", hA: "الأعمدة والنواة", p: "Each floor hands its load to 20 vertical columns and the concrete core. Down at the base, Column C2 alone carries 40,116 kN.", pA: "يسلّم كل طابق حمله إلى 20 عمودًا رأسيًا وإلى النواة الخرسانية. وعند القاعدة يحمل العمود C2 وحده 40,116 كيلونيوتن.", n: "40,116 kN", s: "in Column C2, 0.946 of capacity", sA: "في العمود C2، أي 0.946 من سعته", path: "M300 128 L106 128 L99 128 L99 440" },
+      { h: "The raft", hA: "اللبشة", p: "A 2 m thick concrete raft gathers the column and core loads and spreads them over the piles. It settles 17.23 mm, against a limit of 50 mm.", pA: "تجمع لبشة خرسانية بسماكة 2 م أحمال الأعمدة والنواة وتوزعها على الخوازيق، ويبلغ هبوطها 17.23 مم مقابل حد 50 مم.", n: "17.23 mm", s: "settlement, limit 50 mm", sA: "هبوط، والحد 50 مم", path: "M99 128 L99 440 L99 455 L300 455" },
+      { h: "The piles", hA: "الخوازيق", p: "121 bored piles, 1.5 m across and 25 m long, pass through dense sand into weak rock. 119 are needed, with a factor of safety of 3.28.", pA: "121 خازوقًا محفورًا بقطر 1.5 م وطول 25 م تخترق الرمل الكثيف إلى الصخر الضعيف. والمطلوب 119، بمعامل أمان 3.28.", n: "121", s: "piles, 119 needed", sA: "خازوقًا، والمطلوب 119", path: "M300 455 L300 470 L300 640" },
+      { h: "Into the rock", hA: "إلى الصخر", p: "Each pile hands its load to the ground by friction along its sides and by bearing at its tip in the rock.", pA: "ينقل كل خازوق حمله إلى الأرض بالاحتكاك على جوانبه وبالارتكاز عند طرفه في الصخر.", n: "25 m", s: "deep, tip in weak rock", sA: "عمقًا، والطرف في الصخر الضعيف", path: "M300 600 L300 720" },
+    ],
+    w: [
+      { h: "Wind on the façade", hA: "الرياح على الواجهة", p: "The design wind is 46 m/s from open water (Exposure D). It pushes on the glass, which passes the pressure to each floor edge.", pA: "سرعة رياح التصميم 46 م/ث من جهة المياه المفتوحة (فئة التعرض D)، وتضغط على الزجاج الذي ينقل الضغط إلى حافة كل طابق.", n: "46 m/s", s: "basic wind speed", sA: "سرعة الرياح الأساسية", path: "M76 200 L99 200" },
+      { h: "Floors share it out", hA: "الطوابق توزّعها", p: "Each floor acts as a stiff horizontal plate and passes the wind to the core and the columns.", pA: "يعمل كل طابق كصفيحة أفقية صلبة تنقل الرياح إلى النواة والأعمدة.", n: "50", s: "floors acting as diaphragms", sA: "طابقًا تعمل كصفائح أفقية", path: "M99 200 L250 200" },
+      { h: "The steel belt", hA: "الحزام الفولاذي", p: "At Story 20 steel braces tie the 12 perimeter columns together, so they push and pull as one, alongside the core.", pA: "عند الطابق 20 تربط الدعامات الفولاذية الأعمدة المحيطية الاثني عشر فتعمل معًا ككتلة واحدة إلى جانب النواة.", n: "87.5%", s: "busiest brace connection part", sA: "أعلى نسبة في وصلة الدعامة", path: "M99 286 L250 304 M99 304 L250 286" },
+      { h: "Core and columns bend", hA: "النواة والأعمدة تنحني", p: "The tower bends like a cantilever. The roof moves 494 mm, inside the 500 mm limit of height / 400.", pA: "ينحني البرج كأنه كابولي، ويتحرك السطح 494 مم ضمن حد 500 مم، أي الارتفاع / 400.", n: "494 mm", s: "roof movement, limit 500", sA: "إزاحة السطح، والحد 500", path: "M300 60 L300 440" },
+      { h: "Raft and piles hold it", hA: "اللبشة والخوازيق تثبّته", p: "At the base the overturning becomes push on one side and pull on the other, taken by the raft and the piles into the rock.", pA: "عند القاعدة يتحول الانقلاب إلى ضغط في جهة وشد في الأخرى، تتحمله اللبشة والخوازيق حتى الصخر.", n: "2 m", s: "raft on 121 piles", sA: "لبشة على 121 خازوقًا", path: "M300 440 L300 455 L144 455 L144 700 M300 455 L456 455 L456 700" },
+    ],
+  };
+  const svg = document.getElementById("lp-svg"), lp = svg.parentElement, path = document.getElementById("lp-path"), dot = document.getElementById("lp-dot");
+  const stepsEl = document.getElementById("lp-steps"), wind = document.getElementById("lp-wind");
+  let mode = "g", i = 0, anim = null;
+  function render() {
+    const S = P[mode], st = S[i], a = ar();
+    stepsEl.innerHTML = S.map((x, k) => '<li><button type="button" class="' + (k === i ? "on" : "") + '" data-k="' + k + '">' + (k + 1) + ". " + (a ? x.hA : x.h) + "</button></li>").join("");
+    stepsEl.querySelectorAll("button").forEach((b) => b.onclick = () => { i = +b.dataset.k; render(); });
+    document.getElementById("lp-k").textContent = (a ? "الخطوة " : "Step ") + (i + 1) + (a ? " من " : " of ") + S.length;
+    document.getElementById("lp-h").textContent = a ? st.hA : st.h;
+    document.getElementById("lp-p").textContent = a ? st.pA : st.p;
+    document.getElementById("lp-n").innerHTML = st.n + "<small>" + (a ? st.sA : st.s) + "</small>";
+    lp.classList.add("dim");
+    svg.querySelectorAll(".lp-part").forEach((g) => g.classList.toggle("on", (g.dataset.s || "").split(" ").includes(mode + (i + 1))));
+    wind.setAttribute("opacity", mode === "w" && i === 0 ? 1 : mode === "w" ? .35 : 0);
+    path.setAttribute("d", st.path);
+    const L = path.getTotalLength(); cancelAnimationFrame(anim); const t0 = performance.now();
+    const step = (now) => { const x = ((now - t0) / 1800) % 1, pt = path.getPointAtLength(x * L); dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y); anim = requestAnimationFrame(step); };
+    anim = requestAnimationFrame(step);
+    document.getElementById("lp-prev").disabled = i === 0;
+    document.getElementById("lp-next").textContent = i === S.length - 1 ? (a ? "من البداية" : "Start again") : (a ? "الخطوة التالية" : "Next step");
+    document.getElementById("lp-prev").textContent = a ? "رجوع" : "Back";
+  }
+  const setMode = (m) => { mode = m; i = 0; document.getElementById("lp-g").setAttribute("aria-pressed", m === "g"); document.getElementById("lp-w").setAttribute("aria-pressed", m === "w"); render(); };
+  document.getElementById("lp-g").onclick = () => setMode("g");
+  document.getElementById("lp-w").onclick = () => setMode("w");
+  document.getElementById("lp-next").onclick = () => { i = (i + 1) % P[mode].length; render(); };
+  document.getElementById("lp-prev").onclick = () => { if (i) { i--; render(); } };
+  addEventListener("langchange", render);
+  render();
+})();
+
+// ---------- roof sway guess ----------
+(() => {
+  const r = document.getElementById("quiz-r"), o = document.getElementById("quiz-o"), a = document.getElementById("quiz-a");
+  const ar = () => window.I18N && I18N.lang === "ar";
+  r.oninput = () => { o.textContent = r.value + " mm"; };
+  document.getElementById("quiz-go").onclick = () => {
+    const g = +r.value, d = g - 494, pct = Math.abs(d) / 494 * 100;
+    const verdict = pct < 15 ? (ar() ? "تخمين ممتاز!" : "Great guess!") : d > 0 ? (ar() ? "أكثر من الواقع." : "Too high.") : (ar() ? "أقل من الواقع." : "Too low.");
+    a.innerHTML = ar()
+      ? "<b>494 مم.</b> " + verdict + " خمّنت " + g + " مم. أي أقل من عرض كتفين، على ارتفاع 200 م، وضمن حد 500 مم."
+      : "<b>494 mm.</b> " + verdict + " You guessed " + g + " mm. That is less than a shoulder width, at 200 m up, and inside the 500 mm limit.";
+  };
+})();
+
+// ---------- floor shape: same area, different number of sides ----------
+(() => {
+  const c = document.getElementById("shape-c"), x = c.getContext("2d"), r = document.getElementById("shape-r");
+  const A = 3 * 20.706 * 20.706, H = 200;
+  const per = (n) => n >= 25 ? 2 * Math.PI * Math.sqrt(A / Math.PI) : 2 * n * Math.sqrt(2 * A / (n * Math.sin(2 * Math.PI / n))) * Math.sin(Math.PI / n);
+  const NAMES = { 3: "triangle", 4: "square", 5: "pentagon", 6: "hexagon", 8: "octagon", 12: "sides, as designed", 25: "circle" };
+  const NAMES_AR = { 3: "مثلث", 4: "مربع", 5: "مخمس", 6: "مسدس", 8: "مثمن", 12: "ضلعًا، كما صُمّم", 25: "دائرة" };
+  function draw() {
+    const n = +r.value, ar = window.I18N && I18N.lang === "ar", S = c.width, m = S / 2, k = S / 62;
+    x.clearRect(0, 0, S, S);
+    const R = n >= 25 ? Math.sqrt(A / Math.PI) : Math.sqrt(2 * A / (n * Math.sin(2 * Math.PI / n)));
+    const poly = (nn, RR, fill, stroke, w, dash) => { x.beginPath(); if (nn >= 25) x.arc(m, m, RR * k, 0, 7); else for (let j = 0; j <= nn; j++) { const a = -Math.PI / 2 + j * 2 * Math.PI / nn + (nn === 4 ? Math.PI / 4 : 0); j ? x.lineTo(m + RR * k * Math.cos(a), m + RR * k * Math.sin(a)) : x.moveTo(m + RR * k * Math.cos(a), m + RR * k * Math.sin(a)); } x.setLineDash(dash || []); if (fill) { x.fillStyle = fill; x.fill(); } x.strokeStyle = stroke; x.lineWidth = w; x.stroke(); x.setLineDash([]); };
+    poly(4, Math.sqrt(A / 2), null, "rgba(85,103,125,.45)", 2, [6, 6]);
+    poly(n, R, n === 12 ? "rgba(227,189,120,.22)" : "rgba(31,79,143,.12)", n === 12 ? "#c79a4c" : "#1f4f8f", 4);
+    x.fillStyle = "rgba(196,160,112,.8)"; x.fillRect(m - 8.8 * k, m - 9.2 * k, 17.6 * k, 18.4 * k);
+    const P = per(n), Psq = per(4);
+    document.getElementById("shape-n").textContent = n >= 25 ? "∞" : n;
+    document.getElementById("shape-name").textContent = (ar ? NAMES_AR : NAMES)[n] || (ar ? "ضلعًا" : "sides");
+    document.getElementById("shape-p").textContent = P.toFixed(1) + " m";
+    document.getElementById("shape-f").textContent = Math.round(P * H).toLocaleString("en") + " m²";
+    const sv = (1 - P / Psq) * 100;
+    document.getElementById("shape-s").textContent = Math.abs(sv) < 0.05 ? (ar ? "نفس المربع" : "Same as the square") : Math.abs(sv).toFixed(1) + "% " + (sv > 0 ? (ar ? "واجهة أقل" : "less façade") : (ar ? "واجهة أكثر" : "more façade"));
+  }
+  r.oninput = draw; addEventListener("langchange", draw); draw();
+})();
+
+// ---------- sun and shadow over the site ----------
+(() => {
+  const c = document.getElementById("sun-c"), x = c.getContext("2d");
+  const mR = document.getElementById("sun-m"), hR = document.getElementById("sun-h");
+  const LAT = 26.24 * Math.PI / 180, LON = 50.58, TZ = 3, R = 20.706, H = 200;
+  const TOW = [[-55, -10], [0, 0], [55, -10]];
+  const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const MON_AR = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+  const DOY = [21, 52, 80, 111, 141, 172, 202, 233, 264, 294, 325, 355];
+  function sun(month, hour) {
+    const n = DOY[month], d = 23.44 * Math.PI / 180 * Math.sin(2 * Math.PI * (284 + n) / 365);
+    const B = 2 * Math.PI * (n - 81) / 364, eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+    const solar = hour + (4 * (LON - 15 * TZ) + eot) / 60, Hh = (solar - 12) * 15 * Math.PI / 180;
+    const alt = Math.asin(Math.sin(LAT) * Math.sin(d) + Math.cos(LAT) * Math.cos(d) * Math.cos(Hh));
+    let az = Math.atan2(Math.sin(Hh), Math.cos(Hh) * Math.sin(LAT) - Math.tan(d) * Math.cos(LAT)) + Math.PI;
+    return { alt, az };
+  }
+  function draw() {
+    const ar = window.I18N && I18N.lang === "ar", mo = +mR.value, hr = +hR.value, S = c.width, m = S / 2, k = S / 1000;
+    const hh = Math.floor(hr), mm = Math.round((hr - hh) * 60);
+    x.direction = "ltr";
+    document.getElementById("sun-mo").textContent = (ar ? MON_AR : MON)[mo];
+    document.getElementById("sun-ho").textContent = String(hh).padStart(2, "0") + ":" + String(mm).padStart(2, "0");
+    const { alt, az } = sun(mo, hr);
+    x.fillStyle = "#eef0e6"; x.fillRect(0, 0, S, S);
+    x.fillStyle = "#3d7cc4"; x.fillRect(0, 0, S, m - 150 * k);
+    x.fillStyle = "#c9d9b3"; x.fillRect(m - 200 * k, m - 150 * k, 400 * k, 260 * k);
+    x.fillStyle = "rgba(255,255,255,.85)"; x.font = "600 " + Math.round(22 * k * 1.6) + "px IBM Plex Sans, sans-serif"; x.fillText(ar ? "البحر" : "Sea", 24, 40);
+    const P = (px, pz) => [m + px * k * 2.2, m + pz * k * 2.2];
+    if (alt > 0.01) {
+      const L = Math.min(H / Math.tan(alt), 1400), dir = az + Math.PI, dx = Math.sin(dir) * L, dz = -Math.cos(dir) * L;
+      x.fillStyle = "rgba(30,40,60,.42)";
+      TOW.forEach(([tx, tz]) => {
+        const [ax, ay] = P(tx, tz), [bx, by] = P(tx + dx, tz + dz), rr = R * k * 2.2, ang = Math.atan2(by - ay, bx - ax) + Math.PI / 2;
+        x.beginPath(); x.moveTo(ax + rr * Math.cos(ang), ay + rr * Math.sin(ang)); x.lineTo(bx + rr * Math.cos(ang), by + rr * Math.sin(ang));
+        x.arc(bx, by, rr, ang, ang + Math.PI); x.lineTo(ax - rr * Math.cos(ang), ay - rr * Math.sin(ang)); x.arc(ax, ay, rr, ang + Math.PI, ang + 2 * Math.PI); x.fill();
+      });
+      document.getElementById("sun-len").textContent = L >= 1400 ? "> 1.4 km" : Math.round(L) + " m";
+    } else document.getElementById("sun-len").textContent = ar ? "ليل" : "night";
+    TOW.forEach(([tx, tz]) => { const [ax, ay] = P(tx, tz); x.beginPath(); for (let j = 0; j < 12; j++) { const a = j * Math.PI / 6 + Math.PI / 12; j ? x.lineTo(ax + R * k * 2.2 * Math.cos(a), ay + R * k * 2.2 * Math.sin(a)) : x.moveTo(ax + R * k * 2.2 * Math.cos(a), ay + R * k * 2.2 * Math.sin(a)); } x.closePath(); x.fillStyle = "#1f4f8f"; x.fill(); x.strokeStyle = "#e3bd78"; x.lineWidth = 3; x.stroke(); });
+    // compass and sun
+    const cx = S - 70, cy = S - 70, cr = 50;
+    x.strokeStyle = "rgba(14,34,56,.35)"; x.lineWidth = 2; x.beginPath(); x.arc(cx, cy, cr, 0, 7); x.stroke();
+    x.fillStyle = "#0e2238"; x.font = "700 20px IBM Plex Sans, sans-serif"; x.textAlign = "center"; x.fillText(ar ? "ش" : "N", cx, cy - cr - 8); x.textAlign = "start";
+    if (alt > 0) { const sr = cr * (1 - alt / (Math.PI / 2)); x.fillStyle = "#f0b429"; x.beginPath(); x.arc(cx + sr * Math.sin(az), cy - sr * Math.cos(az), 10, 0, 7); x.fill(); }
+    document.getElementById("sun-alt").textContent = Math.max(0, alt * 180 / Math.PI).toFixed(0) + "°";
+    document.getElementById("sun-az").textContent = (az * 180 / Math.PI).toFixed(0) + "°";
+  }
+  mR.oninput = draw; hR.oninput = draw; addEventListener("langchange", draw);
+  let timer = null; const play = document.getElementById("sun-play");
+  play.onclick = () => { if (timer) { clearInterval(timer); timer = null; return; } hR.value = 5.5; timer = setInterval(() => { hR.value = +hR.value + 0.25; draw(); if (+hR.value >= 19.5) { clearInterval(timer); timer = null; } }, 120); };
+  draw();
+})();
+
+// ---------- night mode for the 3D model ----------
+(() => {
+  const b = document.getElementById("night"), v = document.getElementById("tower");
+  let on = false; const saved = new Map();
+  function apply() {
+    document.body.classList.toggle("night3d", on); b.setAttribute("aria-pressed", on);
+    v.exposure = on ? 0.6 : 1.05;
+    if (!v.model) return;
+    for (const m of v.model.materials) {
+      const n = m.name || "";
+      const glow = /T_glass|bridge_glass|T_lamp|crown_led|pv_glass|Core_Dark_Glass/.test(n);
+      if (!glow) continue;
+      if (!saved.has(m)) saved.set(m, [...m.emissiveFactor]);
+      if (on) m.setEmissiveFactor(/crown_led|lamp/.test(n) ? [1, 0.85, 0.55] : /accent/.test(n) ? [0.42, 0.3, 0.14] : [0.17, 0.12, 0.06]);
+      else m.setEmissiveFactor(saved.get(m));
+    }
+  }
+  b.onclick = () => { on = !on; apply(); };
+  v.addEventListener("load", () => { if (on) apply(); });
+})();
+
+// ---------- presenting: one section per screen, keys move, live counter ----------
+(() => {
+  const html = document.documentElement, secs = [...document.querySelectorAll("body > section")];
+  const count = document.getElementById("pcount"), live = document.getElementById("plive");
+  let i = 0, poll = null;
+  const go = (k) => { i = Math.max(0, Math.min(secs.length - 1, k)); secs[i].scrollIntoView({ behavior: "smooth" }); count.textContent = (i + 1) + " / " + secs.length; };
+  const nearest = () => { let best = 0, bd = 1e9; secs.forEach((s, k) => { const d = Math.abs(s.getBoundingClientRect().top); if (d < bd) { bd = d; best = k; } }); return best; };
+  function start() {
+    html.classList.add("presenting");
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
+    go(nearest()); pollCount(); poll = setInterval(pollCount, 8000);
+  }
+  function stop() { html.classList.remove("presenting"); clearInterval(poll); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); }
+  document.getElementById("present").onclick = start;
+  addEventListener("keydown", (e) => {
+    if (e.target.matches("input, textarea")) return;
+    if ((e.key === "p" || e.key === "P") && !html.classList.contains("presenting")) { start(); return; }
+    if (!html.classList.contains("presenting")) return;
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(e.key)) { e.preventDefault(); go(nearest() + 1); }
+    if (["ArrowLeft", "ArrowUp", "PageUp"].includes(e.key)) { e.preventDefault(); go(nearest() - 1); }
+    if (e.key === "Escape" && !document.getElementById("qrlay").classList.contains("open")) stop();
+  });
+  document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && html.classList.contains("presenting")) stop(); });
+  let claps = 0;
+  function pollCount() {
+    fetch("https://abacus.jasoncameron.dev/get/twisted-towers-uob/claps").then((r) => r.ok ? r.json() : null).then((j) => { if (j && typeof j.value === "number") claps = j.value; }).catch(() => {});
+    fetch("https://abacus.jasoncameron.dev/get/twisted-towers-uob/ar-page").then((r) => r.ok ? r.json() : null).then((j) => {
+      if (!j || typeof j.value !== "number") return;
+      const ar = window.I18N && I18N.lang === "ar";
+      live.textContent = "● " + j.value + (ar ? " زيارة لصفحة الواقع المعزز" : " AR visits") + (claps ? " · " + claps + (ar ? " تصفيق" : " applause") : "");
+      const c = document.getElementById("counter"); c.hidden = false; document.getElementById("counter-n").textContent = j.value.toLocaleString("en");
+    }).catch(() => {});
+  }
+  const cta = document.getElementById("ar");
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { pollCount(); o.disconnect(); } }).observe(cta);
+})();
+</script>
 <script type="module">
 // ---------- wind sway, twisting mode and construction sequence ----------
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js";
@@ -1121,8 +1806,9 @@ function makeScene(canvas, withFoundation) {
     const PER = { x: 9.08, y: 8.545, t: 2.841 };
     const setDir = (d) => { dir = d; bx.setAttribute("aria-pressed", String(d === "x")); by.setAttribute("aria-pressed", String(d === "y")); bt.setAttribute("aria-pressed", String(d === "t"));
       shown = -1;
-      if (d === "t") { unit.textContent = "s"; now.textContent = "2.84"; sub.textContent = "period of mode 3, the towers twist about their cores"; }
-      else { unit.textContent = "mm"; sub.innerHTML = 'roof movement now, of <span id="wind-max">' + (d === "x" ? "494" : "440") + "</span> mm"; }
+      const t = window.I18N ? I18N.t : (x) => x;
+      if (d === "t") { unit.textContent = "s"; now.textContent = "2.84"; sub.textContent = t("period of mode 3, the towers twist about their cores"); }
+      else { unit.textContent = "mm"; sub.textContent = t("roof movement now, of") + " " + (d === "x" ? "494" : "440") + (window.I18N && I18N.lang === "ar" ? " مم" : " mm"); }
       arrows.forEach((a, i) => { a.visible = d !== "t"; if (d === "x") { a.position.set(-150, 60 + 60 * i, 34); a.setDirection(new THREE.Vector3(1, 0, 0)); } else { a.position.set(-55 + 55 * i, 150, -110); a.setDirection(new THREE.Vector3(0, 0, 1)); } });
       frame(0); };
     const g = (t) => dir === "t" ? Math.sin(2 * Math.PI * T / PER.t - t * 0.9) : 0.5 - 0.5 * Math.cos(2 * Math.PI * T / PER[dir] - t * 0.9);
@@ -1133,9 +1819,12 @@ function makeScene(canvas, withFoundation) {
       gauge.parentElement.style.display = dir === "t" ? "none" : ""; if (dir === "t") return;
       const r = (dir === "x" ? DISP.ux : DISP.uy)[50] * g(1), mm = Math.round(r); if (mm !== shown) { now.textContent = mm; shown = mm; gauge.style.height = (r / 500 * 100) + "%"; } }
     bx.addEventListener("click", () => setDir("x")); by.addEventListener("click", () => setDir("y")); bt.addEventListener("click", () => setDir("t"));
-    ex.addEventListener("input", () => { exv.textContent = ex.value === "1" ? "real size" : ex.value + " times"; frame(0); });
-    play.textContent = playing ? "Pause" : "Play";
-    play.addEventListener("click", () => { playing = !playing; play.textContent = playing ? "Pause" : "Play"; });
+    const tt = (x) => window.I18N ? I18N.t(x) : x;
+    const labels = () => { exv.textContent = ex.value === "1" ? tt("real size") : ex.value + " " + tt("times"); play.textContent = tt(playing ? "Pause" : "Play"); };
+    ex.addEventListener("input", () => { labels(); frame(0); });
+    labels();
+    play.addEventListener("click", () => { playing = !playing; labels(); });
+    addEventListener("langchange", () => { labels(); setDir(dir); });
     sc.setFrame(frame); setDir("x");
   }
 }
@@ -1155,15 +1844,19 @@ function makeScene(canvas, withFoundation) {
       const l31 = (p - 0.555) / 0.08, lr = (p - 0.86) / 0.1;
       st.lift = [l31 < 0 ? -1 : l31, l31 < 0 ? -1 : l31, lr < 0 ? -1 : lr, lr < 0 ? -1 : lr];
       sc.update(st);
-      story.textContent = st.nSlab ? "Story " + st.nSlab + " of 50" : "Foundation";
-      stage.textContent = p >= 0.96 ? "Complete, top floor turned 180°" : lr >= 0 ? "Lifting the roof bridges into place"
-        : (l31 >= 0 && l31 < 1) ? "Lifting the Level 31 bridges into place" : st.nSlab ? "Top floor turned " + (3.6 * st.nSlab).toFixed(1) + "°"
-        : p < 0.05 ? "Boring 121 piles under each tower" : "Casting the 2 m raft, core starting";
+      const t = window.I18N ? I18N.t : (x) => x;
+      story.textContent = st.nSlab ? t("Story") + " " + st.nSlab + " " + t("of") + " 50" : t("Foundation");
+      stage.textContent = p >= 0.96 ? t("Complete, top floor turned 180°") : lr >= 0 ? t("Lifting the roof bridges into place")
+        : (l31 >= 0 && l31 < 1) ? t("Lifting the Level 31 bridges into place") : st.nSlab ? t("Top floor turned") + " " + (3.6 * st.nSlab).toFixed(1) + "°"
+        : p < 0.05 ? t("Boring 121 piles under each tower") : t("Casting the 2 m raft, core starting");
       scrub.value = Math.round(p * 1000);
     }
-    play.addEventListener("click", () => { if (playing) { playing = false; play.textContent = "Continue"; return; } if (p >= 1) p = 0; playing = true; play.textContent = "Pause"; });
-    scrub.addEventListener("input", () => { playing = false; p = scrub.value / 1000; play.textContent = p >= 1 ? "Build again" : "Continue"; apply(); });
-    sc.setFrame((dt) => { if (!playing) return; p = Math.min(1, p + dt / DUR); if (p >= 1) { playing = false; play.textContent = "Build again"; } apply(); });
+    const tt = (x) => window.I18N ? I18N.t(x) : x;
+    let lbl = "Build the towers"; const setL = (x) => { lbl = x; play.textContent = tt(x); };
+    play.addEventListener("click", () => { if (playing) { playing = false; setL("Continue"); return; } if (p >= 1) p = 0; playing = true; setL("Pause"); });
+    scrub.addEventListener("input", () => { playing = false; p = scrub.value / 1000; setL(p >= 1 ? "Build again" : "Continue"); apply(); });
+    sc.setFrame((dt) => { if (!playing) return; p = Math.min(1, p + dt / DUR); if (p >= 1) { playing = false; setL("Build again"); } apply(); });
+    addEventListener("langchange", () => { setL(lbl); apply(); });
     apply();
   }
 }

@@ -1,6 +1,6 @@
 // Keeps the 3D models and images on the phone after the first visit,
 // so the demo still loads fast on a crowded or weak network.
-const CACHE = "towers-v2";
+const CACHE = "towers-v4";
 const HEAVY = /\.(glb|usdz|jpg|jpeg|png|webp|mp4)$/i;
 
 self.addEventListener("install", () => self.skipWaiting());

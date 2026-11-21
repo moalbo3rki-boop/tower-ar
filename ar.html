@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<script>self.ModelViewerElement = { dracoDecoderLocation: new URL("draco/", location.href).href };</script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
 <style>
 :root {
@@ -39,7 +40,7 @@ button, a { font: inherit; }
 model-viewer { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; --poster-color: transparent; --progress-bar-color: var(--gold); --progress-bar-height: 3px; }
 model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
 .sheet { position: relative; z-index: 5; padding: 18px 18px max(18px, env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(7,15,28,0) 0%, var(--night) 22%); margin-top: -40px; }
-.pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 5px; border-radius: 16px; background: rgba(233,238,246,.07); border: 1px solid rgba(233,238,246,.1); }
+.pick { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 1fr; gap: 6px; padding: 5px; border-radius: 16px; background: rgba(233,238,246,.07); border: 1px solid rgba(233,238,246,.1); }
 .pick button { border: 0; border-radius: 12px; background: transparent; color: var(--muted); padding: 9px 4px 8px; cursor: pointer; line-height: 1.15; }
 .pick button b { display: block; color: var(--ink); font-weight: 600; font-size: .95rem; }
 .pick button small { font-size: .72rem; }
@@ -55,6 +56,12 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
 .steps li::before { content: attr(data-n); display: block; width: 24px; height: 24px; margin: 0 auto 5px; border-radius: 50%; border: 1px solid rgba(227,189,120,.6); color: var(--gold); font-weight: 600; line-height: 22px; font-size: .78rem; }
 .more { display: flex; justify-content: center; gap: 18px; margin-top: 12px; font-size: .88rem; }
 .more a { color: var(--muted); text-decoration: none; border-bottom: 1px solid rgba(157,176,200,.35); padding-bottom: 1px; }
+.clap { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(227,189,120,.45); background: transparent; color: var(--gold); border-radius: 999px; padding: 6px 12px; font: 600 .85rem var(--body); cursor: pointer; transition: transform .15s; }
+.clap svg { width: 18px; height: 18px; }
+.clap b { color: var(--ink); font-weight: 600; }
+.clap:active, .clap.pop { transform: scale(1.12); }
+.clap[disabled] { opacity: .6; }
+.more { align-items: center; flex-wrap: wrap; }
 .note { display: none; margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: #3a2b0e; color: #ffe2a8; font-size: .9rem; line-height: 1.4; }
 .desk { display: none; }
 .scale { position: absolute; z-index: 4; left: 50%; top: max(70px, calc(env(safe-area-inset-top) + 58px)); transform: translateX(-50%); font-size: .78rem; color: var(--muted); background: rgba(7,15,28,.55); border: 1px solid rgba(233,238,246,.12); padding: 5px 12px; border-radius: 999px; white-space: nowrap; backdrop-filter: blur(6px); }
@@ -83,7 +90,7 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
   <model-viewer id="mv" src="towers_ar.glb" poster="poster.webp" alt="3D model of the three twisted towers"
     camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="0" rotation-per-second="18deg" interaction-prompt="none"
     camera-orbit="35deg 76deg auto" shadow-intensity="1" shadow-softness="0.8" environment-image="neutral" exposure="1.1"
-    ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor">
+    ar ar-modes="scene-viewer webxr quick-look" ar-placement="floor" autoplay>
     <div slot="ar-button" hidden></div>
   </model-viewer>
 </main>
@@ -93,6 +100,9 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
     <button type="button" data-m="towers" aria-pressed="true"><b data-t="m1">Towers</b><small data-t="m1s">Full design</small></button>
     <button type="button" data-m="structure" aria-pressed="false"><b data-t="m2">Structure</b><small data-t="m2s">X-ray</small></button>
     <button type="button" data-m="column" aria-pressed="false"><b data-t="m3">Column C2</b><small data-t="m3s">Real size</small></button>
+    <button type="button" data-m="bridge" aria-pressed="false"><b data-t="m4">Sky bridge</b><small data-t="m4s">Real size, 15 m</small></button>
+    <button type="button" data-m="sway" aria-pressed="false"><b data-t="m5">In wind</b><small data-t="m5s">Moving</small></button>
+    <button type="button" data-m="build" aria-pressed="false"><b data-t="m6">Build it</b><small data-t="m6s">Moving</small></button>
   </div>
 
   <a class="go" id="go" href="#" rel="ar">
@@ -114,7 +124,7 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
     <p data-t="desk">Scan with your phone camera to place the towers in your room.</p>
   </div>
 
-  <div class="more"><a href="./" data-t="site">Explore the full project →</a></div>
+  <div class="more"><a href="./" data-t="site">Explore the full project →</a><button type="button" class="clap" id="clap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12m0-1.5v-4a1.5 1.5 0 0 1 3 0V12m0-3a1.5 1.5 0 0 1 3 0v6a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.3 14a1.5 1.5 0 0 1 2.4-1.8L8 15"/></svg><span data-t="clap">Applaud the team</span><b id="clap-n"></b></button></div>
 </section>
 
 <script type="module">
@@ -122,18 +132,23 @@ const MODELS = {
   towers:    { glb: "towers_ar.glb", usdz: "towers_ar.usdz", title: "Twisted Towers, Bahrain Bay (1:200)", resize: true,  orbit: "35deg 76deg auto", scale: "scale-towers" },
   structure: { glb: "structure.glb", usdz: "structure.usdz", title: "Twisted Towers structure (1:200)",   resize: true,  orbit: "25deg 80deg auto", scale: "scale-structure" },
   column:    { glb: "column_c2.glb", usdz: "column_c2.usdz", title: "Column C2 at real size",             resize: false, orbit: "35deg 72deg auto", scale: "scale-column" },
+  bridge:    { glb: "bridge_real.glb", usdz: "bridge_real.usdz", title: "Sky bridge at real size, 15 m",   resize: false, orbit: "30deg 72deg auto", scale: "scale-bridge" },
+  sway:      { glb: "sway.glb", usdz: "sway.usdz", title: "Towers swaying in wind (enlarged 40x)",          resize: true,  orbit: "90deg 82deg auto", scale: "scale-sway" },
+  build:     { glb: "build.glb", usdz: "build.usdz", title: "The towers rising",                             resize: true,  orbit: "80deg 76deg auto", scale: "scale-build" },
 };
 const T = {
   en: { title: "Twisted Towers", sub: "Bahrain Bay · AR", m1: "Towers", m1s: "Full design", m2: "Structure", m2s: "X-ray", m3: "Column C2", m3s: "Real size",
         go: "View in your room", s1: "Point at the floor or a table", s2: "Move the phone slowly", s3: "Walk around the towers",
-        "scale-towers": "1:200 · about 1.1 m tall", "scale-structure": "1:200 · core, columns, bracing, piles", "scale-column": "Real size · 1.2 m wide, 2.4 m tall",
+        "scale-towers": "1:200 · about 1.1 m tall", m4: "Sky bridge", m4s: "Real size, 15 m", m5: "In wind", m5s: "Moving", m6: "Build it", m6s: "Moving",
+        "scale-bridge": "Real size · 15 m long · stand under the trusses", "scale-sway": "1:200 · sway enlarged 40×, twice real speed", "scale-build": "1:200 · piles, raft, core, floors, bridges", "scale-structure": "1:200 · core, columns, bracing, piles", "scale-column": "Real size · 1.2 m wide, 2.4 m tall",
         inapp: "This app can't open AR. Tap ⋯ and choose “Open in Safari” or “Open in Chrome”.", noar: "AR isn't available on this phone, but you can still turn and zoom the model above.",
-        desk: "Scan with your phone camera to place the towers in your room.", site: "Explore the full project →", lang: "عربي" },
+        desk: "Scan with your phone camera to place the towers in your room.", site: "Explore the full project →", lang: "عربي", clap: "Applaud the team", thanks: "Thank you!" },
   ar: { title: "الأبراج الملتوية", sub: "خليج البحرين · واقع معزز", m1: "الأبراج", m1s: "التصميم الكامل", m2: "الهيكل", m2s: "من الداخل", m3: "العمود C2", m3s: "بالحجم الحقيقي",
         go: "شاهدها في غرفتك", s1: "وجّه الكاميرا إلى الأرض أو الطاولة", s2: "حرّك الهاتف ببطء", s3: "تجوّل حول الأبراج",
-        "scale-towers": "مقياس ١:٢٠٠ · ارتفاع ١٫١ م تقريبًا", "scale-structure": "مقياس ١:٢٠٠ · النواة والأعمدة والتدعيم والخوازيق", "scale-column": "بالحجم الحقيقي · عرض ١٫٢ م وارتفاع ٢٫٤ م",
+        "scale-towers": "مقياس ١:٢٠٠ · ارتفاع ١٫١ م تقريبًا", m4: "الجسر السماوي", m4s: "بالحجم الحقيقي، 15 م", m5: "مع الرياح", m5s: "متحرك", m6: "ابنِها", m6s: "متحرك",
+        "scale-bridge": "بالحجم الحقيقي · طول 15 م · قف تحت الجملونات", "scale-sway": "مقياس ١:٢٠٠ · التمايل مكبّر 40 مرة وبضعف السرعة", "scale-build": "مقياس ١:٢٠٠ · الخوازيق واللبشة والنواة والطوابق والجسور", "scale-structure": "مقياس ١:٢٠٠ · النواة والأعمدة والتدعيم والخوازيق", "scale-column": "بالحجم الحقيقي · عرض ١٫٢ م وارتفاع ٢٫٤ م",
         inapp: "لا يمكن فتح الواقع المعزز داخل هذا التطبيق. اضغط ⋯ واختر «فتح في Safari» أو «فتح في Chrome».", noar: "الواقع المعزز غير متاح على هذا الهاتف، لكن يمكنك تدوير النموذج وتكبيره في الأعلى.",
-        desk: "امسح الرمز بكاميرا هاتفك لتضع الأبراج في غرفتك.", site: "استكشف المشروع كاملًا ←", lang: "English" },
+        desk: "امسح الرمز بكاميرا هاتفك لتضع الأبراج في غرفتك.", site: "استكشف المشروع كاملًا ←", lang: "English", clap: "صفّق للفريق", thanks: "شكرًا لك!" },
 };
 const $ = (s) => document.querySelector(s);
 const mv = $("#mv"), go = $("#go");
@@ -174,6 +189,7 @@ function setLang(l) {
   document.documentElement.lang = l; document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
   document.querySelectorAll("[data-t]").forEach((el) => { const s = T[l][el.dataset.t]; if (s) el.textContent = s; });
   $("#lang").textContent = T[l].lang;
+  document.querySelector(".more a").href = l === "ar" ? "./?lang=ar" : "./?lang=en";
 }
 document.querySelectorAll(".pick button").forEach((b) => b.addEventListener("click", () => setModel(b.dataset.m)));
 $("#lang").addEventListener("click", () => setLang(lang === "ar" ? "en" : "ar"));
@@ -190,6 +206,20 @@ if (inApp) $("#inapp").style.display = "block";
 else if (isIOS && !quickLook) $("#noar").style.display = "block";
 
 setLang(lang); setModel(key);
+// visit counter (free Abacus API; if it is down nothing happens)
+try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/ar-page").catch(() => {}); } catch (e) {}
+// applause: each phone can clap up to 10 times; the presenter's screen shows the total live
+const clap = $("#clap"), clapN = $("#clap-n"); let mine = 0;
+try { mine = +(localStorage.getItem("claps") || 0); } catch (e) {}
+clap.addEventListener("click", () => {
+  if (mine >= 10) { clap.disabled = true; return; }
+  mine++; try { localStorage.setItem("claps", mine); } catch (e) {}
+  clap.classList.add("pop"); setTimeout(() => clap.classList.remove("pop"), 160);
+  if (navigator.vibrate) navigator.vibrate(12);
+  fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/claps").then((r) => r.json()).then((j) => { clapN.textContent = j.value; }).catch(() => {});
+  if (mine >= 10) { clap.querySelector("span").textContent = T[lang].thanks; clap.disabled = true; }
+});
+go.addEventListener("click", () => { try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/ar-launch-" + key, { keepalive: true }).catch(() => {}); } catch (e) {} });
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
 </body>

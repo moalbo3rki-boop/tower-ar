@@ -1,13 +1,25 @@
-# How to put the new website live
+# How to put the new website live (about 3 minutes)
 
-1. Open https://github.com/moalbo3rki-boop/tower-ar
-2. Click **Add file → Upload files**.
-3. Drag in **every file from this zip** (except this one if you like). Say yes to replacing the old files.
-4. Click **Commit changes**. Wait 1 to 2 minutes for GitHub Pages to update.
-5. Test on your phone: open https://moalbo3rki-boop.github.io/tower-ar/ar.html and tap **View in your room**.
+1. Double-click the zip to open it (your computer unzips it by itself).
+2. Go to https://github.com/moalbo3rki-boop/tower-ar and sign in.
+3. Click **Add file → Upload files**.
+4. Select EVERYTHING inside the folder (including the `draco` folder) and drag it onto the page.
+5. Click **Commit changes**, then wait 1 to 2 minutes.
 
-New files: `ar.html` (the page the QR code opens), `qr-ar.png` (the QR), `qr-slide.png` (a 1920×1080 slide for your presentation), `sw.js` (keeps the models on the phone so the demo loads fast on weak Wi-Fi).
-Replaced: `index.html`, and the three `.glb` models (same models, compressed: 9 MB → 4 MB).
+Main site: https://moalbo3rki-boop.github.io/tower-ar/
+AR page (what the QR opens): https://moalbo3rki-boop.github.io/tower-ar/ar.html
 
-QR code link: https://moalbo3rki-boop.github.io/tower-ar/ar.html
-Deep links: add `?m=structure` or `?m=column` to open on that model, `?lang=ar` for Arabic.
+If you still see the old site, refresh with Ctrl+Shift+R (on a phone, close the tab and open it again).
+
+## While presenting (on the laptop)
+- **P**: slide mode. Each arrow key moves one section, full screen. Esc to leave.
+- **Q**: full-screen QR code for the audience. Esc or Q to close.
+- In slide mode the bottom bar shows live counts: AR page visits and applause from the audience's phones.
+
+## Links you can share
+- Arabic: add `?lang=ar` to any link.
+- AR page straight to a model: `ar.html?m=structure`, `?m=column`, `?m=bridge`, `?m=sway`, `?m=build`.
+
+## New files in this version
+trailer.mp4 (the project film), bridge_real / sway / build (.glb and .usdz, the new AR models).
+The print files (poster-A3.pdf, card.pdf) are separate and do not need uploading.
