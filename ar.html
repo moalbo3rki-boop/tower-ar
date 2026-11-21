@@ -105,12 +105,13 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
     <button type="button" data-m="build" aria-pressed="false"><b data-t="m6">Build it</b><small data-t="m6s">Moving</small></button>
   </div>
 
-  <a class="go" id="go" href="#" rel="ar">
+  <a class="go" id="go" href="#">
     <img src="poster.webp" alt="">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="M3 7l9 5 9-5M12 12v10"/></svg>
     <span data-t="go">View in your room</span>
   </a>
   <div class="note" id="inapp" data-t="inapp">This app can't open AR. Tap ⋯ and choose “Open in Safari” or “Open in Chrome”.</div>
+  <div class="note" id="noar2" data-t="noar2">AR could not start. Update the “Google” app and “Google Play Services for AR” from the Play Store, then try again. You can still turn the model above.</div>
   <div class="note" id="noar" data-t="noar">AR isn't available on this phone, but you can still turn and zoom the model above.</div>
 
   <ol class="steps">
@@ -129,9 +130,9 @@ model-viewer::part(default-progress-bar) { top: auto; bottom: 0; }
 
 <script type="module">
 const MODELS = {
-  towers:    { glb: "towers_ar.glb", usdz: "towers_ar.usdz", title: "Twisted Towers, Bahrain Bay (1:200)", resize: true,  orbit: "35deg 76deg auto", scale: "scale-towers" },
-  structure: { glb: "structure.glb", usdz: "structure.usdz", title: "Twisted Towers structure (1:200)",   resize: true,  orbit: "25deg 80deg auto", scale: "scale-structure" },
-  column:    { glb: "column_c2.glb", usdz: "column_c2.usdz", title: "Column C2 at real size",             resize: false, orbit: "35deg 72deg auto", scale: "scale-column" },
+  towers:    { sv: "towers_ar_android.glb", glb: "towers_ar.glb", usdz: "towers_ar.usdz", title: "Twisted Towers, Bahrain Bay (1:200)", resize: true,  orbit: "35deg 76deg auto", scale: "scale-towers" },
+  structure: { sv: "structure_android.glb", glb: "structure.glb", usdz: "structure.usdz", title: "Twisted Towers structure (1:200)",   resize: true,  orbit: "25deg 80deg auto", scale: "scale-structure" },
+  column:    { sv: "column_c2_android.glb", glb: "column_c2.glb", usdz: "column_c2.usdz", title: "Column C2 at real size",             resize: false, orbit: "35deg 72deg auto", scale: "scale-column" },
   bridge:    { glb: "bridge_real.glb", usdz: "bridge_real.usdz", title: "Sky bridge at real size, 15 m",   resize: false, orbit: "30deg 72deg auto", scale: "scale-bridge" },
   sway:      { glb: "sway.glb", usdz: "sway.usdz", title: "Towers swaying in wind (enlarged 40x)",          resize: true,  orbit: "90deg 82deg auto", scale: "scale-sway" },
   build:     { glb: "build.glb", usdz: "build.usdz", title: "The towers rising",                             resize: true,  orbit: "80deg 76deg auto", scale: "scale-build" },
@@ -142,13 +143,13 @@ const T = {
         "scale-towers": "1:200 · about 1.1 m tall", m4: "Sky bridge", m4s: "Real size, 15 m", m5: "In wind", m5s: "Moving", m6: "Build it", m6s: "Moving",
         "scale-bridge": "Real size · 15 m long · stand under the trusses", "scale-sway": "1:200 · sway enlarged 40×, twice real speed", "scale-build": "1:200 · piles, raft, core, floors, bridges", "scale-structure": "1:200 · core, columns, bracing, piles", "scale-column": "Real size · 1.2 m wide, 2.4 m tall",
         inapp: "This app can't open AR. Tap ⋯ and choose “Open in Safari” or “Open in Chrome”.", noar: "AR isn't available on this phone, but you can still turn and zoom the model above.",
-        desk: "Scan with your phone camera to place the towers in your room.", site: "Explore the full project →", lang: "عربي", clap: "Applaud the team", thanks: "Thank you!" },
+        desk: "Scan with your phone camera to place the towers in your room.", site: "Explore the full project →", lang: "عربي", noar2: "AR could not start. Update the “Google” app and “Google Play Services for AR” from the Play Store, then try again. You can still turn the model above.", clap: "Applaud the team", thanks: "Thank you!" },
   ar: { title: "الأبراج الملتوية", sub: "خليج البحرين · واقع معزز", m1: "الأبراج", m1s: "التصميم الكامل", m2: "الهيكل", m2s: "من الداخل", m3: "العمود C2", m3s: "بالحجم الحقيقي",
         go: "شاهدها في غرفتك", s1: "وجّه الكاميرا إلى الأرض أو الطاولة", s2: "حرّك الهاتف ببطء", s3: "تجوّل حول الأبراج",
         "scale-towers": "مقياس ١:٢٠٠ · ارتفاع ١٫١ م تقريبًا", m4: "الجسر السماوي", m4s: "بالحجم الحقيقي، 15 م", m5: "مع الرياح", m5s: "متحرك", m6: "ابنِها", m6s: "متحرك",
         "scale-bridge": "بالحجم الحقيقي · طول 15 م · قف تحت الجملونات", "scale-sway": "مقياس ١:٢٠٠ · التمايل مكبّر 40 مرة وبضعف السرعة", "scale-build": "مقياس ١:٢٠٠ · الخوازيق واللبشة والنواة والطوابق والجسور", "scale-structure": "مقياس ١:٢٠٠ · النواة والأعمدة والتدعيم والخوازيق", "scale-column": "بالحجم الحقيقي · عرض ١٫٢ م وارتفاع ٢٫٤ م",
         inapp: "لا يمكن فتح الواقع المعزز داخل هذا التطبيق. اضغط ⋯ واختر «فتح في Safari» أو «فتح في Chrome».", noar: "الواقع المعزز غير متاح على هذا الهاتف، لكن يمكنك تدوير النموذج وتكبيره في الأعلى.",
-        desk: "امسح الرمز بكاميرا هاتفك لتضع الأبراج في غرفتك.", site: "استكشف المشروع كاملًا ←", lang: "English", clap: "صفّق للفريق", thanks: "شكرًا لك!" },
+        desk: "امسح الرمز بكاميرا هاتفك لتضع الأبراج في غرفتك.", site: "استكشف المشروع كاملًا ←", lang: "English", noar2: "تعذّر تشغيل الواقع المعزز. حدّث تطبيق «Google» و«خدمات Google Play للواقع المعزز» من متجر Play ثم حاول مجددًا. ويمكنك تدوير النموذج في الأعلى.", clap: "صفّق للفريق", thanks: "شكرًا لك!" },
 };
 const $ = (s) => document.querySelector(s);
 const mv = $("#mv"), go = $("#go");
@@ -163,18 +164,31 @@ let lang = (navigator.language || "").startsWith("ar") ? "ar" : "en";
 if (params.get("lang")) lang = params.get("lang") === "ar" ? "ar" : "en";
 
 function abs(f) { return new URL(f, location.href).href; }
-function setHref() {
+// One tap straight into AR.
+// iPhone: AR Quick Look only skips its "View 3D object?" step when the link holds nothing but one image,
+// so we build that link on the fly and click it (the same trick model-viewer uses).
+// Android: Google Scene Viewer through the Google app, AR first, uncompressed model files.
+function launchAR() {
   const m = MODELS[key];
   if (isIOS) {
-    go.href = abs(m.usdz) + (m.resize ? "" : "#allowsContentScaling=0");
-  } else if (isAndroid) {
-    const sv = "https://arvr.google.com/scene-viewer/1.0?file=" + encodeURIComponent(abs(m.glb)) + "&mode=ar_preferred&title=" + encodeURIComponent(m.title) + (m.resize ? "" : "&resizable=false");
-    go.href = "intent://arvr.google.com/scene-viewer/1.0?file=" + encodeURIComponent(abs(m.glb)) + "&mode=ar_preferred&title=" + encodeURIComponent(m.title) + (m.resize ? "" : "&resizable=false")
-      + "#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=" + encodeURIComponent(sv) + ";end;";
-  } else {
-    go.removeAttribute("href");
+    const a = document.createElement("a");
+    a.setAttribute("rel", "ar");
+    a.appendChild(document.createElement("img"));
+    a.href = abs(m.usdz) + (m.resize ? "" : "#allowsContentScaling=0");
+    a.style.display = "none"; document.body.appendChild(a); a.click(); setTimeout(() => a.remove(), 2000);
+    return true;
   }
+  if (isAndroid) {
+    const back = new URL(location.href); back.hash = "no-ar";
+    const p = new URLSearchParams({ mode: "ar_preferred", disable_occlusion: "true", title: m.title });
+    if (!m.resize) p.set("resizable", "false");
+    location.href = "intent://arvr.google.com/scene-viewer/1.2?" + p.toString() + "&file=" + encodeURIComponent(abs(m.sv || m.glb))
+      + "#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" + encodeURIComponent(back.toString()) + ";end;";
+    return true;
+  }
+  return false;
 }
+function setHref() {}
 function setModel(k) {
   key = k;
   const m = MODELS[k];
@@ -195,15 +209,15 @@ document.querySelectorAll(".pick button").forEach((b) => b.addEventListener("cli
 $("#lang").addEventListener("click", () => setLang(lang === "ar" ? "en" : "ar"));
 
 go.addEventListener("click", (e) => {
-  if (isIOS && quickLook && !inApp) return;          // Quick Look opens straight from the link
-  if (isAndroid) return;                             // the intent link opens Google Scene Viewer at once
   e.preventDefault();
-  if (mv.canActivateAR) mv.activateAR();
-  else $("#noar").style.display = "block";
+  if (inApp) { $("#inapp").style.display = "block"; return; }
+  if (!launchAR()) { if (mv.canActivateAR) mv.activateAR(); else $("#noar").style.display = "block"; }
 });
+if (location.hash === "#no-ar") {   // Android came back: AR could not start on this phone
+  $("#noar2").style.display = "block"; history.replaceState(null, "", location.pathname + location.search);
+}
 mv.addEventListener("ar-status", (e) => { if (e.detail.status === "failed") $("#noar").style.display = "block"; });
 if (inApp) $("#inapp").style.display = "block";
-else if (isIOS && !quickLook) $("#noar").style.display = "block";
 
 setLang(lang); setModel(key);
 // visit counter (free Abacus API; if it is down nothing happens)
