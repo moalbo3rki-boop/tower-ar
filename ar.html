@@ -207,7 +207,7 @@ else if (isIOS && !quickLook) $("#noar").style.display = "block";
 
 setLang(lang); setModel(key);
 // visit counter (free Abacus API; if it is down nothing happens)
-try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/ar-page").catch(() => {}); } catch (e) {}
+try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/v2-ar-page").catch(() => {}); } catch (e) {}
 // applause: each phone can clap up to 10 times; the presenter's screen shows the total live
 const clap = $("#clap"), clapN = $("#clap-n"); let mine = 0;
 try { mine = +(localStorage.getItem("claps") || 0); } catch (e) {}
@@ -216,10 +216,11 @@ clap.addEventListener("click", () => {
   mine++; try { localStorage.setItem("claps", mine); } catch (e) {}
   clap.classList.add("pop"); setTimeout(() => clap.classList.remove("pop"), 160);
   if (navigator.vibrate) navigator.vibrate(12);
-  fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/claps").then((r) => r.json()).then((j) => { clapN.textContent = j.value; }).catch(() => {});
+  fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/v2-claps").catch(() => {});
+  clapN.textContent = "+" + mine;
   if (mine >= 10) { clap.querySelector("span").textContent = T[lang].thanks; clap.disabled = true; }
 });
-go.addEventListener("click", () => { try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/ar-launch-" + key, { keepalive: true }).catch(() => {}); } catch (e) {} });
+go.addEventListener("click", () => { try { fetch("https://abacus.jasoncameron.dev/hit/twisted-towers-uob/v2-launch-" + key, { keepalive: true }).catch(() => {}); } catch (e) {} });
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>
 </body>

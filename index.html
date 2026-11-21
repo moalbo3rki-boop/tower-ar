@@ -66,7 +66,7 @@ p { margin: 0 0 14px; max-width: 68ch; }
 /* top bar */
 .progress { position: fixed; z-index: 40; top: 0; left: 0; height: 2px; width: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--gold), var(--amber)); }
 .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 30; color: var(--on-night); transition: background .4s, box-shadow .4s; }
-.bar.solid { background: rgba(7,15,28,.86); backdrop-filter: blur(12px) saturate(1.3); -webkit-backdrop-filter: blur(12px) saturate(1.3); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+.bar.solid { background: rgba(7,15,28,.96); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
 .bar .wrap { display: flex; align-items: center; gap: 16px; height: 60px; max-width: 1300px; }
 .logo { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-family: var(--display); font-size: 1.4rem; font-weight: 800; white-space: nowrap; }
 .logo svg { width: 28px; height: 28px; }
@@ -97,7 +97,7 @@ p { margin: 0 0 14px; max-width: 68ch; }
 .hero .bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; opacity: 0; transform: scale(1.12); transition: opacity 1.8s ease; }
 .hero .bg img.on { opacity: 1; animation: kb 9s ease-out forwards; }
 @keyframes kb { from { transform: scale(1.12); } to { transform: scale(1); } }
-.glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(420px circle at var(--gx, 70%) var(--gy, 40%), rgba(227,189,120,.16), transparent 60%); transition: background .2s; }
+.glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(420px circle at var(--gx, 70%) var(--gy, 40%), rgba(227,189,120,.16), transparent 60%); }
 .dots-hero { display: flex; gap: 8px; margin-top: 18px; }
 .dots-hero button { width: 28px; height: 4px; border: 0; padding: 0; border-radius: 2px; background: rgba(255,255,255,.25); cursor: pointer; }
 .dots-hero button.on { background: var(--gold); }
@@ -1312,7 +1312,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
     total = v; deg.textContent = Math.round(v) + "°"; per.textContent = (v / 50).toFixed(1) + (window.I18N ? I18N.t("° per floor × 50 floors") : "° per floor × 50 floors"); range.value = v; draw(); plan();
   }
   function size() {
-    const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    const r = c.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 1.5);
     W = r.width; H = r.height; c.width = W * d; c.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); draw();
   }
   addEventListener("resize", size); size(); set(180);
@@ -1325,12 +1325,12 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
     if (visible && !played && !reduce) { played = true; anim = true; t0 = performance.now(); }
     if (visible) requestAnimationFrame(loop);
   }, { threshold: 0.35 }).observe(c);
-  let t0 = 0;
+  let t0 = 0, acc = 0, spun = 0;
   function loop(now) {
     if (!visible) return;
     if (anim) { const x = Math.min(1, (now - t0 - 200) / 3200); if (x >= 0) set(180 * (x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2)); if (x >= 1) anim = false; }
-    if (!reduce) { spin += last ? (now - last) / 1000 * 0.12 : 0; draw(); }
-    last = now; requestAnimationFrame(loop);
+    if (!reduce && !anim && spun < 25) { const dt = last ? (now - last) / 1000 : 0; acc += dt; if (acc > 1 / 30) { spin += acc * 0.12; spun += acc; acc = 0; draw(); } }
+    last = now; if (anim || spun < 25) requestAnimationFrame(loop);
   }
   if (!reduce) set(0);
 })();
@@ -1341,7 +1341,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const loader = document.getElementById("loader");
   const hide = () => loader.classList.add("done");
-  if (document.documentElement.classList.contains("seen") || reduce) hide(); else setTimeout(hide, 1500);
+  if (document.documentElement.classList.contains("seen") || reduce) hide(); else setTimeout(hide, 900);
 
   // slideshow
   const imgs = [...document.querySelectorAll("#slides img")], dotsEl = document.getElementById("slide-dots");
@@ -1361,8 +1361,9 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
 
   // soft light that follows the pointer in the hero
   const hero = document.getElementById("top"), glow = document.getElementById("glow");
+  let gq = null;
   if (!reduce && matchMedia("(hover: hover)").matches) hero.addEventListener("pointermove", (e) => {
-    const r = hero.getBoundingClientRect(); glow.style.setProperty("--gx", (e.clientX - r.left) + "px"); glow.style.setProperty("--gy", (e.clientY - r.top) + "px");
+    if (gq) return; gq = requestAnimationFrame(() => { gq = null; const r = hero.getBoundingClientRect(); glow.style.setProperty("--gx", (e.clientX - r.left) + "px"); glow.style.setProperty("--gy", (e.clientY - r.top) + "px"); });
   });
 
   // QR overlay: button, or press Q while presenting
@@ -1654,7 +1655,7 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
   function start() {
     html.classList.add("presenting");
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {});
-    go(nearest()); pollCount(); poll = setInterval(pollCount, 8000);
+    go(nearest()); pollCount(); poll = setInterval(pollCount, 5000);
   }
   function stop() { html.classList.remove("presenting"); clearInterval(poll); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); }
   document.getElementById("present").onclick = start;
@@ -1667,15 +1668,16 @@ if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catc
     if (e.key === "Escape" && !document.getElementById("qrlay").classList.contains("open")) stop();
   });
   document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && html.classList.contains("presenting")) stop(); });
-  let claps = 0;
+  // counts come from a free counter service; the host screen can set a "zero point" stored on this laptop
+  const base = () => { try { return JSON.parse(localStorage.getItem("tt-baseline") || "{}"); } catch (e) { return {}; } };
+  const get = (k) => fetch("https://abacus.jasoncameron.dev/get/twisted-towers-uob/" + k).then((r) => r.ok ? r.json() : { value: 0 }).then((j) => Math.max(0, (j.value || 0) - (base()[k] || 0))).catch(() => null);
   function pollCount() {
-    fetch("https://abacus.jasoncameron.dev/get/twisted-towers-uob/claps").then((r) => r.ok ? r.json() : null).then((j) => { if (j && typeof j.value === "number") claps = j.value; }).catch(() => {});
-    fetch("https://abacus.jasoncameron.dev/get/twisted-towers-uob/ar-page").then((r) => r.ok ? r.json() : null).then((j) => {
-      if (!j || typeof j.value !== "number") return;
+    Promise.all([get("v2-ar-page"), get("v2-claps")]).then(([v, c]) => {
+      if (v === null) return;
       const ar = window.I18N && I18N.lang === "ar";
-      live.textContent = "● " + j.value + (ar ? " زيارة لصفحة الواقع المعزز" : " AR visits") + (claps ? " · " + claps + (ar ? " تصفيق" : " applause") : "");
-      const c = document.getElementById("counter"); c.hidden = false; document.getElementById("counter-n").textContent = j.value.toLocaleString("en");
-    }).catch(() => {});
+      live.textContent = "● " + v + (ar ? " زيارة لصفحة الواقع المعزز" : " AR visits") + " · " + (c || 0) + (ar ? " تصفيق" : " applause");
+      const el = document.getElementById("counter"); el.hidden = false; document.getElementById("counter-n").textContent = v.toLocaleString("en");
+    });
   }
   const cta = document.getElementById("ar");
   new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { pollCount(); o.disconnect(); } }).observe(cta);
@@ -1710,7 +1712,7 @@ function makeScene(canvas, withFoundation) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
   catch (e) { canvas.style.display = "none"; canvas.parentElement.querySelector(".fail").style.display = "block"; return null; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, matchMedia("(max-width: 899px)").matches ? 1.25 : 1.5));
   const scene = new THREE.Scene();
   scene.add(new THREE.HemisphereLight(0xe6efff, 0x243a5c, 1.7));
   const sun = new THREE.DirectionalLight(0xffffff, 1.5); sun.position.set(140, 260, 200); scene.add(sun);
